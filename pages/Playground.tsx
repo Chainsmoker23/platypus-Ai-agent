@@ -12,77 +12,40 @@ import type { FileSystem } from '../components/ide/types';
 const BackIcon = () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>;
 
 const PlaygroundPage: React.FC<{ onNavigateHome: () => void }> = ({ onNavigateHome }) => {
-  const [isLoading, setIsLoading] = useState(true); // Start in loading state
+  const [isLoading, setIsLoading] = useState(true);
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
   const [files, setFiles] = useState<FileSystem | null>(null);
   const [openTabs, setOpenTabs] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<string | null>(null);
-  const [terminalOutput, setTerminalOutput] = useState<string[]>(['Welcome to the Platypus IDE simulation. Select an example to begin.']);
   
-  const isMounted = useRef(false);
-  const timeoutRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    isMounted.current = true;
-    // Pre-warm the first example on initial load.
-    handleGenerate(examplePrompts[0].id);
-
-    // Cleanup function for unmount
-    return () => {
-      isMounted.current = false;
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []); // Empty array ensures this runs only on mount and unmount
+  // State for driving the terminal
+  const [terminalKey, setTerminalKey] = useState(0);
+  const [initialCommand, setInitialCommand] = useState(`platypus create ${examplePrompts[0].id}`);
+  const [activeResponseId, setActiveResponseId] = useState<keyof typeof aiResponses>(examplePrompts[0].id);
 
   const handleGenerate = (id: keyof typeof aiResponses) => {
-    // This check prevents re-triggering if a user clicks while animating
-    if (isLoading && files) return;
-
-    // Clear any existing animation before starting a new one.
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    if (isLoading) return;
 
     setIsLoading(true);
     setFiles(null);
     setOpenTabs([]);
     setActiveTab(null);
-    setTerminalOutput([]);
-
-    const response = aiResponses[id];
-    let currentLine = 0;
-
-    const animateTerminal = () => {
-      // Gracefully stop animation if the component has been unmounted
-      if (!isMounted.current) return;
-
-      if (currentLine >= response.terminal.length) {
-        // Animation complete, update the final state
-        if (isMounted.current) {
-          setFiles(response.files);
-          setOpenTabs(response.openTabs);
-          setActiveTab(response.initialActiveTab);
-          setIsLoading(false);
-        }
-        timeoutRef.current = null;
-        return; // Stop the recursion
-      }
-      
-      // Add the next line to the output, then schedule the next one
-      if (isMounted.current) {
-          setTerminalOutput(prev => [...prev, response.terminal[currentLine]]);
-          currentLine++;
-          timeoutRef.current = window.setTimeout(animateTerminal, 150);
-      }
-    };
-
-    // Kick off the animation
-    animateTerminal();
+    setActiveResponseId(id);
+    setInitialCommand(`platypus create ${id}`);
+    setTerminalKey(k => k + 1); // Reset the terminal component with a new command
   };
   
+  const handleGenerationComplete = () => {
+    const response = aiResponses[activeResponseId];
+    if (response) {
+      setFiles(response.files);
+      setOpenTabs(response.openTabs);
+      setActiveTab(response.initialActiveTab);
+      setIsLoading(false);
+    }
+  };
+
   const handleFileSelect = (path: string) => {
     if (!openTabs.includes(path)) {
       setOpenTabs(prev => [...prev, path]);
@@ -138,7 +101,12 @@ const PlaygroundPage: React.FC<{ onNavigateHome: () => void }> = ({ onNavigateHo
                 rawFileContent={rawActiveFileContent}
                 isLoading={isLoading}
             />
-            <TerminalPanel output={terminalOutput} />
+            <TerminalPanel
+              key={terminalKey}
+              initialCommand={initialCommand}
+              files={files}
+              onGenerationComplete={handleGenerationComplete}
+            />
         </div>
       </main>
     </div>
