@@ -8,17 +8,21 @@ interface FeatureCardProps {
   description: string;
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => (
-  <div className="group bg-platypus-secondary p-6 rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-    <div className="text-platypus-primary group-hover:text-platypus-accent mb-4 transition-colors duration-300">
-      {icon}
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => {
+  console.log(`Rendering: FeatureCard - ${title}`);
+  return (
+    <div className="group bg-platypus-secondary p-6 rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+      <div className="text-platypus-primary group-hover:text-platypus-accent mb-4 transition-colors duration-300">
+        {icon}
+      </div>
+      <h3 className="text-xl font-bold mb-2 text-platypus-text">{title}</h3>
+      <p className="text-platypus-subtle">{description}</p>
     </div>
-    <h3 className="text-xl font-bold mb-2 text-platypus-text">{title}</h3>
-    <p className="text-platypus-subtle">{description}</p>
-  </div>
-);
+  );
+};
 
 const FeaturesSection: React.FC = () => {
+  console.log('Rendering: FeaturesSection');
   const features = [
     {
       icon: ICONS.folder,

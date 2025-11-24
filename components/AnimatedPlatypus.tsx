@@ -11,12 +11,13 @@ import {
   PlatypusWavingSimpleSVG,
   PlatypusWavingSkateboardSVG,
   PlatypusCoinsSVG,
-  PlatypusChatHeadSVG
+  PlatypusChatHeadSVG,
+  PlatypusSleepingSVG
 } from './PlatypusPlaceholders';
 
 
 interface AnimatedPlatypusProps {
-  mascotType: 'hero' | 'peeking' | 'magnifying' | 'rocket' | 'lollipop' | 'laptop' | 'clipboard' | 'pillow' | 'wavingSimple' | 'wavingSkateboard' | 'coins' | 'chat';
+  mascotType: 'hero' | 'peeking' | 'magnifying' | 'rocket' | 'lollipop' | 'laptop' | 'clipboard' | 'pillow' | 'wavingSimple' | 'wavingSkateboard' | 'coins' | 'chat' | 'sleeping';
   className?: string;
 }
 
@@ -33,11 +34,15 @@ const mascotMap = {
   wavingSkateboard: PlatypusWavingSkateboardSVG,
   coins: PlatypusCoinsSVG,
   chat: PlatypusChatHeadSVG,
+  sleeping: PlatypusSleepingSVG,
 };
 
 const AnimatedPlatypus: React.FC<AnimatedPlatypusProps> = ({ mascotType, className }) => {
+  console.log(`Rendering: AnimatedPlatypus (type: ${mascotType})`);
   const MascotComponent = mascotMap[mascotType];
-  const animationClass = mascotType === 'peeking' ? '' : 'animate-subtle-bob';
+  if (!MascotComponent) return null; // Safety check
+
+  const animationClass = (mascotType === 'peeking' || mascotType === 'sleeping') ? '' : 'animate-subtle-bob';
 
   return (
     <div className={`${animationClass} ${className || ''}`}>

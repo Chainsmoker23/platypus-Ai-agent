@@ -6,6 +6,7 @@ const Cross: React.FC = () => <span className="text-red-500 text-2xl">✖</span>
 const Partial: React.FC<{ text: string }> = ({ text }) => <span className="text-yellow-500" title={text}>Partial</span>;
 
 const ComparisonSection: React.FC = () => {
+  console.log('Rendering: ComparisonSection');
   const features = [
     { feature: 'Full-Project Context', platypus: <Check />, cursor: <Check />, qodo: <Partial text="File-level context" /> },
     { feature: 'Autonomous Multi-File Agents', platypus: <Check />, cursor: <Partial text="Manual multi-file edits" />, qodo: <Cross /> },

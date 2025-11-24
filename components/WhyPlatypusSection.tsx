@@ -1,18 +1,22 @@
 import React from 'react';
 import AnimatedPlatypus from './AnimatedPlatypus';
 
-const StrengthCard: React.FC<{ mascotType: 'rocket' | 'lollipop' | 'laptop'; title: string; children: React.ReactNode }> = ({ mascotType, title, children }) => (
-  <div className="bg-platypus-secondary p-8 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
-    <AnimatedPlatypus 
-      mascotType={mascotType}
-      className="w-40 h-40 md:w-48 md:h-48 mb-6"
-    />
-    <h3 className="text-2xl font-bold text-platypus-text mb-3">{title}</h3>
-    <p className="text-platypus-subtle">{children}</p>
-  </div>
-);
+const StrengthCard: React.FC<{ mascotType: 'rocket' | 'lollipop' | 'laptop'; title: string; children: React.ReactNode }> = ({ mascotType, title, children }) => {
+  console.log(`Rendering: StrengthCard - ${title}`);
+  return (
+    <div className="bg-platypus-secondary p-8 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
+      <AnimatedPlatypus 
+        mascotType={mascotType}
+        className="w-40 h-40 md:w-48 md:h-48 mb-6"
+      />
+      <h3 className="text-2xl font-bold text-platypus-text mb-3">{title}</h3>
+      <p className="text-platypus-subtle">{children}</p>
+    </div>
+  );
+};
 
 const WhyPlatypusSection: React.FC = () => {
+  console.log('Rendering: WhyPlatypusSection');
   return (
     <section className="py-16 md:py-20 bg-white">
       <div className="container mx-auto px-6">

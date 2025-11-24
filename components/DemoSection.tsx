@@ -70,6 +70,7 @@ const codeSnippets = [
 
 
 const DemoSection: React.FC = () => {
+  console.log('Rendering: DemoSection');
   const [snippetIndex, setSnippetIndex] = useState(0);
   const [isFading, setIsFading] = useState(false);
 

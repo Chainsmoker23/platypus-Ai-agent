@@ -3,6 +3,7 @@ import { ICONS } from '../constants';
 import AnimatedPlatypus from './AnimatedPlatypus';
 
 const Footer: React.FC = () => {
+  console.log('Rendering: Footer');
   return (
     <footer className="bg-platypus-secondary">
       <div className="container mx-auto px-6 py-12 md:py-16">

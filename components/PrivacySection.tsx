@@ -1,7 +1,8 @@
 import React from 'react';
-import PlatypusSleeping from './platypusSleeping';
+import AnimatedPlatypus from './AnimatedPlatypus';
 
 const PrivacySection: React.FC = () => {
+  console.log('Rendering: PrivacySection');
   return (
     <section id="privacy" className="py-16 md:py-20">
       <div className="container mx-auto px-6">
@@ -19,8 +20,9 @@ const PrivacySection: React.FC = () => {
                 </p>
             </div>
           </div>
-          <div className="flex justify-center animate-subtle-bob">
-            <PlatypusSleeping 
+          <div className="flex justify-center">
+            <AnimatedPlatypus 
+              mascotType="sleeping"
               className="w-2/3 md:w-full max-w-sm" 
             />
           </div>

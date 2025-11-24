@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-export const PlatypusLogoSVG: React.FC<{ className?: string }> = ({ className }) => (
+export const PlatypusLogoSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusLogoSVG');
+    return (
     <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-labelledby="platypus-logo-title">
         <title id="platypus-logo-title">Creative logo of a platypus bill forming an idea lightbulb</title>
         <g>
@@ -12,13 +14,16 @@ export const PlatypusLogoSVG: React.FC<{ className?: string }> = ({ className })
              {/* Filament Eyes */}
             <circle cx="43" cy="25" r="3" fill="#0A2540" />
             <circle cx="57" cy="25" r="3" fill="#0A2540" />
-            <path d="M44 28 Q 50 32 56 28" stroke="#0A2540" strokeWidth="2" strokeLinecap="round" fill="none"/>
+            <path d="M44 28 Q 50 32 56 28" stroke="#0A2540" strokeWidth="2" strokeLineCap="round" fill="none"/>
         </g>
     </svg>
-);
+    );
+};
 
 
-export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className }) => (
+export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusHeroSVG');
+    return (
     <svg viewBox="0 0 200 200" className={className} xmlns="http://www.w3.org/2000/svg" aria-labelledby="platypus-hero-title">
         <title id="platypus-hero-title">A secret agent platypus standing confidently in a cowboy hat, waving a pair of realistic, high-quality headphones.</title>
         <defs>
@@ -40,8 +45,8 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
                 <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#C05621" strokeWidth="1.5"/>
             </pattern>
             <linearGradient id="hatGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style={{stopColor: '#4A5568'}} />
-                <stop offset="100%" style={{stopColor: '#2D3748'}} />
+                <stop offset="0%" stopColor="#4A5568" />
+                <stop offset="100%" stopColor="#2D3748" />
             </linearGradient>
             <filter id="codeGlow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
@@ -89,8 +94,8 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
                     {/* The coordinate system is shifted so (0,0) is the top-center of the headband arc */}
 
                     {/* Headband */}
-                    <path d="M -27.5 40 C -27.5 0, 27.5 0, 27.5 40" strokeWidth="12" stroke="#2D3748" fill="none" strokeLinecap="round" />
-                    <path d="M -27.5 40 C -27.5 0, 27.5 0, 27.5 40" strokeWidth="8" stroke="#4A5568" fill="none" strokeLinecap="round" />
+                    <path d="M -27.5 40 C -27.5 0, 27.5 0, 27.5 40" strokeWidth="12" stroke="#2D3748" fill="none" strokeLineCap="round" />
+                    <path d="M -27.5 40 C -27.5 0, 27.5 0, 27.5 40" strokeWidth="8" stroke="#4A5568" fill="none" strokeLineCap="round" />
 
                     {/* Right Earcup (closer to viewer) */}
                     <g transform="translate(27.5, 40)">
@@ -160,12 +165,13 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
 
             {/* Creative Element: Glowing Code Symbol */}
             <g filter="url(#codeGlow)">
-                <path d="M98 52 L 95 54.5 L 98 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                <path d="M112 52 L 115 54.5 L 112 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                <path d="M98 52 L 95 54.5 L 98 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLineCap="round" />
+                <path d="M112 52 L 115 54.5 L 112 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLineCap="round" />
             </g>
         </g>
     </svg>
-);
+    );
+};
 
 type EyeExpression = 'default' | 'focused' | 'curious';
 
@@ -195,6 +201,7 @@ const EyeStyles = () => (
 );
 
 const Eyes: React.FC<{ expression?: EyeExpression }> = ({ expression = 'default' }) => {
+    console.log(`Rendering: Eyes (expression: ${expression})`);
     const pupilStyle = expression === 'focused' ? { r: 3.5 } : { r: 3 };
     const animationDuration = expression === 'focused' ? '6s' : '4s';
     const [delays, setDelays] = useState({ left: '0s', right: '0s' });
@@ -226,8 +233,10 @@ const Eyes: React.FC<{ expression?: EyeExpression }> = ({ expression = 'default'
 };
 
 
-const PlatypusBaseSVG: React.FC<{ children?: React.ReactNode, accessories?: React.ReactNode, title: string, titleId: string, sitting?: boolean, defs?: React.ReactNode, expression?: EyeExpression }> = ({ children, accessories, title, titleId, sitting = false, defs, expression }) => (
-    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-labelledby={titleId}>
+const PlatypusBaseSVG: React.FC<{ children?: React.ReactNode, accessories?: React.ReactNode, title: string, titleId: string, sitting?: boolean, defs?: React.ReactNode, expression?: EyeExpression, className?: string }> = ({ children, accessories, title, titleId, sitting = false, defs, expression, className }) => {
+    console.log(`Rendering: PlatypusBaseSVG (title: ${title})`);
+    return (
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-labelledby={titleId} className={className}>
         <title id={titleId}>{title}</title>
         <defs>
             <pattern id="tailGridBase" patternUnits="userSpaceOnUse" width="10" height="10">
@@ -276,24 +285,28 @@ const PlatypusBaseSVG: React.FC<{ children?: React.ReactNode, accessories?: Reac
             {accessories}
         </g>
     </svg>
-);
+    );
+};
 
 
-export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className }) => (
+export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusRocketSVG');
+    return (
     <PlatypusBaseSVG 
+      className={className}
       titleId="platypus-rocket-title" 
       title="A speedy platypus standing next to a rocket, ready for launch."
-      defs={<>
-          <linearGradient id="rocketBodyGradient" x1="0" y1="0" x2="1" y2="1">
+      defs={[
+          <linearGradient key="g1" id="rocketBodyGradient" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stopColor="#E2E8F0" />
               <stop offset="100%" stopColor="#CBD5E0" />
-          </linearGradient>
-          <radialGradient id="rocketFlameGradient" cx="0.5" cy="0.5" r="0.5">
+          </linearGradient>,
+          <radialGradient key="g2" id="rocketFlameGradient" cx="0.5" cy="0.5" r="0.5">
               <stop offset="0%" stopColor="#FBBF24" />
               <stop offset="50%" stopColor="#F59E0B" />
               <stop offset="100%" stopColor="#D97706" />
-          </radialGradient>
-          <style>{`
+          </radialGradient>,
+          <style key="s1">{`
               @keyframes rocket_flame_anim {
                   0%, 100% { transform: scaleY(1); }
                   25% { transform: scaleY(1.3); }
@@ -305,7 +318,7 @@ export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className 
                   transform-origin: center bottom;
               }
           `}</style>
-      </>}
+      ]}
     >
         {/* Rocket, positioned to the side */}
         <g transform="translate(50, 120) rotate(-10)">
@@ -342,71 +355,67 @@ export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className 
             <path d="M72,130 C 65,140 50,135 55,125 C 53,115 63,113 67,119 L 75,123 C 77,125 74,130 72,130 Z" fill="#ED8936" />
         </g>
     </PlatypusBaseSVG>
-);
+    );
+};
 
-const platypusHatDefs = (
-    <>
-        <linearGradient id="platypusHatGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#4A5568" />
-            <stop offset="100%" stopColor="#2D3748" />
-        </linearGradient>
-        <filter id="platypusCodeGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
-            <feFlood floodColor="#5DA9E9" result="color" />
-            <feComposite in="color" in2="blur" operator="in" result="glow" />
-            <feMerge>
-                <feMergeNode in="glow" />
-                <feMergeNode in="SourceGraphic" />
-            </feMerge>
-        </filter>
-    </>
-);
-
-const PlatypusHat = () => (
-    <g>
-        {/* Brim */}
-        <path d="M50,55 C 30,60 180,60 160,55 C 170,45 40,45 50,55 Z" fill="url(#platypusHatGradient)" />
-        {/* Crown */}
-        <path d="M75,55 C 70,25 140,25 135,55 L 75,55 Z" fill="#2D3748" />
-        {/* Crown Crease */}
-        <path d="M105,25 C 115,32 95,32 105,25" fill="#4A5568" />
-        {/* Hat Band */}
-        <rect x="74" y="50" width="62" height="6" fill="#0A2540" />
-        {/* Creative Element: Glowing Code Symbol */}
-        <g filter="url(#platypusCodeGlow)">
-            <path d="M98 52 L 95 54.5 L 98 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-            <path d="M112 52 L 115 54.5 L 112 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-        </g>
-    </g>
-);
-
-export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className }) => (
+export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusLaptopSVG');
+    return (
     <PlatypusBaseSVG 
+        className={className}
         titleId="platypus-laptop-title" 
         title="A developer platypus wearing a cowboy hat, sitting with a laptop beside it." 
         sitting={true}
-        accessories={<PlatypusHat />}
         expression="focused"
-        defs={<>
-            <linearGradient id="laptopScreen" x1="0" y1="0" x2="1" y2="1">
+        accessories={
+          <g>
+            {/* Brim */}
+            <path d="M50,55 C 30,60 180,60 160,55 C 170,45 40,45 50,55 Z" fill="url(#platypusHatGradient)" />
+            {/* Crown */}
+            <path d="M75,55 C 70,25 140,25 135,55 L 75,55 Z" fill="#2D3748" />
+            {/* Crown Crease */}
+            <path d="M105,25 C 115,32 95,32 105,25" fill="#4A5568" />
+            {/* Hat Band */}
+            <rect x="74" y="50" width="62" height="6" fill="#0A2540" />
+            {/* Creative Element: Glowing Code Symbol */}
+            <g filter="url(#platypusCodeGlow)">
+                <path d="M98 52 L 95 54.5 L 98 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLineCap="round" />
+                <path d="M112 52 L 115 54.5 L 112 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLineCap="round" />
+            </g>
+          </g>
+        }
+        defs={[
+            <linearGradient key="lg1" id="laptopScreen" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stopColor="#0A2540" />
                 <stop offset="100%" stopColor="#1a3f66" />
-            </linearGradient>
-            <linearGradient id="laptopBody" x1="0.5" y1="0" x2="0.5" y2="1">
+            </linearGradient>,
+            <linearGradient key="lg2" id="laptopBody" x1="0.5" y1="0" x2="0.5" y2="1">
                 <stop offset="0%" stopColor="#E2E8F0" />
                 <stop offset="50%" stopColor="#CBD5E0" />
                 <stop offset="100%" stopColor="#A0AEC0" />
-            </linearGradient>
-            <filter id="laptopShadow" x="-20%" y="-20%" width="140%" height="140%">
+            </linearGradient>,
+            <filter key="f1" id="laptopShadow" x="-20%" y="-20%" width="140%" height="140%">
                 <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
                 <feOffset in="blur" dx="3" dy="5" result="offsetBlur"/>
                 <feMerge>
                     <feMergeNode in="offsetBlur"/>
                     <feMergeNode in="SourceGraphic"/>
                 </feMerge>
+            </filter>,
+            <linearGradient key="lg3" id="platypusHatGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#4A5568" />
+                <stop offset="100%" stopColor="#2D3748" />
+            </linearGradient>,
+            <filter key="f2" id="platypusCodeGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
+                <feFlood floodColor="#5DA9E9" result="color" />
+                <feComposite in="color" in2="blur" operator="in" result="glow" />
+                <feMerge>
+                    <feMergeNode in="glow" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
             </filter>
-            {platypusHatDefs}
-        </>}
+        ]}
     >
         {/* Arms resting on lap */}
         <g>
@@ -457,26 +466,30 @@ export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className 
             <text x="-40" y="-30" fontFamily="monospace" fontSize="8" fill="#38B2AC">/&gt;</text>
         </g>
     </PlatypusBaseSVG>
-);
+    );
+};
 
 
-export const PlatypusPillowSVG: React.FC<{ className?: string }> = ({ className }) => (
+export const PlatypusPillowSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusPillowSVG');
+    return (
     <PlatypusBaseSVG 
+      className={className}
       titleId="platypus-pillow-title" 
       title="A calm platypus hugging a fluffy pillow."
-      defs={<>
-        <radialGradient id="pillowGradient" cx="0.5" cy="0.5" r="0.7">
+      defs={[
+        <radialGradient key="g1" id="pillowGradient" cx="0.5" cy="0.5" r="0.7">
           <stop offset="0%" stopColor="#FFFFFF" />
           <stop offset="100%" stopColor="#EBF8FF" />
         </radialGradient>
-      </>}
+      ]}
     >
       {/* Pillow */}
       <g>
         <path d="M80 100 C 50 100, 55 160, 80 160 L 130 160 C 155 160, 160 100, 130 100 Z" fill="url(#pillowGradient)" stroke="#CBD5E0" strokeWidth="0.5" />
         {/* Pillow Shading/Indentations */}
-        <path d="M90,105 C 80,125, 85,145, 90,155" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
-        <path d="M120,105 C 130,125, 125,145, 120,155" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
+        <path d="M90,105 C 80,125, 85,145, 90,155" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLineCap="round" opacity="0.7"/>
+        <path d="M120,105 C 130,125, 125,145, 120,155" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLineCap="round" opacity="0.7"/>
       </g>
 
       {/* Arms hugging the pillow */}
@@ -489,18 +502,22 @@ export const PlatypusPillowSVG: React.FC<{ className?: string }> = ({ className 
           <path d="M90,140 C 80,150 65,135 80,130 L 88,138 Z" fill="#ED8936" />
       </g>
     </PlatypusBaseSVG>
-);
+    );
+};
 
-export const PlatypusLollipopSVG: React.FC<{ className?: string }> = ({ className }) => (
+export const PlatypusLollipopSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusLollipopSVG');
+    return (
     <PlatypusBaseSVG 
+        className={className}
         titleId="platypus-lollipop-title" 
         title="A friendly platypus holding a colorful lollipop, which is in front of its body."
-        defs={<>
-            <linearGradient id="lollipopStick" x1="0.5" y1="0" x2="0.5" y2="1">
+        defs={[
+            <linearGradient key="g1" id="lollipopStick" x1="0.5" y1="0" x2="0.5" y2="1">
                 <stop offset="0%" stopColor="#FFFFFF" />
                 <stop offset="80%" stopColor="#E2E8F0" />
-            </linearGradient>
-            <radialGradient id="lollipopSwirl">
+            </linearGradient>,
+            <radialGradient key="g2" id="lollipopSwirl">
                 <stop offset="0%" stopColor="#FF6B6B" />
                 <stop offset="16.6%" stopColor="#FBBF24" />
                 <stop offset="33.3%" stopColor="#48BB78" />
@@ -509,7 +526,7 @@ export const PlatypusLollipopSVG: React.FC<{ className?: string }> = ({ classNam
                 <stop offset="83.3%" stopColor="#ED64A6" />
                 <stop offset="100%" stopColor="#FF6B6B" />
             </radialGradient>
-        </>}
+        ]}
         accessories={
             <g transform="rotate(-15 80 95)">
                 {/* Lollipop Head */}
@@ -546,10 +563,14 @@ export const PlatypusLollipopSVG: React.FC<{ className?: string }> = ({ classNam
             <path d="M78,95 C 75,105 75,115 78,125 Z" fill="#319795" />
         </g>
     </PlatypusBaseSVG>
-);
+    );
+};
 
-export const PlatypusMagnifyingGlassSVG: React.FC<{ className?: string }> = ({ className }) => (
+export const PlatypusMagnifyingGlassSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusMagnifyingGlassSVG');
+    return (
     <PlatypusBaseSVG 
+      className={className}
       titleId="platypus-magnifying-title" 
       title="A curious platypus inspecting with a magnifying glass, holding it downwards."
       expression="curious"
@@ -570,7 +591,7 @@ export const PlatypusMagnifyingGlassSVG: React.FC<{ className?: string }> = ({ c
                 <g transform="translate(84, 95)">
                     <circle cx="0" cy="0" r="25" fill="#718096" />
                     <circle cx="0" cy="0" r="21" fill="#EBF8FF" opacity="0.7" />
-                    <path d="M-10 -10 A 15 15 0 0 1 10 -5" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
+                    <path d="M-10 -10 A 15 15 0 0 1 10 -5" fill="none" stroke="white" strokeWidth="3" strokeLineCap="round" opacity="0.9" />
                 </g>
                 
                 {/* Handle */}
@@ -593,10 +614,13 @@ export const PlatypusMagnifyingGlassSVG: React.FC<{ className?: string }> = ({ c
             <path d="M78,95 C 75,105 75,115 78,125 Z" fill="#319795" />
        </g>
     </PlatypusBaseSVG>
-);
+    );
+};
 
-export const PlatypusClipboardSVG: React.FC<{ className?: string }> = ({ className }) => (
-    <PlatypusBaseSVG titleId="platypus-clipboard-title" title="An analytical platypus holding a clipboard.">
+export const PlatypusClipboardSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusClipboardSVG');
+    return (
+    <PlatypusBaseSVG className={className} titleId="platypus-clipboard-title" title="An analytical platypus holding a clipboard.">
         {/* Right Arm (Static) */}
         <g>
             <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#319795" />
@@ -611,10 +635,10 @@ export const PlatypusClipboardSVG: React.FC<{ className?: string }> = ({ classNa
                 <rect x="-18" y="-28" width="36" height="51" rx="2" fill="white" />
                 {/* Lined Paper & Checkmarks */}
                 <line x1="-15" y1="-15" x2="15" y2="-15" stroke="#E2E8F0" strokeWidth="1"/>
-                <path d="M-13 -8 l2 2 l4 -4" stroke="#38A169" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+                <path d="M-13 -8 l2 2 l4 -4" stroke="#38A169" strokeWidth="1.5" fill="none" strokeLineCap="round"/>
                 <line x1="-15" y1="-5" x2="15" y2="-5" stroke="#E2E8F0" strokeWidth="1"/>
                 <line x1="-15" y1="5" x2="15" y2="5" stroke="#E2E8F0" strokeWidth="1"/>
-                <path d="M-13 12 l2 2 l4 -4" stroke="#38A169" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+                <path d="M-13 12 l2 2 l4 -4" stroke="#38A169" strokeWidth="1.5" fill="none" strokeLineCap="round"/>
                 <line x1="-15" y1="15" x2="15" y2="15" stroke="#E2E8F0" strokeWidth="1"/>
                 {/* Clip */}
                 <path d="M -18 -35 h 36 a 3 3 0 0 1 3 3 v 7 h -42 v -7 a 3 3 0 0 1 3 -3 z" fill="#A0AEC0" />
@@ -624,10 +648,13 @@ export const PlatypusClipboardSVG: React.FC<{ className?: string }> = ({ classNa
             <path d="M60,115 C 45,120 40,100 45,95 L 60,95 C 70,95 70,115 60,115 Z" fill="#ED8936" />
         </g>
     </PlatypusBaseSVG>
-);
+    );
+};
 
-export const PlatypusWavingSimpleSVG: React.FC<{ className?: string }> = ({ className }) => (
-    <PlatypusBaseSVG titleId="platypus-waving-title" title="A friendly platypus waving its hand.">
+export const PlatypusWavingSimpleSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusWavingSimpleSVG');
+    return (
+    <PlatypusBaseSVG className={className} titleId="platypus-waving-title" title="A friendly platypus waving its hand.">
         {/* Right Arm (Static) */}
         <g>
             <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#319795" />
@@ -640,9 +667,11 @@ export const PlatypusWavingSimpleSVG: React.FC<{ className?: string }> = ({ clas
             <path d="M55,105 C 45,115 40,100 50,95 C 55,90 60,100 55,105 Z" fill="#ED8936" />
         </g>
     </PlatypusBaseSVG>
-);
+    );
+};
 
 export const PlatypusWavingSkateboardSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusWavingSkateboardSVG');
     const [delays, setDelays] = useState({ left: '0s', right: '0s' });
 
     useEffect(() => {
@@ -747,6 +776,7 @@ export const PlatypusWavingSkateboardSVG: React.FC<{ className?: string }> = ({ 
 
 
 export const PlatypusPeekingSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusPeekingSVG');
     const [delays, setDelays] = useState({ left: '0s', right: '0s' });
 
     useEffect(() => {
@@ -804,17 +834,20 @@ export const PlatypusPeekingSVG: React.FC<{ className?: string }> = ({ className
     );
 };
 
-export const PlatypusCoinsSVG: React.FC<{ className?: string }> = ({ className }) => (
+export const PlatypusCoinsSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusCoinsSVG');
+    return (
     <PlatypusBaseSVG 
+      className={className}
       titleId="platypus-coins-title" 
       title="A cheerful platypus holding a large coin."
-      defs={<>
-          <radialGradient id="coinGradient" cx="0.5" cy="0.5" r="0.5">
+      defs={[
+          <radialGradient key="g1" id="coinGradient" cx="0.5" cy="0.5" r="0.5">
               <stop offset="0%" stopColor="#FBBF24" />
               <stop offset="80%" stopColor="#F6E05E" />
               <stop offset="100%" stopColor="#D69E2E" />
           </radialGradient>
-      </>}
+      ]}
     >
         {/* Coin */}
         <g transform="translate(85, 125)">
@@ -834,9 +867,11 @@ export const PlatypusCoinsSVG: React.FC<{ className?: string }> = ({ className }
             <path d="M95,120 C 85,130 70,115 85,110 L 93,118 Z" fill="#ED8936" />
         </g>
     </PlatypusBaseSVG>
-);
+    );
+};
 
 export const PlatypusChatHeadSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusChatHeadSVG');
     const [delays, setDelays] = useState({ left: '0s', right: '0s' });
 
     useEffect(() => {
@@ -888,14 +923,121 @@ export const PlatypusChatHeadSVG: React.FC<{ className?: string }> = ({ classNam
             {/* Headphones */}
             <g>
                 {/* Headband */}
-                <path d="M 20 38 C 20 10, 80 10, 80 38" strokeWidth="10" stroke="#2D3748" fill="none" strokeLinecap="round" />
-                <path d="M 20 38 C 20 10, 80 10, 80 38" strokeWidth="6" stroke="#4A5568" fill="none" strokeLinecap="round" />
+                <path d="M 20 38 C 20 10, 80 10, 80 38" strokeWidth="10" stroke="#2D3748" fill="none" strokeLineCap="round" />
+                <path d="M 20 38 C 20 10, 80 10, 80 38" strokeWidth="6" stroke="#4A5568" fill="none" strokeLineCap="round" />
                 {/* Left Earcup */}
                 <rect x="10" y="35" width="20" height="20" rx="6" fill="#2D3748"/>
                 <rect x="13" y="38" width="14" height="14" rx="4" fill="#5DA9E9"/>
                 {/* Right Earcup */}
                 <rect x="70" y="35" width="20" height="20" rx="6" fill="#2D3748"/>
                 <rect x="73" y="38" width="14" height="14" rx="4" fill="#5DA9E9"/>
+            </g>
+        </g>
+    </svg>
+    );
+};
+
+export const PlatypusSleepingSVG: React.FC<{ className?: string }> = ({ className }) => {
+    console.log('Rendering: PlatypusSleepingSVG');
+    const [delays, setDelays] = useState({ left: '0s', right: '0s' });
+
+    useEffect(() => {
+        const randomDelay = Math.random() * 4; // base delay up to 4s for slower feel
+        setDelays({
+            left: `${randomDelay.toFixed(2)}s`,
+            right: `${(randomDelay + 0.5 + Math.random() * 0.5).toFixed(2)}s`
+        });
+    }, []);
+
+    return (
+    <svg viewBox="0 0 200 200" className={className} xmlns="http://www.w3.org/2000/svg" aria-labelledby="platypus-sleeping-title">
+        <title id="platypus-sleeping-title">A platypus sleeping peacefully on a pillow, representing data security and privacy.</title>
+        <defs>
+            <radialGradient id="pillowGradientSleeping" cx="0.5" cy="0.5" r="0.7">
+                <stop offset="0%" stopColor="#FFFFFF" />
+                <stop offset="100%" stopColor="#EBF8FF" />
+            </radialGradient>
+            <pattern id="tailGridSleeping" patternUnits="userSpaceOnUse" width="10" height="10">
+                <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#C05621" strokeWidth="1.5"/>
+            </pattern>
+            <style>
+                {`
+                    .zzz {
+                        font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+                        font-weight: bold;
+                        fill: #5DA9E9;
+                        opacity: 0;
+                        animation: float-up 3s ease-in-out infinite;
+                    }
+                    @keyframes float-up {
+                        0% { transform: translate(0, 0); opacity: 0; }
+                        20% { opacity: 0.8; }
+                        80% { opacity: 0.8; }
+                        100% { transform: translate(-10px, -40px); opacity: 0; }
+                    }
+                    .zzz:nth-of-type(2) { animation-delay: 1s; }
+                    .zzz:nth-of-type(3) { animation-delay: 2s; }
+
+                    @keyframes eye-twitch {
+                        0%, 98%, 100% { transform: translateY(0); }
+                        99% { transform: translateY(-0.5px); }
+                    }
+                    .eye-twitch { 
+                        animation-name: eye-twitch;
+                        animation-duration: 5s;
+                        animation-iteration-count: infinite;
+                    }
+                `}
+            </style>
+        </defs>
+        <g transform="translate(10, 0)">
+            {/* Zzz particles */}
+            <g transform="translate(60, 60)">
+                <text x="0" y="0" fontSize="16" className="zzz">z</text>
+                <text x="5" y="-5" fontSize="20" className="zzz">z</text>
+                <text x="10" y="-10" fontSize="24" className="zzz">Z</text>
+            </g>
+
+            {/* Pillow (behind body) */}
+            <g>
+                <path d="M70 120 C 40 120, 45 180, 70 180 L 140 180 C 165 180, 170 120, 140 120 Z" fill="url(#pillowGradientSleeping)" stroke="#CBD5E0" strokeWidth="0.5" />
+            </g>
+
+            {/* Tail */}
+            <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="#ED8936"/>
+            <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="url(#tailGridSleeping)"/>
+
+            {/* Left Leg */}
+            <path d="M80,175 C 70,190 100,190 90,175 L 90,165 L 75,168 Z" fill="#ED8936" />
+            {/* Right Leg */}
+            <path d="M120,178 C 110,193 140,193 130,178 L 130,168 L 115,171 Z" fill="#ED8936" />
+            
+            {/* Body */}
+            <path d="M80,70 C 70,120 70,180 85,180 L 125,180 C 140,180 140,120 130,70 Z" fill="#38B2AC"/>
+            
+            {/* Arms hugging pillow */}
+             <g>
+              {/* Right Arm */}
+              <path d="M132,95 C 140,120 130,140 120,140 Z" fill="#319795" />
+              <path d="M120,140 C 130,150 145,135,130,130 L 122,138 Z" fill="#ED8936" />
+              {/* Left arm */}
+              <path d="M78,95 C 70,120 80,140 90,140 Z" fill="#319795" />
+              <path d="M90,140 C 80,150 65,135 80,130 L 88,138 Z" fill="#ED8936" />
+            </g>
+
+            {/* Head and Bill */}
+            <path d="M80,80 C 65,65 145,65 130,80 C 140,40 70,40 80,80 Z" fill="#38B2AC"/>
+            <path d="M70,85 C 50,105 160,105 140,85 L 130,80 L 80,80 Z" fill="#ED8936" />
+            {/* Nostrils */}
+            <g fill="#C05621">
+                <ellipse cx="98" cy="88" rx="2.5" ry="1.5" transform="rotate(-10 98 88)" />
+                <ellipse cx="112" cy="88" rx="2.5" ry="1.5" transform="rotate(10 112 88)" />
+            </g>
+            
+            {/* Sleeping Eyes */}
+            <g>
+                <path d="M 89 72 A 7 7 0 0 0 101 72" stroke="black" strokeWidth="1.5" fill="none" className="eye-twitch" style={{ animationDelay: delays.left }} transform="rotate(-10 95 68)" />
+                <path d="M 114 72 A 7 7 0 0 0 126 72" stroke="black" strokeWidth="1.5" fill="none" className="eye-twitch" style={{ animationDelay: delays.right }} transform="rotate(10 120 68)" />
             </g>
         </g>
     </svg>
