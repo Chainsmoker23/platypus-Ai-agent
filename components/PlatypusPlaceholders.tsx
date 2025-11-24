@@ -14,7 +14,8 @@ export const PlatypusLogoSVG: React.FC<{ className?: string }> = ({ className })
              {/* Filament Eyes */}
             <circle cx="43" cy="25" r="3" fill="#0A2540" />
             <circle cx="57" cy="25" r="3" fill="#0A2540" />
-            <path d="M44 28 Q 50 32 56 28" stroke="#0A2540" strokeWidth="2" strokeLineCap="round" fill="none"/>
+            {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+            <path d="M44 28 Q 50 32 56 28" stroke="#0A2540" strokeWidth="2" strokeLinecap="round" fill="none"/>
         </g>
     </svg>
     );
@@ -94,8 +95,10 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
                     {/* The coordinate system is shifted so (0,0) is the top-center of the headband arc */}
 
                     {/* Headband */}
-                    <path d="M -27.5 40 C -27.5 0, 27.5 0, 27.5 40" strokeWidth="12" stroke="#2D3748" fill="none" strokeLineCap="round" />
-                    <path d="M -27.5 40 C -27.5 0, 27.5 0, 27.5 40" strokeWidth="8" stroke="#4A5568" fill="none" strokeLineCap="round" />
+                    {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+                    <path d="M -27.5 40 C -27.5 0, 27.5 0, 27.5 40" strokeWidth="12" stroke="#2D3748" fill="none" strokeLinecap="round" />
+                    {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+                    <path d="M -27.5 40 C -27.5 0, 27.5 0, 27.5 40" strokeWidth="8" stroke="#4A5568" fill="none" strokeLinecap="round" />
 
                     {/* Right Earcup (closer to viewer) */}
                     <g transform="translate(27.5, 40)">
@@ -165,8 +168,10 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
 
             {/* Creative Element: Glowing Code Symbol */}
             <g filter="url(#codeGlow)">
-                <path d="M98 52 L 95 54.5 L 98 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLineCap="round" />
-                <path d="M112 52 L 115 54.5 L 112 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLineCap="round" />
+                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+                <path d="M98 52 L 95 54.5 L 98 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+                <path d="M112 52 L 115 54.5 L 112 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
             </g>
         </g>
     </svg>
@@ -379,8 +384,10 @@ export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className 
             <rect x="74" y="50" width="62" height="6" fill="#0A2540" />
             {/* Creative Element: Glowing Code Symbol */}
             <g filter="url(#platypusCodeGlow)">
-                <path d="M98 52 L 95 54.5 L 98 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLineCap="round" />
-                <path d="M112 52 L 115 54.5 L 112 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLineCap="round" />
+                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+                <path d="M98 52 L 95 54.5 L 98 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+                <path d="M112 52 L 115 54.5 L 112 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
             </g>
           </g>
         }
@@ -488,8 +495,10 @@ export const PlatypusPillowSVG: React.FC<{ className?: string }> = ({ className 
       <g>
         <path d="M80 100 C 50 100, 55 160, 80 160 L 130 160 C 155 160, 160 100, 130 100 Z" fill="url(#pillowGradient)" stroke="#CBD5E0" strokeWidth="0.5" />
         {/* Pillow Shading/Indentations */}
-        <path d="M90,105 C 80,125, 85,145, 90,155" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLineCap="round" opacity="0.7"/>
-        <path d="M120,105 C 130,125, 125,145, 120,155" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLineCap="round" opacity="0.7"/>
+        {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+        <path d="M90,105 C 80,125, 85,145, 90,155" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
+        {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+        <path d="M120,105 C 130,125, 125,145, 120,155" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
       </g>
 
       {/* Arms hugging the pillow */}
@@ -591,7 +600,8 @@ export const PlatypusMagnifyingGlassSVG: React.FC<{ className?: string }> = ({ c
                 <g transform="translate(84, 95)">
                     <circle cx="0" cy="0" r="25" fill="#718096" />
                     <circle cx="0" cy="0" r="21" fill="#EBF8FF" opacity="0.7" />
-                    <path d="M-10 -10 A 15 15 0 0 1 10 -5" fill="none" stroke="white" strokeWidth="3" strokeLineCap="round" opacity="0.9" />
+                    {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+                    <path d="M-10 -10 A 15 15 0 0 1 10 -5" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
                 </g>
                 
                 {/* Handle */}
@@ -635,10 +645,12 @@ export const PlatypusClipboardSVG: React.FC<{ className?: string }> = ({ classNa
                 <rect x="-18" y="-28" width="36" height="51" rx="2" fill="white" />
                 {/* Lined Paper & Checkmarks */}
                 <line x1="-15" y1="-15" x2="15" y2="-15" stroke="#E2E8F0" strokeWidth="1"/>
-                <path d="M-13 -8 l2 2 l4 -4" stroke="#38A169" strokeWidth="1.5" fill="none" strokeLineCap="round"/>
+                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+                <path d="M-13 -8 l2 2 l4 -4" stroke="#38A169" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
                 <line x1="-15" y1="-5" x2="15" y2="-5" stroke="#E2E8F0" strokeWidth="1"/>
                 <line x1="-15" y1="5" x2="15" y2="5" stroke="#E2E8F0" strokeWidth="1"/>
-                <path d="M-13 12 l2 2 l4 -4" stroke="#38A169" strokeWidth="1.5" fill="none" strokeLineCap="round"/>
+                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+                <path d="M-13 12 l2 2 l4 -4" stroke="#38A169" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
                 <line x1="-15" y1="15" x2="15" y2="15" stroke="#E2E8F0" strokeWidth="1"/>
                 {/* Clip */}
                 <path d="M -18 -35 h 36 a 3 3 0 0 1 3 3 v 7 h -42 v -7 a 3 3 0 0 1 3 -3 z" fill="#A0AEC0" />
@@ -923,8 +935,10 @@ export const PlatypusChatHeadSVG: React.FC<{ className?: string }> = ({ classNam
             {/* Headphones */}
             <g>
                 {/* Headband */}
-                <path d="M 20 38 C 20 10, 80 10, 80 38" strokeWidth="10" stroke="#2D3748" fill="none" strokeLineCap="round" />
-                <path d="M 20 38 C 20 10, 80 10, 80 38" strokeWidth="6" stroke="#4A5568" fill="none" strokeLineCap="round" />
+                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+                <path d="M 20 38 C 20 10, 80 10, 80 38" strokeWidth="10" stroke="#2D3748" fill="none" strokeLinecap="round" />
+                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
+                <path d="M 20 38 C 20 10, 80 10, 80 38" strokeWidth="6" stroke="#4A5568" fill="none" strokeLinecap="round" />
                 {/* Left Earcup */}
                 <rect x="10" y="35" width="20" height="20" rx="6" fill="#2D3748"/>
                 <rect x="13" y="38" width="14" height="14" rx="4" fill="#5DA9E9"/>
