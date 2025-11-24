@@ -12,19 +12,36 @@ import type { FileSystem } from '../components/ide/types';
 const BackIcon = () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>;
 
 const PlaygroundPage: React.FC<{ onNavigateHome: () => void }> = ({ onNavigateHome }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Start in loading state
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
   const [files, setFiles] = useState<FileSystem | null>(null);
   const [openTabs, setOpenTabs] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<string | null>(null);
   const [terminalOutput, setTerminalOutput] = useState<string[]>(['Welcome to the Platypus IDE simulation. Select an example to begin.']);
+  
+  const isMounted = useRef(false);
   const timeoutRef = useRef<number | null>(null);
 
-  const handleGenerate = (id: keyof typeof aiResponses) => {
-    if (isLoading) return;
+  useEffect(() => {
+    isMounted.current = true;
+    // Pre-warm the first example on initial load.
+    handleGenerate(examplePrompts[0].id);
 
-    // Clear any existing timeout animation before starting a new one.
+    // Cleanup function for unmount
+    return () => {
+      isMounted.current = false;
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []); // Empty array ensures this runs only on mount and unmount
+
+  const handleGenerate = (id: keyof typeof aiResponses) => {
+    // This check prevents re-triggering if a user clicks while animating
+    if (isLoading && files) return;
+
+    // Clear any existing animation before starting a new one.
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -39,43 +56,32 @@ const PlaygroundPage: React.FC<{ onNavigateHome: () => void }> = ({ onNavigateHo
     let currentLine = 0;
 
     const animateTerminal = () => {
-      // Check if we've reached the end of the terminal log
+      // Gracefully stop animation if the component has been unmounted
+      if (!isMounted.current) return;
+
       if (currentLine >= response.terminal.length) {
-        // Animation is complete, update the final state
+        // Animation complete, update the final state
+        if (isMounted.current) {
+          setFiles(response.files);
+          setOpenTabs(response.openTabs);
+          setActiveTab(response.initialActiveTab);
+          setIsLoading(false);
+        }
         timeoutRef.current = null;
-        setFiles(response.files);
-        setOpenTabs(response.openTabs);
-        setActiveTab(response.initialActiveTab);
-        setIsLoading(false);
         return; // Stop the recursion
       }
-
-      // Add the next line to the output
-      setTerminalOutput(prev => [...prev, response.terminal[currentLine]]);
-      currentLine++;
-
-      // Schedule the next line to be added
-      timeoutRef.current = window.setTimeout(animateTerminal, 200);
+      
+      // Add the next line to the output, then schedule the next one
+      if (isMounted.current) {
+          setTerminalOutput(prev => [...prev, response.terminal[currentLine]]);
+          currentLine++;
+          timeoutRef.current = window.setTimeout(animateTerminal, 150);
+      }
     };
 
     // Kick off the animation
     animateTerminal();
   };
-  
-  useEffect(() => {
-    // Pre-warm the first example on initial load for a faster demo experience.
-    // This check prevents re-triggering if the component re-renders for other reasons.
-    if (!files && !isLoading) {
-      handleGenerate(examplePrompts[0].id);
-    }
-
-    // Cleanup function to run when the component unmounts, preventing memory leaks.
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []); // Intentionally empty to run only on initial mount.
   
   const handleFileSelect = (path: string) => {
     if (!openTabs.includes(path)) {
@@ -89,11 +95,7 @@ const PlaygroundPage: React.FC<{ onNavigateHome: () => void }> = ({ onNavigateHo
     setOpenTabs(newTabs);
 
     if (activeTab === path) {
-      if (newTabs.length > 0) {
-        setActiveTab(newTabs[newTabs.length - 1]);
-      } else {
-        setActiveTab(null);
-      }
+      setActiveTab(newTabs.length > 0 ? newTabs[newTabs.length - 1] : null);
     }
   };
   

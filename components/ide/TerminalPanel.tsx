@@ -19,12 +19,18 @@ const TerminalPanel: React.FC<TerminalPanelProps> = ({ output }) => {
         <h3 className="text-xs uppercase font-bold tracking-wider text-gray-400">Terminal</h3>
       </div>
       <div className="flex-grow p-2 overflow-y-auto text-xs">
-        {output.map((line, index) => (
-          <div key={index} className="flex">
-            <span className="text-gray-500 mr-2 select-none">{line.startsWith('$') || line.startsWith('>') ? '' : '>'}</span>
-            <span className={line.startsWith('✓') ? 'text-green-400' : ''}>{line}</span>
-          </div>
-        ))}
+        {output.map((line, index) => {
+          // Defensive check to prevent crashes on undefined or non-string lines
+          if (typeof line !== 'string') {
+            return null;
+          }
+          return (
+            <div key={index} className="flex">
+              <span className="text-gray-500 mr-2 select-none">{line.startsWith('$') || line.startsWith('>') ? '' : '>'}</span>
+              <span className={line.startsWith('✓') ? 'text-green-400' : ''}>{line}</span>
+            </div>
+          );
+        })}
         <div ref={endOfTerminalRef} />
       </div>
     </div>
