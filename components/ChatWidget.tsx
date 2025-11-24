@@ -4,13 +4,26 @@ import AnimatedPlatypus from './AnimatedPlatypus';
 
 const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<{ type: 'user' | 'ai'; text: string }[]>([
-    { type: 'ai', text: "Hello! I'm Platypus, your AI coding companion. How can I help you today?" }
-  ]);
+  const [messages, setMessages] = useState<{ type: 'user' | 'ai'; text: string }[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isApiConfigured, setIsApiConfigured] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (process.env.API_KEY) {
+      setIsApiConfigured(true);
+      setMessages([
+        { type: 'ai', text: "Hello! I'm Platypus, your AI coding companion. How can I help you today?" }
+      ]);
+    } else {
+      setIsApiConfigured(false);
+      setMessages([
+        { type: 'ai', text: "Welcome! To enable chat, please add your Gemini API key to your environment configuration." }
+      ]);
+    }
+  }, []);
+  
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -21,7 +34,7 @@ const ChatWidget: React.FC = () => {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    if (!isApiConfigured || !input.trim() || isLoading) return;
 
     const userMessage = { type: 'user' as const, text: input };
     setMessages(prev => [...prev, userMessage]);
@@ -77,7 +90,7 @@ const ChatWidget: React.FC = () => {
             <AnimatedPlatypus mascotType="chat" className="w-12 h-12 flex-shrink-0" />
             <div>
                 <h3 className="font-bold text-lg text-platypus-text">Chat with Platypus</h3>
-                <p className="text-sm text-platypus-subtle">Online</p>
+                <p className="text-sm text-platypus-subtle">{isApiConfigured ? 'Online' : 'Offline'}</p>
             </div>
           </header>
 
@@ -111,13 +124,13 @@ const ChatWidget: React.FC = () => {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask me anything..."
-                className="w-full px-4 py-2 rounded-full border border-gray-300 focus:ring-2 focus:ring-platypus-primary focus:outline-none"
-                disabled={isLoading}
+                placeholder={isApiConfigured ? "Ask me anything..." : "API Key not configured"}
+                className="w-full px-4 py-2 rounded-full border border-gray-300 focus:ring-2 focus:ring-platypus-primary focus:outline-none disabled:bg-gray-100"
+                disabled={isLoading || !isApiConfigured}
               />
               <button
                 type="submit"
-                disabled={isLoading || !input.trim()}
+                disabled={isLoading || !input.trim() || !isApiConfigured}
                 className="w-10 h-10 bg-platypus-primary text-white rounded-full flex-shrink-0 flex items-center justify-center disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-platypus-primary/90 transition-colors"
                 aria-label="Send message"
               >
