@@ -34,7 +34,15 @@ export const ChevronDownIcon: React.FC = () => (
 );
 
 export const FilesIcon: React.FC = () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M13.172 12.828a4 4 0 1 1-5.657-5.657 4 4 0 0 1 5.657 5.657Z"></path><path d="M12.828 13.172a4 4 0 1 1-5.657 5.657 4 4 0 0 1 5.657-5.657Z"></path><path d="M7.172 7.172a4 4 0 1 1 5.657-5.657 4 4 0 0 1-5.657 5.657Z"></path><path d="M18.828 7.172a4 4 0 1 1-5.657-5.657 4 4 0 0 1 5.657 5.657Z"></path></svg>
+    <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="0" className="w-6 h-6"><path d="M3,5H1V19a2,2,0,0,0,2,2H18V21H3a2,2,0,0,1-2-2V5H3M21,1H7A2,2,0,0,0,5,3V15a2,2,0,0,0,2,2H21a2,2,0,0,0,2-2V3a2,2,0,0,0-2-2Z"></path></svg>
+);
+
+export const ChatIcon: React.FC = () => (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg>
+);
+
+export const SendIcon: React.FC = () => (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
 );
 
 export const CopyIcon: React.FC = () => (

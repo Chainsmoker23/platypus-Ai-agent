@@ -5,7 +5,7 @@ import Sidebar from '../components/ide/Sidebar';
 import EditorPanel from '../components/ide/EditorPanel';
 import TerminalPanel from '../components/ide/TerminalPanel';
 import { aiResponses, examplePrompts } from '../components/ide/aiResponses';
-import { getFileContent, getRawFileContent } from '../components/ide/utils';
+import { getFileContent, getRawFileContent, updateFileContent } from '../components/ide/utils';
 import type { FileSystem } from '../components/ide/types';
 
 // FIX: Corrected SVG attribute 'strokeLineJoin' to 'strokeLinejoin' and 'strokeLineCap' to 'strokeLinecap'.
@@ -14,6 +14,7 @@ const BackIcon = () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" 
 const PlaygroundPage: React.FC<{ onNavigateHome: () => void }> = ({ onNavigateHome }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+  const [activeView, setActiveView] = useState<'explorer' | 'chat'>('explorer');
 
   const [files, setFiles] = useState<FileSystem | null>(null);
   const [openTabs, setOpenTabs] = useState<string[]>([]);
@@ -44,6 +45,16 @@ const PlaygroundPage: React.FC<{ onNavigateHome: () => void }> = ({ onNavigateHo
       setActiveTab(response.initialActiveTab);
       setIsLoading(false);
     }
+  };
+
+  const handleApplyCodeChange = (filePath: string, newRawContent: string, newJsxContent: React.ReactNode) => {
+    if (!files) return;
+    const { fs: newFs } = updateFileContent(files, filePath, newRawContent, newJsxContent);
+    setFiles(newFs);
+  };
+
+  const handleFilesChange = (newFiles: FileSystem) => {
+    setFiles(newFiles);
   };
 
   const handleFileSelect = (path: string) => {
@@ -80,17 +91,19 @@ const PlaygroundPage: React.FC<{ onNavigateHome: () => void }> = ({ onNavigateHo
 
       <main className="flex-grow flex overflow-hidden">
         <ActivityBar 
-          onToggleSidebar={() => setIsSidebarVisible(!isSidebarVisible)}
-          isSidebarActive={isSidebarVisible}
+          activeView={activeView}
+          onSelectView={setActiveView}
         />
-        {isSidebarVisible && (
-            <Sidebar 
-                files={files}
-                isLoading={isLoading}
-                onFileSelect={handleFileSelect}
-                onGenerate={handleGenerate}
-            />
-        )}
+        <Sidebar 
+            activeView={activeView}
+            files={files}
+            isLoading={isLoading}
+            onFileSelect={handleFileSelect}
+            onGenerate={handleGenerate}
+            activeTab={activeTab}
+            activeFileContent={rawActiveFileContent}
+            onApplyCodeChange={handleApplyCodeChange}
+        />
         <div className="flex-grow flex flex-col overflow-hidden">
             <EditorPanel 
                 tabs={openTabs}
@@ -106,6 +119,7 @@ const PlaygroundPage: React.FC<{ onNavigateHome: () => void }> = ({ onNavigateHo
               initialCommand={initialCommand}
               files={files}
               onGenerationComplete={handleGenerationComplete}
+              onFilesChange={handleFilesChange}
             />
         </div>
       </main>

@@ -2,15 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import { TerminalIcon } from './Icons';
 import type { FileSystem } from './types';
 import { aiResponses } from './aiResponses';
-import { getFileContent, getRawFileContent, getFolderContent } from './utils';
+import { getRawFileContent, getFolderContent, addFileSystemEntry, removeFileSystemEntry } from './utils';
 
 interface TerminalPanelProps {
   initialCommand?: string;
   files: FileSystem | null;
   onGenerationComplete: () => void;
+  onFilesChange: (newFiles: FileSystem) => void;
 }
 
-const TerminalPanel: React.FC<TerminalPanelProps> = ({ initialCommand, files, onGenerationComplete }) => {
+const TerminalPanel: React.FC<TerminalPanelProps> = ({ initialCommand, files, onGenerationComplete, onFilesChange }) => {
     const [history, setHistory] = useState<string[]>(['Welcome to the Platypus IDE simulation. Type `help` for commands.']);
     const [input, setInput] = useState('');
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -21,7 +22,7 @@ const TerminalPanel: React.FC<TerminalPanelProps> = ({ initialCommand, files, on
     const endOfTerminalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        endOfTerminalRef.current?.scrollIntoView();
+        endOfTerminalRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [history]);
 
     useEffect(() => {
@@ -42,13 +43,51 @@ const TerminalPanel: React.FC<TerminalPanelProps> = ({ initialCommand, files, on
                 output.push('  help              - Show this help message.');
                 output.push('  ls [path]         - List files in the specified directory.');
                 output.push('  cat <file_path>   - Display file content.');
-                output.push('  node <file_path>    - Simulate running a node script.');
+                output.push('  touch <file_path> - Create a new empty file.');
+                output.push('  mkdir <dir_path>  - Create a new directory.');
+                output.push('  rm <path>         - Remove a file or empty directory.');
+                output.push('  node <file_path>  - Simulate running a node script.');
                 output.push('  platypus create ... - Run a generation task (see sidebar).');
-                output.push('  clear             - Clear the terminal screen.');
+                output.push('  whoami            - Display the current user.');
+                output.push('  clear / cls       - Clear the terminal screen.');
                 break;
+            case 'cls':
             case 'clear':
                 setHistory([]);
                 return;
+            case 'whoami':
+                output.push('platypus_user');
+                break;
+            case 'touch':
+                if (!args[0]) { output.push('usage: touch FILE...'); break; }
+                if (!files) { output.push('Error: No file system loaded.'); break; }
+                const { fs: newFsTouch, error: touchError } = addFileSystemEntry(files, args[0], { type: 'file', content: <></>, rawContent: '' });
+                if (touchError) {
+                    output.push(`touch: ${touchError}`);
+                } else {
+                    onFilesChange(newFsTouch);
+                }
+                break;
+            case 'mkdir':
+                if (!args[0]) { output.push('usage: mkdir DIRECTORY...'); break; }
+                if (!files) { output.push('Error: No file system loaded.'); break; }
+                const { fs: newFsMkdir, error: mkdirError } = addFileSystemEntry(files, args[0], { type: 'folder', children: {} });
+                 if (mkdirError) {
+                    output.push(`mkdir: ${mkdirError}`);
+                } else {
+                    onFilesChange(newFsMkdir);
+                }
+                break;
+            case 'rm':
+                if (!args[0]) { output.push('usage: rm FILE...'); break; }
+                if (!files) { output.push('Error: No file system loaded.'); break; }
+                const { fs: newFsRm, error: rmError } = removeFileSystemEntry(files, args[0]);
+                 if (rmError) {
+                    output.push(rmError);
+                } else {
+                    onFilesChange(newFsRm);
+                }
+                break;
             case 'ls':
                 const path = args[0] || '/';
                 if (!files) {
@@ -78,7 +117,7 @@ const TerminalPanel: React.FC<TerminalPanelProps> = ({ initialCommand, files, on
                    break;
                 }
                 const fileContent = getRawFileContent(files, args[0]);
-                if (fileContent) {
+                if (fileContent !== null) {
                     output.push(fileContent);
                 } else {
                     output.push(`cat: ${args[0]}: No such file or directory`);
@@ -125,7 +164,7 @@ const TerminalPanel: React.FC<TerminalPanelProps> = ({ initialCommand, files, on
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && !isProcessing) {
             e.preventDefault();
             processCommand(input);
         } else if (e.key === 'ArrowUp') {

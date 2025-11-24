@@ -11,33 +11,79 @@ const reactAppJs = (
   <>
     <span className="text-purple-400">import</span> React, {'{ useState }'} <span className="text-purple-400">from</span> <span className="text-green-400">'react'</span>;
     <br />
-    <span className="text-purple-400">import</span> {'\'./index.css\''}
+    <span className="text-purple-400">import</span> <span className="text-green-400">'./index.css'</span>;
     <br /><br />
     <span className="text-purple-400">function</span> <span className="text-yellow-400">App</span>() {'{'}
     <br />
-    {'  '}<span className="text-purple-400">const</span> [todos, setTodos] = <span className="text-yellow-400">useState</span>([<span className="text-green-400">'Learn Platypus'</span>, <span className="text-green-400">'Build an app'</span>]);
+    {'  '}<span className="text-purple-400">const</span> [todos, setTodos] = <span className="text-yellow-400">useState</span>([<span className="text-green-400">'Learn Platypus'</span>, <span className="text-green-400">'Build an app'</span>, <span className="text-green-400">'Ship to production'</span>]);
     <br />
     {'  '}<span className="text-purple-400">const</span> [input, setInput] = <span className="text-yellow-400">useState</span>(<span className="text-green-400">''</span>);
     <br /><br/>
-    {'  '}<span className="text-purple-400">const</span> <span className="text-yellow-400">addTodo</span> = () => {'{'}
-    <br/>
-    {'    '}<span className="text-purple-400">if</span> (input) {'{'}
-    <br/>
+    {'  '}<span className="text-purple-400">const</span> <span className="text-yellow-400">addTodo</span> = (e) => {'{'}
+    <br />
+    {'    '}e.<span className="text-yellow-400">preventDefault</span>();
+    <br />
+    {'    '}<span className="text-purple-400">if</span> (input.<span className="text-yellow-400">trim</span>()) {'{'}
+    <br />
     {'      '}<span className="text-yellow-400">setTodos</span>([...todos, input]);
-    <br/>
+    <br />
     {'      '}<span className="text-yellow-400">setInput</span>(<span className="text-green-400">''</span>);
-    <br/>
+    <br />
     {'    '}{'}'}
-    <br/>
+    <br />
+    {'  '}{'};'}
+    <br /><br/>
+    {'  '}<span className="text-purple-400">const</span> <span className="text-yellow-400">removeTodo</span> = (indexToRemove) => {'{'}
+    <br />
+    {'    '}<span className="text-yellow-400">setTodos</span>(todos.<span className="text-yellow-400">filter</span>((_, index) => index !== indexToRemove));
+    <br />
     {'  '}{'};'}
     <br /><br/>
     {'  '}<span className="text-purple-400">return</span> (
     <br />
     {'    '}&lt;<span className="text-red-400">div</span> <span className="text-cyan-400">className</span>=<span className="text-green-400">"app"</span>&gt;
     <br />
-    {'      '}&lt;<span className="text-red-400">h1</span>&gt;Platypus To-Do List&lt;/<span className="text-red-400">h1</span>&gt;
+    {'      '}&lt;<span className="text-red-400">h1</span> <span className="text-cyan-400">className</span>=<span className="text-green-400">"title"</span>&gt;Platypus To-Do List&lt;/<span className="text-red-400">h1</span>&gt;
     <br />
-    {'      '}{/* ... implementation ... */}
+    {'      '}&lt;<span className="text-red-400">form</span> <span className="text-cyan-400">onSubmit</span>={'{addTodo}'} <span className="text-cyan-400">className</span>=<span className="text-green-400">"input-form"</span>&gt;
+    <br />
+    {'        '}&lt;<span className="text-red-400">input</span>
+    <br />
+    {'          '}<span className="text-cyan-400">type</span>=<span className="text-green-400">"text"</span>
+    <br />
+    {'          '}<span className="text-cyan-400">value</span>={'{input}'}
+    <br />
+    {'          '}<span className="text-cyan-400">onChange</span>={'{'}(e) => <span className="text-yellow-400">setInput</span>(e.target.value){'}'}
+    <br />
+    {'          '}<span className="text-cyan-400">placeholder</span>=<span className="text-green-400">"Add a new to-do..."</span>
+    <br />
+    {'          '}<span className="text-cyan-400">className</span>=<span className="text-green-400">"todo-input"</span>
+    <br />
+    {'        '}/&gt;
+    <br />
+    {'        '}&lt;<span className="text-red-400">button</span> <span className="text-cyan-400">type</span>=<span className="text-green-400">"submit"</span> <span className="text-cyan-400">className</span>=<span className="text-green-400">"add-btn"</span>&gt;Add&lt;/<span className="text-red-400">button</span>&gt;
+    <br />
+    {'      '}&lt;/<span className="text-red-400">form</span>&gt;
+    <br />
+    {'      '}&lt;<span className="text-red-400">ul</span> <span className="text-cyan-400">className</span>=<span className="text-green-400">"todo-list"</span>&gt;
+    <br />
+    {'        '}{'{'}todos.<span className="text-yellow-400">map</span>((todo, index) => (
+    <br />
+    {'          '}&lt;<span className="text-red-400">li</span> <span className="text-cyan-400">key</span>={'{index}'} <span className="text-cyan-400">className</span>=<span className="text-green-400">"todo-item"</span>&gt;
+    <br />
+    {'            '}&lt;<span className="text-red-400">span</span>&gt;{'{todo}'}&lt;/<span className="text-red-400">span</span>&gt;
+    <br />
+    {'            '}&lt;<span className="text-red-400">button</span> <span className="text-cyan-400">onClick</span>={'{() => removeTodo(index)}'} <span className="text-cyan-400">className</span>=<span className="text-green-400">"remove-btn"</span>&gt;
+    <br />
+    {'              '}&amp;times;
+    <br />
+    {'            '}&lt;/<span className="text-red-400">button</span>&gt;
+    <br />
+    {'          '}&lt;/<span className="text-red-400">li</span>&gt;
+    <br />
+    {'        '})){'}'}
+    <br />
+    {'      '}&lt;/<span className="text-red-400">ul</span>&gt;
     <br />
     {'    '}&lt;/<span className="text-red-400">div</span>&gt;
     <br />
@@ -50,23 +96,47 @@ const reactAppJs = (
 );
 
 const reactAppJsRaw = `import React, { useState } from 'react';
-import './index.css'
+import './index.css';
 
 function App() {
-  const [todos, setTodos] = useState(['Learn Platypus', 'Build an app']);
+  const [todos, setTodos] = useState(['Learn Platypus', 'Build an app', 'Ship to production']);
   const [input, setInput] = useState('');
 
-  const addTodo = () => {
-    if (input) {
+  const addTodo = (e) => {
+    e.preventDefault();
+    if (input.trim()) {
       setTodos([...todos, input]);
       setInput('');
     }
   };
 
+  const removeTodo = (indexToRemove) => {
+    setTodos(todos.filter((_, index) => index !== indexToRemove));
+  };
+
   return (
     <div className="app">
-      <h1>Platypus To-Do List</h1>
-      {/* ... implementation ... */}
+      <h1 className="title">Platypus To-Do List</h1>
+      <form onSubmit={addTodo} className="input-form">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Add a new to-do..."
+          className="todo-input"
+        />
+        <button type="submit" className="add-btn">Add</button>
+      </form>
+      <ul className="todo-list">
+        {todos.map((todo, index) => (
+          <li key={index} className="todo-item">
+            <span>{todo}</span>
+            <button onClick={() => removeTodo(index)} className="remove-btn">
+              &times;
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -77,17 +147,119 @@ const reactIndexCss = (
   <>
     <span className="text-cyan-400">body</span> {'{'}
     <br/>
-    {'  '}<span className="text-purple-400">background-color</span>: <span className="text-blue-400">#282c34</span>;
+    {'  '}<span className="text-purple-400">font-family</span>: <span className="text-blue-400">-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif</span>;
     <br/>
-    {'  '}<span className="text-purple-400">color</span>: white;
+    {'  '}<span className="text-purple-400">background-color</span>: <span className="text-blue-400">#1e1e1e</span>;
+    <br/>
+    {'  '}<span className="text-purple-400">color</span>: <span className="text-blue-400">#d4d4d4</span>;
     <br/>
     {'}'}
+    <br/><br/>
+    <span className="text-cyan-400">.app</span> {'{'}
+    <br/>
+    {'  '}<span className="text-purple-400">background-color</span>: <span className="text-blue-400">#252526</span>;
+    <br/>
+    {'  '}<span className="text-purple-400">padding</span>: <span className="text-blue-400">30px</span>;
+    <br />
+    {'  '}<span className="text-purple-400">border-radius</span>: <span className="text-blue-400">12px</span>;
+    <br />
+    {'}'}
+    <br /><br />
+    {/* ... other styles */}
   </>
 );
 const reactIndexCssRaw = `body {
-  background-color: #282c34;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.app {
+  background-color: #252526;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  border: 1px solid #333;
+}
+
+.title {
+  text-align: center;
+  color: #5DA9E9;
+  margin-bottom: 20px;
+}
+
+.input-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.todo-input {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #3c3c3c;
+  background-color: #333;
+  color: #d4d4d4;
+  outline: none;
+}
+.todo-input:focus {
+  border-color: #5DA9E9;
+}
+
+.add-btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #5DA9E9;
   color: white;
-}`;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.todo-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: #2d2d2d;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #FF6B6B;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.clear-btn {
+  width: 100%;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  background-color: #FF6B6B;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+`;
 
 const reactPackageJson = (
   <>
