@@ -3,9 +3,10 @@ import { PlatypusLogoSVG } from './PlatypusPlaceholders';
 
 interface HeaderProps {
   scrolled: boolean;
+  onNavigateToPlayground: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ scrolled }) => {
+const Header: React.FC<HeaderProps> = ({ scrolled, onNavigateToPlayground }) => {
   console.log('Rendering: Header');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -21,6 +22,11 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     </svg>
   );
 
+  const handleMobileLinkClick = (action: () => void) => {
+    action();
+    setIsMenuOpen(false);
+  };
+
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-lg bg-platypus-background/95 backdrop-blur-xl' : 'bg-platypus-background/80 backdrop-blur-md'}`}>
@@ -32,6 +38,7 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
         <nav className="hidden md:flex items-center space-x-8">
           <a href="#features" className="text-platypus-subtle hover:text-platypus-primary transition-colors">Features</a>
           <a href="#demo" className="text-platypus-subtle hover:text-platypus-primary transition-colors">Demo</a>
+          <button onClick={onNavigateToPlayground} className="text-platypus-subtle hover:text-platypus-primary transition-colors">Playground</button>
           <a href="#compare" className="text-platypus-subtle hover:text-platypus-primary transition-colors">Compare</a>
           <a href="#pricing" className="text-platypus-subtle hover:text-platypus-primary transition-colors">Pricing</a>
           <a href="#privacy" className="text-platypus-subtle hover:text-platypus-primary transition-colors">Privacy</a>
@@ -58,6 +65,7 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
           <nav className="flex flex-col items-center space-y-4 px-6 pb-6 pt-2">
             <a href="#features" onClick={() => setIsMenuOpen(false)} className="text-platypus-subtle hover:text-platypus-primary transition-colors text-lg">Features</a>
             <a href="#demo" onClick={() => setIsMenuOpen(false)} className="text-platypus-subtle hover:text-platypus-primary transition-colors text-lg">Demo</a>
+            <button onClick={() => handleMobileLinkClick(onNavigateToPlayground)} className="text-platypus-subtle hover:text-platypus-primary transition-colors text-lg">Playground</button>
             <a href="#compare" onClick={() => setIsMenuOpen(false)} className="text-platypus-subtle hover:text-platypus-primary transition-colors text-lg">Compare</a>
             <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="text-platypus-subtle hover:text-platypus-primary transition-colors text-lg">Pricing</a>
             <a href="#privacy" onClick={() => setIsMenuOpen(false)} className="text-platypus-subtle hover:text-platypus-primary transition-colors text-lg">Privacy</a>

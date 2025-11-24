@@ -10,9 +10,11 @@ import PricingSection from './components/PricingSection';
 import PrivacySection from './components/PrivacySection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
+import PlaygroundPage from './pages/Playground';
 
 const App: React.FC = () => {
   console.log('Rendering: App');
+  const [page, setPage] = useState('home');
   const [headerScrolled, setHeaderScrolled] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
@@ -40,12 +42,25 @@ const App: React.FC = () => {
     };
   }, []);
 
+  const navigateToPlayground = () => {
+    setPage('playground');
+    window.scrollTo(0, 0);
+  };
+
+  const navigateToHome = () => {
+    setPage('home');
+  };
+
+  if (page === 'playground') {
+    return <PlaygroundPage onNavigateHome={navigateToHome} />;
+  }
+
   return (
     <div className="min-h-screen text-platypus-text font-sans transition-colors duration-300">
       <div ref={sentinelRef} style={{ position: 'absolute', top: '10px', height: '1px' }} />
-      <Header scrolled={headerScrolled} />
+      <Header scrolled={headerScrolled} onNavigateToPlayground={navigateToPlayground} />
       <main>
-        <HeroSection />
+        <HeroSection onNavigateToPlayground={navigateToPlayground} />
         <FeaturesSection />
         <LanguagesSection />
         <DemoSection />
