@@ -10,7 +10,6 @@ import PricingSection from './components/PricingSection';
 import PrivacySection from './components/PrivacySection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
-import ChatWidget from './components/ChatWidget';
 import Playground from './pages/Playground';
 
 type Page = 'home' | 'playground';
@@ -69,7 +68,6 @@ const App: React.FC = () => {
         <CTASection />
       </main>
       <Footer />
-      <ChatWidget />
     </div>
   );
 };

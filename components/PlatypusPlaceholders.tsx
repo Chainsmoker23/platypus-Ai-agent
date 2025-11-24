@@ -169,6 +169,31 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
 
 type EyeExpression = 'default' | 'focused' | 'curious';
 
+const EyeStyles = () => (
+    <style>{`
+        @keyframes blink_anim {
+            0%, 95%, 100% { transform: scaleY(1); }
+            97.5% { transform: scaleY(0.1); }
+        }
+        @keyframes pupil_move_anim {
+            0%, 40%, 100% { transform: translateX(0); }
+            50%, 70% { transform: translateX(1px); }
+            80%, 90% { transform: translateX(-1px); }
+        }
+        .eye-group { 
+            transform-origin: center;
+            animation-name: blink_anim;
+            animation-iteration-count: infinite;
+        }
+        .pupil { 
+            transform-origin: center;
+        }
+        .pupil-curious {
+            animation: pupil_move_anim 5s infinite 0.5s;
+        }
+    `}</style>
+);
+
 const Eyes: React.FC<{ expression?: EyeExpression }> = ({ expression = 'default' }) => {
     const pupilStyle = expression === 'focused' ? { r: 3.5 } : { r: 3 };
     const animationDuration = expression === 'focused' ? '6s' : '4s';
@@ -182,39 +207,19 @@ const Eyes: React.FC<{ expression?: EyeExpression }> = ({ expression = 'default'
         });
     }, []);
 
+    const pupilClassName = `pupil ${expression === 'curious' ? 'pupil-curious' : ''}`;
+
     return (
         <g>
-            <style>
-                {`
-                @keyframes blink_anim {
-                    0%, 95%, 100% { transform: scaleY(1); }
-                    97.5% { transform: scaleY(0.1); }
-                }
-                @keyframes pupil_move_anim {
-                    0%, 40%, 100% { transform: translateX(0); }
-                    50%, 70% { transform: translateX(1px); }
-                    80%, 90% { transform: translateX(-1px); }
-                }
-                .eye-group { 
-                    transform-origin: center;
-                    animation-name: blink_anim;
-                    animation-iteration-count: infinite;
-                 }
-                .pupil { 
-                    animation: ${expression === 'curious' ? `pupil_move_anim 5s infinite 0.5s` : 'none'};
-                    transform-origin: center;
-                }
-                `}
-            </style>
             {/* Left Eye */}
             <g className="eye-group" style={{ animationDuration, animationDelay: delays.left }} transform="rotate(-10 95 68)">
                 <ellipse cx="95" cy="68" rx="7" ry="11" fill="white" />
-                <circle cx="97" cy="70" {...pupilStyle} fill="black" className="pupil"/>
+                <circle cx="97" cy="70" {...pupilStyle} fill="black" className={pupilClassName}/>
             </g>
             {/* Right Eye */}
             <g className="eye-group" style={{ animationDuration, animationDelay: delays.right }} transform="rotate(10 120 68)">
                 <ellipse cx="120" cy="68" rx="7" ry="11" fill="white" />
-                <circle cx="118" cy="70" {...pupilStyle} fill="black" className="pupil"/>
+                <circle cx="118" cy="70" {...pupilStyle} fill="black" className={pupilClassName}/>
             </g>
         </g>
     );
@@ -228,6 +233,7 @@ const PlatypusBaseSVG: React.FC<{ children?: React.ReactNode, accessories?: Reac
             <pattern id="tailGridBase" patternUnits="userSpaceOnUse" width="10" height="10">
                 <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#C05621" strokeWidth="1.5"/>
             </pattern>
+            <EyeStyles />
             {defs}
         </defs>
         <g transform="translate(10, 0)">
@@ -274,33 +280,39 @@ const PlatypusBaseSVG: React.FC<{ children?: React.ReactNode, accessories?: Reac
 
 
 export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className }) => (
-    <PlatypusBaseSVG titleId="platypus-rocket-title" title="A speedy platypus standing next to a rocket, ready for launch.">
-        <defs>
-            <linearGradient id="rocketBodyGradient" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#E2E8F0" />
-                <stop offset="100%" stopColor="#CBD5E0" />
-            </linearGradient>
-            <radialGradient id="rocketFlameGradient" cx="0.5" cy="0.5" r="0.5">
-                <stop offset="0%" stopColor="#FBBF24" />
-                <stop offset="50%" stopColor="#F59E0B" />
-                <stop offset="100%" stopColor="#D97706" />
-            </radialGradient>
-        </defs>
-        
+    <PlatypusBaseSVG 
+      titleId="platypus-rocket-title" 
+      title="A speedy platypus standing next to a rocket, ready for launch."
+      defs={<>
+          <linearGradient id="rocketBodyGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#E2E8F0" />
+              <stop offset="100%" stopColor="#CBD5E0" />
+          </linearGradient>
+          <radialGradient id="rocketFlameGradient" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stopColor="#FBBF24" />
+              <stop offset="50%" stopColor="#F59E0B" />
+              <stop offset="100%" stopColor="#D97706" />
+          </radialGradient>
+          <style>{`
+              @keyframes rocket_flame_anim {
+                  0%, 100% { transform: scaleY(1); }
+                  25% { transform: scaleY(1.3); }
+                  50% { transform: scaleY(1.1); }
+                  75% { transform: scaleY(1.4); }
+              }
+              .rocket-flame {
+                  animation: rocket_flame_anim 0.2s infinite;
+                  transform-origin: center bottom;
+              }
+          `}</style>
+      </>}
+    >
         {/* Rocket, positioned to the side */}
         <g transform="translate(50, 120) rotate(-10)">
             {/* Flame */}
-            <g transform-origin="center 35px">
+            <g className="rocket-flame">
                 <path d="M -5,35 L 5,35 L 0,55 Z" fill="url(#rocketFlameGradient)" />
                 <path d="M -3,35 L 3,35 L 0,45 Z" fill="#FBBF24" />
-                <animateTransform 
-                    attributeName="transform" 
-                    type="scale" 
-                    values="1 1; 1 1.3; 1 1.1; 1 1.4; 1 1" 
-                    dur="0.1s" 
-                    repeatCount="indefinite" 
-                    additive="sum"
-                />
             </g>
             {/* Back fin */}
             <path d="M -4 20 C 0 30, 0 30, 4 20 L 0 35 Z" fill="#c53030" />
@@ -332,23 +344,26 @@ export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className 
     </PlatypusBaseSVG>
 );
 
+const platypusHatDefs = (
+    <>
+        <linearGradient id="platypusHatGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#4A5568" />
+            <stop offset="100%" stopColor="#2D3748" />
+        </linearGradient>
+        <filter id="platypusCodeGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
+            <feFlood floodColor="#5DA9E9" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glow" />
+            <feMerge>
+                <feMergeNode in="glow" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+    </>
+);
+
 const PlatypusHat = () => (
     <g>
-        <defs>
-            <linearGradient id="platypusHatGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#4A5568" />
-                <stop offset="100%" stopColor="#2D3748" />
-            </linearGradient>
-            <filter id="platypusCodeGlow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
-                <feFlood floodColor="#5DA9E9" result="color" />
-                <feComposite in="color" in2="blur" operator="in" result="glow" />
-                <feMerge>
-                    <feMergeNode in="glow" />
-                    <feMergeNode in="SourceGraphic" />
-                </feMerge>
-            </filter>
-        </defs>
         {/* Brim */}
         <path d="M50,55 C 30,60 180,60 160,55 C 170,45 40,45 50,55 Z" fill="url(#platypusHatGradient)" />
         {/* Crown */}
@@ -372,8 +387,7 @@ export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className 
         sitting={true}
         accessories={<PlatypusHat />}
         expression="focused"
-    >
-        <defs>
+        defs={<>
             <linearGradient id="laptopScreen" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stopColor="#0A2540" />
                 <stop offset="100%" stopColor="#1a3f66" />
@@ -391,8 +405,9 @@ export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className 
                     <feMergeNode in="SourceGraphic"/>
                 </feMerge>
             </filter>
-        </defs>
-        
+            {platypusHatDefs}
+        </>}
+    >
         {/* Arms resting on lap */}
         <g>
             {/* Right Arm */}
@@ -446,14 +461,16 @@ export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className 
 
 
 export const PlatypusPillowSVG: React.FC<{ className?: string }> = ({ className }) => (
-    <PlatypusBaseSVG titleId="platypus-pillow-title" title="A calm platypus hugging a fluffy pillow.">
-      <defs>
+    <PlatypusBaseSVG 
+      titleId="platypus-pillow-title" 
+      title="A calm platypus hugging a fluffy pillow."
+      defs={<>
         <radialGradient id="pillowGradient" cx="0.5" cy="0.5" r="0.7">
           <stop offset="0%" stopColor="#FFFFFF" />
           <stop offset="100%" stopColor="#EBF8FF" />
         </radialGradient>
-      </defs>
-      
+      </>}
+    >
       {/* Pillow */}
       <g>
         <path d="M80 100 C 50 100, 55 160, 80 160 L 130 160 C 155 160, 160 100, 130 100 Z" fill="url(#pillowGradient)" stroke="#CBD5E0" strokeWidth="0.5" />
@@ -788,15 +805,17 @@ export const PlatypusPeekingSVG: React.FC<{ className?: string }> = ({ className
 };
 
 export const PlatypusCoinsSVG: React.FC<{ className?: string }> = ({ className }) => (
-    <PlatypusBaseSVG titleId="platypus-coins-title" title="A cheerful platypus holding a large coin.">
-        <defs>
-            <radialGradient id="coinGradient" cx="0.5" cy="0.5" r="0.5">
-                <stop offset="0%" stopColor="#FBBF24" />
-                <stop offset="80%" stopColor="#F6E05E" />
-                <stop offset="100%" stopColor="#D69E2E" />
-            </radialGradient>
-        </defs>
-
+    <PlatypusBaseSVG 
+      titleId="platypus-coins-title" 
+      title="A cheerful platypus holding a large coin."
+      defs={<>
+          <radialGradient id="coinGradient" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stopColor="#FBBF24" />
+              <stop offset="80%" stopColor="#F6E05E" />
+              <stop offset="100%" stopColor="#D69E2E" />
+          </radialGradient>
+      </>}
+    >
         {/* Coin */}
         <g transform="translate(85, 125)">
             <circle cx="0" cy="0" r="35" fill="url(#coinGradient)" />

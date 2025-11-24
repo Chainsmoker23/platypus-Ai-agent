@@ -284,7 +284,6 @@ const Playground: React.FC<PlaygroundProps> = ({ onExit }) => {
               key={path} 
               onClick={() => setActiveFile(path)}
               className={`flex items-center gap-2 p-2 rounded-md cursor-pointer text-sm ${activeFile === path ? 'bg-platypus-primary/20 text-platypus-primary' : 'hover:bg-gray-700/50'}`}>
-              {/* FIX: Add type assertion as TypeScript may incorrectly infer 'data' as 'unknown' from Object.entries. */}
               <span>{(data as { icon: string }).icon}</span>
               <span>{path}</span>
             </div>
