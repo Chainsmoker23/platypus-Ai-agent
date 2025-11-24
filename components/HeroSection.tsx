@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import AnimatedPlatypus from './AnimatedPlatypus';
 
-const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  onTryOnline: () => void;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ onTryOnline }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -26,7 +30,9 @@ const HeroSection: React.FC = () => {
             <button className="px-8 py-3 bg-platypus-accent text-white font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
               Download Extension
             </button>
-            <button className="px-8 py-3 bg-platypus-secondary text-platypus-text font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+            <button 
+              onClick={onTryOnline}
+              className="px-8 py-3 bg-platypus-secondary text-platypus-text font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
               Try Online
             </button>
           </div>

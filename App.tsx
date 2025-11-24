@@ -11,21 +11,24 @@ import PrivacySection from './components/PrivacySection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
+import Playground from './pages/Playground';
+
+type Page = 'home' | 'playground';
 
 const App: React.FC = () => {
   const [headerScrolled, setHeaderScrolled] = useState(false);
+  const [currentPage, setCurrentPage] = useState<Page>('home');
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Set `scrolled` to true when the sentinel is NOT intersecting (i.e., has scrolled out of view).
         setHeaderScrolled(!entry.isIntersecting);
       },
       {
-        root: null, // Observe relative to the viewport
+        root: null,
         rootMargin: '0px',
-        threshold: 1.0, // Fire when the element is fully out of view
+        threshold: 1.0,
       }
     );
 
@@ -41,14 +44,21 @@ const App: React.FC = () => {
     };
   }, []);
 
+  const navigateTo = (page: Page) => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+  };
+
+  if (currentPage === 'playground') {
+    return <Playground onExit={() => navigateTo('home')} />;
+  }
 
   return (
     <div className="min-h-screen text-platypus-text font-sans transition-colors duration-300">
-      {/* This sentinel is an invisible element. When it scrolls out of view, the IntersectionObserver fires. */}
       <div ref={sentinelRef} style={{ position: 'absolute', top: '10px', height: '1px' }} />
       <Header scrolled={headerScrolled} />
       <main>
-        <HeroSection />
+        <HeroSection onTryOnline={() => navigateTo('playground')} />
         <FeaturesSection />
         <LanguagesSection />
         <DemoSection />
