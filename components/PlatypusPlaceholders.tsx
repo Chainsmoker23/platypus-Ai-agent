@@ -37,7 +37,7 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
                 `}
             </style>
             <pattern id="tailGrid" patternUnits="userSpaceOnUse" width="10" height="10">
-                <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#C05621" strokeWidth="1.5"/>
+                <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#EA580C" strokeWidth="1.5"/>
             </pattern>
             <linearGradient id="hatGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stopColor="#4A5568" />
@@ -45,7 +45,7 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
             </linearGradient>
             <filter id="codeGlow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
-              <feFlood floodColor="#5DA9E9" result="color" />
+              <feFlood floodColor="#0D92F4" result="color" />
               <feComposite in="color" in2="blur" operator="in" result="glow" />
               <feMerge>
                 <feMergeNode in="glow" />
@@ -55,16 +55,16 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
         </defs>
         <g transform="translate(10, 0)">
             {/* Tail */}
-            <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="#ED8936"/>
+            <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="#F97316"/>
             <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="url(#tailGrid)"/>
 
             {/* Left Leg */}
-            <path d="M80,175 C 70,190 100,190 90,175 L 90,165 L 75,168 Z" fill="#ED8936" />
+            <path d="M80,175 C 70,190 100,190 90,175 L 90,165 L 75,168 Z" fill="#F97316" />
             {/* Right Leg */}
-            <path d="M120,178 C 110,193 140,193 130,178 L 130,168 L 115,171 Z" fill="#ED8936" />
+            <path d="M120,178 C 110,193 140,193 130,178 L 130,168 L 115,171 Z" fill="#F97316" />
 
             {/* Body */}
-            <path d="M80,70 C 70,120 70,180 85,180 L 125,180 C 140,180 140,120 130,70 Z" fill="#38B2AC"/>
+            <path d="M80,70 C 70,120 70,180 85,180 L 125,180 C 140,180 140,120 130,70 Z" fill="#0D92F4"/>
 
             {/* Arms */}
             {/* Waving Arm with Headphones */}
@@ -82,7 +82,7 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
                 />
                 
                 {/* Arm */}
-                <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#319795" />
+                <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#0B78C5" />
 
                 {/* Redesigned Headphones - now gripped in the middle */}
                 <g transform="translate(55, 105) rotate(15) scale(0.85)">
@@ -102,7 +102,7 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
                         <rect x="-18" y="0" width="36" height="36" rx="10" fill="#2D3748"/>
                         <rect x="-14" y="4" width="28" height="28" rx="8" fill="#4A5568"/>
                         <rect x="-10" y="8" width="20" height="20" rx="6" fill="#2D3748"/>
-                        <rect x="-6" y="12" width="12" height="12" rx="4" fill="#5DA9E9"/>
+                        <rect x="-6" y="12" width="12" height="12" rx="4" fill="#0D92F4"/>
                     </g>
                     
                      {/* Left Earcup (further from viewer) */}
@@ -119,20 +119,20 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
                 </g>
 
                 {/* Hand gripping the middle of the headphones' headband */}
-                <path d="M60,115 C 45,120 40,100 45,95 L 60,95 C 70,95 70,115 60,115 Z" fill="#ED8936" />
+                <path d="M60,115 C 45,120 40,100 45,95 L 60,95 C 70,95 70,115 60,115 Z" fill="#F97316" />
             </g>
             
             {/* Static Arm (Right) */}
             <g>
-                <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#319795" />
-                <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#ED8936"/>
+                <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#0B78C5" />
+                <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#F97316"/>
             </g>
 
             {/* Head and Bill - Refined Head Structure */}
-            <path d="M80,80 C 65,65 145,65 130,80 C 140,40 70,40 80,80 Z" fill="#38B2AC"/>
-            <path d="M70,85 C 50,105 160,105 140,85 L 130,80 L 80,80 Z" fill="#ED8936" />
+            <path d="M80,80 C 65,65 145,65 130,80 C 140,40 70,40 80,80 Z" fill="#0D92F4"/>
+            <path d="M70,85 C 50,105 160,105 140,85 L 130,80 L 80,80 Z" fill="#F97316" />
             {/* Nostrils */}
-            <g fill="#C05621">
+            <g fill="#EA580C">
                 <ellipse cx="98" cy="88" rx="2.5" ry="1.5" transform="rotate(-10 98 88)" />
                 <ellipse cx="112" cy="88" rx="2.5" ry="1.5" transform="rotate(10 112 88)" />
             </g>
@@ -160,8 +160,8 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
 
             {/* Creative Element: Glowing Code Symbol */}
             <g filter="url(#codeGlow)">
-                <path d="M98 52 L 95 54.5 L 98 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                <path d="M112 52 L 115 54.5 L 112 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                <path d="M98 52 L 95 54.5 L 98 57" stroke="#0D92F4" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                <path d="M112 52 L 115 54.5 L 112 57" stroke="#0D92F4" strokeWidth="1.5" fill="none" strokeLinecap="round" />
             </g>
         </g>
     </svg>
@@ -243,40 +243,40 @@ const PlatypusBaseSVG: React.FC<PlatypusBaseSVGProps> = ({ children, accessories
         <title id={titleId}>{title}</title>
         <defs>
             <pattern id="tailGridBase" patternUnits="userSpaceOnUse" width="10" height="10">
-                <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#C05621" strokeWidth="1.5"/>
+                <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#EA580C" strokeWidth="1.5"/>
             </pattern>
             <EyeStyles />
             {defs}
         </defs>
         <g transform="translate(10, 0)">
             {/* Tail */}
-            <path d={sitting ? "M110,160 C 160,150 180,195 130,198 C 100,200 95,170 110,160 Z" : "M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z"} fill="#ED8936"/>
+            <path d={sitting ? "M110,160 C 160,150 180,195 130,198 C 100,200 95,170 110,160 Z" : "M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z"} fill="#F97316"/>
             <path d={sitting ? "M110,160 C 160,150 180,195 130,198 C 100,200 95,170 110,160 Z" : "M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z"} fill="url(#tailGridBase)"/>
 
             {/* Legs */}
             {sitting ? (
                 <>
-                    <path d="M85,175 C 75,190 105,190 95,175 L 100,165 L 85,168 Z" fill="#ED8936" />
-                    <path d="M115,178 C 105,193 135,193 125,178 L 130,168 L 115,171 Z" fill="#ED8936" />
+                    <path d="M85,175 C 75,190 105,190 95,175 L 100,165 L 85,168 Z" fill="#F97316" />
+                    <path d="M115,178 C 105,193 135,193 125,178 L 130,168 L 115,171 Z" fill="#F97316" />
                 </>
             ) : (
                 <>
-                    <path d="M80,175 C 70,190 100,190 90,175 L 90,165 L 75,168 Z" fill="#ED8936" />
-                    <path d="M120,178 C 110,193 140,193 130,178 L 130,168 L 115,171 Z" fill="#ED8936" />
+                    <path d="M80,175 C 70,190 100,190 90,175 L 90,165 L 75,168 Z" fill="#F97316" />
+                    <path d="M120,178 C 110,193 140,193 130,178 L 130,168 L 115,171 Z" fill="#F97316" />
                 </>
             )}
             
             {/* Body */}
-            <path d="M80,70 C 70,120 70,180 85,180 L 125,180 C 140,180 140,120 130,70 Z" fill="#38B2AC"/>
+            <path d="M80,70 C 70,120 70,180 85,180 L 125,180 C 140,180 140,120 130,70 Z" fill="#0D92F4"/>
             
             {/* Custom Content (e.g., arms and props) */}
             {children}
 
             {/* Head and Bill */}
-            <path d="M80,80 C 65,65 145,65 130,80 C 140,40 70,40 80,80 Z" fill="#38B2AC"/>
-            <path d="M70,85 C 50,105 160,105 140,85 L 130,80 L 80,80 Z" fill="#ED8936" />
+            <path d="M80,80 C 65,65 145,65 130,80 C 140,40 70,40 80,80 Z" fill="#0D92F4"/>
+            <path d="M70,85 C 50,105 160,105 140,85 L 130,80 L 80,80 Z" fill="#F97316" />
             {/* Nostrils */}
-            <g fill="#C05621">
+            <g fill="#EA580C">
                 <ellipse cx="98" cy="88" rx="2.5" ry="1.5" transform="rotate(-10 98 88)" />
                 <ellipse cx="112" cy="88" rx="2.5" ry="1.5" transform="rotate(10 112 88)" />
             </g>
@@ -338,7 +338,7 @@ export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className 
             <path d="M-10,15 l0,15 l-8,5 l0,-15 z" fill="#FF6B6B" />
             <path d="M10,15 l0,15 l8,5 l0,-15 z" fill="#FF6B6B" />
             {/* Window */}
-            <circle cx="0" cy="5" r="5" fill="#5DA9E9" stroke="white" strokeWidth="1.5" />
+            <circle cx="0" cy="5" r="5" fill="#0D92F4" stroke="white" strokeWidth="1.5" />
             {/* Nose Cone */}
             <path d="M -10,-10 C -10,-25 10,-25 10,-10 Z" fill="#FF6B6B" />
             <path d="M 0,-22 C 5,-18 5,-12 0,-10" fill="#d9534f" />
@@ -346,14 +346,14 @@ export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className 
 
         {/* Right Arm (Static) */}
         <g>
-            <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#319795" />
-            <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#ED8936"/>
+            <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#0B78C5" />
+            <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#F97316"/>
         </g>
 
         {/* Left Arm (Mirrored Static) */}
         <g>
-            <path d="M78,95 C 65,100 62,125 72,130 Z" fill="#319795" />
-            <path d="M72,130 C 65,140 50,135 55,125 C 53,115 63,113 67,119 L 75,123 C 77,125 74,130 72,130 Z" fill="#ED8936" />
+            <path d="M78,95 C 65,100 62,125 72,130 Z" fill="#0B78C5" />
+            <path d="M72,130 C 65,140 50,135 55,125 C 53,115 63,113 67,119 L 75,123 C 77,125 74,130 72,130 Z" fill="#F97316" />
         </g>
     </PlatypusBaseSVG>
 );
@@ -377,8 +377,8 @@ export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className 
             <rect x="74" y="50" width="62" height="6" fill="#0A2540" />
             {/* Creative Element: Glowing Code Symbol */}
             <g filter="url(#platypusCodeGlow)">
-                <path d="M98 52 L 95 54.5 L 98 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                <path d="M112 52 L 115 54.5 L 112 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                <path d="M98 52 L 95 54.5 L 98 57" stroke="#0D92F4" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                <path d="M112 52 L 115 54.5 L 112 57" stroke="#0D92F4" strokeWidth="1.5" fill="none" strokeLinecap="round" />
             </g>
           </g>
         }
@@ -406,7 +406,7 @@ export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className 
             </linearGradient>,
             <filter key="f2" id="platypusCodeGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
-                <feFlood floodColor="#5DA9E9" result="color" />
+                <feFlood floodColor="#0D92F4" result="color" />
                 <feComposite in="color" in2="blur" operator="in" result="glow" />
                 <feMerge>
                     <feMergeNode in="glow" />
@@ -418,11 +418,11 @@ export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className 
         {/* Arms resting on lap */}
         <g>
             {/* Right Arm */}
-            <path d="M132,95 C 130,120 125,145 120,160 L 128,162 C 135,145 142,120 132,95 Z" fill="#319795" />
-            <path d="M120,160 C 128,165 128,155 123,152 Z" fill="#ED8936" />
+            <path d="M132,95 C 130,120 125,145 120,160 L 128,162 C 135,145 142,120 132,95 Z" fill="#0B78C5" />
+            <path d="M120,160 C 128,165 128,155 123,152 Z" fill="#F97316" />
             {/* Left Arm */}
-            <path d="M78,95 C 80,120 85,145 90,160 L 82,162 C 75,145 68,120 78,95 Z" fill="#319795" />
-            <path d="M90,160 C 82,165 82,155 87,152 Z" fill="#ED8936" />
+            <path d="M78,95 C 80,120 85,145 90,160 L 82,162 C 75,145 68,120 78,95 Z" fill="#0B78C5" />
+            <path d="M90,160 C 82,165 82,155 87,152 Z" fill="#F97316" />
         </g>
 
         {/* Laptop on the side */}
@@ -459,9 +459,9 @@ export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className 
             <circle cx="0" cy="-64" r="2" fill="#2D3748" /> {/* Webcam */}
             
             {/* Screen Content */}
-            <text x="-40" y="-50" fontFamily="monospace" fontSize="8" fill="#38B2AC">&lt;Platypus</text>
-            <text x="-35" y="-40" fontFamily="monospace" fontSize="8" fill="#81E6D9" xmlSpace="preserve"> .isAwesome(true)</text>
-            <text x="-40" y="-30" fontFamily="monospace" fontSize="8" fill="#38B2AC">/&gt;</text>
+            <text x="-40" y="-50" fontFamily="monospace" fontSize="8" fill="#0D92F4">&lt;Platypus</text>
+            <text x="-35" y="-40" fontFamily="monospace" fontSize="8" fill="#93C5FD" xmlSpace="preserve"> .isAwesome(true)</text>
+            <text x="-40" y="-30" fontFamily="monospace" fontSize="8" fill="#0D92F4">/&gt;</text>
         </g>
     </PlatypusBaseSVG>
 );
@@ -475,26 +475,26 @@ export const PlatypusPillowSVG: React.FC<{ className?: string }> = ({ className 
       defs={[
         <radialGradient key="g1" id="pillowGradient" cx="0.5" cy="0.5" r="0.7">
           <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="100%" stopColor="#EBF8FF" />
+          <stop offset="100%" stopColor="#EFF6FF" />
         </radialGradient>
       ]}
     >
       {/* Pillow */}
       <g>
-        <path d="M80 100 C 50 100, 55 160, 80 160 L 130 160 C 155 160, 160 100, 130 100 Z" fill="url(#pillowGradient)" stroke="#CBD5E0" strokeWidth="0.5" />
+        <path d="M80 100 C 50 100, 55 160, 80 160 L 130 160 C 155 160, 160 100, 130 100 Z" fill="url(#pillowGradient)" stroke="#BFDBFE" strokeWidth="0.5" />
         {/* Pillow Shading/Indentations */}
-        <path d="M90,105 C 80,125, 85,145, 90,155" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
-        <path d="M120,105 C 130,125, 125,145, 120,155" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
+        <path d="M90,105 C 80,125, 85,145, 90,155" stroke="#DBEAFE" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
+        <path d="M120,105 C 130,125, 125,145, 120,155" stroke="#DBEAFE" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
       </g>
 
       {/* Arms hugging the pillow */}
       <g>
           {/* Right Arm */}
-          <path d="M132,95 C 140,120 130,140 120,140 Z" fill="#319795" />
-          <path d="M120,140 C 130,150 145,135,130,130 L 122,138 Z" fill="#ED8936" />
+          <path d="M132,95 C 140,120 130,140 120,140 Z" fill="#0B78C5" />
+          <path d="M120,140 C 130,150 145,135,130,130 L 122,138 Z" fill="#F97316" />
           {/* Left arm */}
-          <path d="M78,95 C 70,120 80,140 90,140 Z" fill="#319795" />
-          <path d="M90,140 C 80,150 65,135 80,130 L 88,138 Z" fill="#ED8936" />
+          <path d="M78,95 C 70,120 80,140 90,140 Z" fill="#0B78C5" />
+          <path d="M90,140 C 80,150 65,135 80,130 L 88,138 Z" fill="#F97316" />
       </g>
     </PlatypusBaseSVG>
 );
@@ -539,20 +539,20 @@ export const PlatypusLollipopSVG: React.FC<{ className?: string }> = ({ classNam
                 <rect x="78" y="110" width="8" height="55" rx="4" fill="url(#lollipopStick)" stroke="#CBD5E0" strokeWidth="0.5" />
 
                 {/* Hand (in front of stick) */}
-                <path d="M82,130 C 68,135 68,115 82,120 Z" fill="#ED8936" />
+                <path d="M82,130 C 68,135 68,115 82,120 Z" fill="#F97316" />
             </g>
         }
     >
         {/* Right Arm (Static, on hip) */}
         <g>
-            <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#319795" />
-            <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#ED8936"/>
+            <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#0B78C5" />
+            <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#F97316"/>
         </g>
 
         {/* Left arm (back part only) */}
         <g transform="rotate(-15 80 95)">
             {/* Arm (behind stick) */}
-            <path d="M78,95 C 75,105 75,115 78,125 Z" fill="#319795" />
+            <path d="M78,95 C 75,105 75,115 78,125 Z" fill="#0B78C5" />
         </g>
     </PlatypusBaseSVG>
 );
@@ -579,7 +579,7 @@ export const PlatypusMagnifyingGlassSVG: React.FC<{ className?: string }> = ({ c
                 {/* Head of glass */}
                 <g transform="translate(84, 95)">
                     <circle cx="0" cy="0" r="25" fill="#718096" />
-                    <circle cx="0" cy="0" r="21" fill="#EBF8FF" opacity="0.7" />
+                    <circle cx="0" cy="0" r="21" fill="#FEF6F7" opacity="0.7" />
                     <path d="M-10 -10 A 15 15 0 0 1 10 -5" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
                 </g>
                 
@@ -588,19 +588,19 @@ export const PlatypusMagnifyingGlassSVG: React.FC<{ className?: string }> = ({ c
                 <rect x="79" y="121" width="10" height="38" rx="5" fill="#A0AEC0" />
             </g>
             {/* Hand (in front of handle) */}
-            <path d="M84,140 C 70,145 70,125 84,130 Z" fill="#ED8936" /> 
+            <path d="M84,140 C 70,145 70,125 84,130 Z" fill="#F97316" /> 
         </g>
       }
     >
        {/* Right Arm (Static) */}
        <g>
-           <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#319795" />
-           <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#ED8936"/>
+           <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#0B78C5" />
+           <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#F97316"/>
        </g>
 
        {/* Back part of left arm */}
        <g transform="rotate(-15 80 95)">
-            <path d="M78,95 C 75,105 75,115 78,125 Z" fill="#319795" />
+            <path d="M78,95 C 75,105 75,115 78,125 Z" fill="#0B78C5" />
        </g>
     </PlatypusBaseSVG>
 );
@@ -609,12 +609,12 @@ export const PlatypusClipboardSVG: React.FC<{ className?: string }> = ({ classNa
     <PlatypusBaseSVG className={className} titleId="platypus-clipboard-title" title="An analytical platypus holding a clipboard.">
         {/* Right Arm (Static) */}
         <g>
-            <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#319795" />
-            <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#ED8936"/>
+            <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#0B78C5" />
+            <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#F97316"/>
         </g>
         {/* Left Arm with Clipboard */}
         <g>
-             <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#319795" />
+             <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#0B78C5" />
              {/* Clipboard */}
              <g transform="translate(50,110) rotate(20)">
                 <rect x="-20" y="-30" width="40" height="55" rx="3" fill="#D69E2E" />
@@ -631,7 +631,7 @@ export const PlatypusClipboardSVG: React.FC<{ className?: string }> = ({ classNa
                 <path d="M -15 -34 h 30 v 8 h -30 z" fill="#718096" />
              </g>
              {/* Hand */}
-            <path d="M60,115 C 45,120 40,100 45,95 L 60,95 C 70,95 70,115 60,115 Z" fill="#ED8936" />
+            <path d="M60,115 C 45,120 40,100 45,95 L 60,95 C 70,95 70,115 60,115 Z" fill="#F97316" />
         </g>
     </PlatypusBaseSVG>
 );
@@ -640,14 +640,14 @@ export const PlatypusWavingSimpleSVG: React.FC<{ className?: string }> = ({ clas
     <PlatypusBaseSVG className={className} titleId="platypus-waving-title" title="A friendly platypus waving its hand.">
         {/* Right Arm (Static) */}
         <g>
-            <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#319795" />
-            <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#ED8936"/>
+            <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#0B78C5" />
+            <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#F97316"/>
         </g>
         {/* Waving Arm (Left) */}
         <g>
             <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="-15 80 95; 5 80 95; -15 80 95" dur="2.5s" repeatCount="indefinite" keyTimes="0; 0.5; 1" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1" calcMode="spline" />
-            <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#319795" />
-            <path d="M55,105 C 45,115 40,100 50,95 C 55,90 60,100 55,105 Z" fill="#ED8936" />
+            <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#0B78C5" />
+            <path d="M55,105 C 45,115 40,100 50,95 C 55,90 60,100 55,105 Z" fill="#F97316" />
         </g>
     </PlatypusBaseSVG>
 );
@@ -682,12 +682,12 @@ export const PlatypusWavingSkateboardSVG: React.FC<{ className?: string }> = ({ 
                 `}
             </style>
             <pattern id="tailGridSkateboard" patternUnits="userSpaceOnUse" width="10" height="10">
-                <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#C05621" strokeWidth="1.5"/>
+                <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#EA580C" strokeWidth="1.5"/>
             </pattern>
         </defs>
         <g transform="translate(10, -5)">
             {/* Tail */}
-            <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="#ED8936"/>
+            <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="#F97316"/>
             <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="url(#tailGridSkateboard)"/>
             
             {/* Skateboard */}
@@ -705,7 +705,7 @@ export const PlatypusWavingSkateboardSVG: React.FC<{ className?: string }> = ({ 
               {/* Grip tape */}
               <path d="M-42,0 a 8 8 0 0 1 8 -8 L 34 -8 a 8 8 0 0 1 8 8 L 42 0 a 8 8 0 0 1 -8 8 L -34 8 a 8 8 0 0 1 -8 -8 Z" fill="#2D3748" />
               {/* Platypus Logo on griptape */}
-              <path d="M-5 -2 C -7 3, 7 3, 5 -2 S 0, -6 0, -6 S -3, -6 -5, -2 Z" fill="#5DA9E9" opacity="0.8" />
+              <path d="M-5 -2 C -7 3, 7 3, 5 -2 S 0, -6 0, -6 S -3, -6 -5, -2 Z" fill="#0D92F4" opacity="0.8" />
               
               {/* Wheels (drawn last to be in foreground) */}
               <circle cx="-17" cy="15" r="5" fill="#FF6B6B" stroke="#C53030" strokeWidth="1" />
@@ -713,30 +713,30 @@ export const PlatypusWavingSkateboardSVG: React.FC<{ className?: string }> = ({ 
             </g>
 
             {/* Legs */}
-            <path d="M80,175 C 70,190 100,190 90,175 L 90,165 L 75,168 Z" fill="#ED8936" />
-            <path d="M120,178 C 110,193 140,193 130,178 L 130,168 L 115,171 Z" fill="#ED8936" />
+            <path d="M80,175 C 70,190 100,190 90,175 L 90,165 L 75,168 Z" fill="#F97316" />
+            <path d="M120,178 C 110,193 140,193 130,178 L 130,168 L 115,171 Z" fill="#F97316" />
             
             {/* Body */}
-            <path d="M80,70 C 70,120 70,180 85,180 L 125,180 C 140,180 140,120 130,70 Z" fill="#38B2AC"/>
+            <path d="M80,70 C 70,120 70,180 85,180 L 125,180 C 140,180 140,120 130,70 Z" fill="#0D92F4"/>
             
             {/* ARMS from WavingSimple */}
             {/* Right Arm (Static) */}
             <g>
-                <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#319795" />
-                <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#ED8936"/>
+                <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#0B78C5" />
+                <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#F97316"/>
             </g>
             {/* Waving Arm (Left) */}
             <g>
                 <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="-15 80 95; 5 80 95; -15 80 95" dur="2.5s" repeatCount="indefinite" keyTimes="0; 0.5; 1" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1" calcMode="spline" />
-                <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#319795" />
-                <path d="M55,105 C 45,115 40,100 50,95 C 55,90 60,100 55,105 Z" fill="#ED8936" />
+                <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#0B78C5" />
+                <path d="M55,105 C 45,115 40,100 50,95 C 55,90 60,100 55,105 Z" fill="#F97316" />
             </g>
 
             {/* Head and Bill */}
-            <path d="M80,80 C 65,65 145,65 130,80 C 140,40 70,40 80,80 Z" fill="#38B2AC"/>
-            <path d="M70,85 C 50,105 160,105 140,85 L 130,80 L 80,80 Z" fill="#ED8936" />
+            <path d="M80,80 C 65,65 145,65 130,80 C 140,40 70,40 80,80 Z" fill="#0D92F4"/>
+            <path d="M70,85 C 50,105 160,105 140,85 L 130,80 L 80,80 Z" fill="#F97316" />
             {/* Nostrils */}
-            <g fill="#C05621">
+            <g fill="#EA580C">
                 <ellipse cx="98" cy="88" rx="2.5" ry="1.5" transform="rotate(-10 98 88)" />
                 <ellipse cx="112" cy="88" rx="2.5" ry="1.5" transform="rotate(10 112 88)" />
             </g>
@@ -793,10 +793,10 @@ export const PlatypusPeekingSVG: React.FC<{ className?: string }> = ({ className
             </style>
         </defs>
         <g transform="translate(50, 60) rotate(-15 100 100)">
-            <path d="M130,80 C 140,40 70,40 80,80 Z" fill="#38B2AC"/>
-            <path d="M140,85 C 160,105 70,105 70,85 L 80,80 L 130,80 Z" fill="#ED8936" />
+            <path d="M130,80 C 140,40 70,40 80,80 Z" fill="#0D92F4"/>
+            <path d="M140,85 C 160,105 70,105 70,85 L 80,80 L 130,80 Z" fill="#F97316" />
             {/* Nostrils */}
-            <g fill="#C05621">
+            <g fill="#EA580C">
                 <ellipse cx="98" cy="88" rx="2.5" ry="1.5" transform="rotate(-10 98 88)" />
                 <ellipse cx="112" cy="88" rx="2.5" ry="1.5" transform="rotate(10 112 88)" />
             </g>
@@ -832,17 +832,17 @@ export const PlatypusCoinsSVG: React.FC<{ className?: string }> = ({ className }
             <circle cx="0" cy="0" r="35" fill="url(#coinGradient)" />
             <circle cx="0" cy="0" r="32" stroke="#F6E05E" strokeWidth="2" fill="none" />
             {/* Simple Platypus Bill Symbol */}
-            <path d="M-15 0 C -20,15 20,15 15,0 S 0,-10 0,-10 S -10,-10 -15,0 Z" fill="#C05621" opacity="0.8" />
+            <path d="M-15 0 C -20,15 20,15 15,0 S 0,-10 0,-10 S -10,-10 -15,0 Z" fill="#EA580C" opacity="0.8" />
         </g>
         
         {/* Arms holding the coin */}
         <g>
             {/* Right Arm */}
-            <path d="M132,95 C 140,110 125,120 115,120 Z" fill="#319795" />
-            <path d="M115,120 C 125,130 140,115,125,110 L 117,118 Z" fill="#ED8936" />
+            <path d="M132,95 C 140,110 125,120 115,120 Z" fill="#0B78C5" />
+            <path d="M115,120 C 125,130 140,115,125,110 L 117,118 Z" fill="#F97316" />
             {/* Left arm */}
-            <path d="M78,95 C 70,110 85,120 95,120 Z" fill="#319795" />
-            <path d="M95,120 C 85,130 70,115 85,110 L 93,118 Z" fill="#ED8936" />
+            <path d="M78,95 C 70,110 85,120 95,120 Z" fill="#0B78C5" />
+            <path d="M95,120 C 85,130 70,115 85,110 L 93,118 Z" fill="#F97316" />
         </g>
     </PlatypusBaseSVG>
 );
@@ -879,11 +879,11 @@ export const PlatypusChatHeadSVG: React.FC<{ className?: string }> = ({ classNam
         </defs>
         <g transform="translate(0, 5)">
              {/* Head */}
-            <path d="M25 50 C 15 30, 85 30, 75 50 C 80 15, 20 15, 25 50Z" fill="#38B2AC"/>
+            <path d="M25 50 C 15 30, 85 30, 75 50 C 80 15, 20 15, 25 50Z" fill="#0D92F4"/>
             {/* Bill */}
-            <path d="M20 55 C 5 75, 95 75, 80 55 L 75 50 L 25 50 Z" fill="#ED8936" />
+            <path d="M20 55 C 5 75, 95 75, 80 55 L 75 50 L 25 50 Z" fill="#F97316" />
             {/* Nostrils */}
-            <g fill="#C05621">
+            <g fill="#EA580C">
                 <circle cx="40" cy="62" r="2" />
                 <circle cx="60" cy="62" r="2" />
             </g>
@@ -903,10 +903,10 @@ export const PlatypusChatHeadSVG: React.FC<{ className?: string }> = ({ classNam
                 <path d="M 20 38 C 20 10, 80 10, 80 38" strokeWidth="6" stroke="#4A5568" fill="none" strokeLinecap="round" />
                 {/* Left Earcup */}
                 <rect x="10" y="35" width="20" height="20" rx="6" fill="#2D3748"/>
-                <rect x="13" y="38" width="14" height="14" rx="4" fill="#5DA9E9"/>
+                <rect x="13" y="38" width="14" height="14" rx="4" fill="#0D92F4"/>
                 {/* Right Earcup */}
                 <rect x="70" y="35" width="20" height="20" rx="6" fill="#2D3748"/>
-                <rect x="73" y="38" width="14" height="14" rx="4" fill="#5DA9E9"/>
+                <rect x="73" y="38" width="14" height="14" rx="4" fill="#0D92F4"/>
             </g>
         </g>
     </svg>
@@ -930,17 +930,17 @@ export const PlatypusSleepingSVG: React.FC<{ className?: string }> = ({ classNam
         <defs>
             <radialGradient id="pillowGradientSleeping" cx="0.5" cy="0.5" r="0.7">
                 <stop offset="0%" stopColor="#FFFFFF" />
-                <stop offset="100%" stopColor="#EBF8FF" />
+                <stop offset="100%" stopColor="#EFF6FF" />
             </radialGradient>
             <pattern id="tailGridSleeping" patternUnits="userSpaceOnUse" width="10" height="10">
-                <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#C05621" strokeWidth="1.5"/>
+                <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#EA580C" strokeWidth="1.5"/>
             </pattern>
             <style>
                 {`
                     .zzz {
                         font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
                         font-weight: bold;
-                        fill: #5DA9E9;
+                        fill: #0D92F4;
                         opacity: 0;
                         animation: float-up 3s ease-in-out infinite;
                     }
@@ -975,36 +975,36 @@ export const PlatypusSleepingSVG: React.FC<{ className?: string }> = ({ classNam
 
             {/* Pillow (behind body) */}
             <g>
-                <path d="M70 120 C 40 120, 45 180, 70 180 L 140 180 C 165 180, 170 120, 140 120 Z" fill="url(#pillowGradientSleeping)" stroke="#CBD5E0" strokeWidth="0.5" />
+                <path d="M70 120 C 40 120, 45 180, 70 180 L 140 180 C 165 180, 170 120, 140 120 Z" fill="url(#pillowGradientSleeping)" stroke="#BFDBFE" strokeWidth="0.5" />
             </g>
 
             {/* Tail */}
-            <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="#ED8936"/>
+            <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="#F97316"/>
             <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="url(#tailGridSleeping)"/>
 
             {/* Left Leg */}
-            <path d="M80,175 C 70,190 100,190 90,175 L 90,165 L 75,168 Z" fill="#ED8936" />
+            <path d="M80,175 C 70,190 100,190 90,175 L 90,165 L 75,168 Z" fill="#F97316" />
             {/* Right Leg */}
-            <path d="M120,178 C 110,193 140,193 130,178 L 130,168 L 115,171 Z" fill="#ED8936" />
+            <path d="M120,178 C 110,193 140,193 130,178 L 130,168 L 115,171 Z" fill="#F97316" />
             
             {/* Body */}
-            <path d="M80,70 C 70,120 70,180 85,180 L 125,180 C 140,180 140,120 130,70 Z" fill="#38B2AC"/>
+            <path d="M80,70 C 70,120 70,180 85,180 L 125,180 C 140,180 140,120 130,70 Z" fill="#0D92F4"/>
             
             {/* Arms hugging pillow */}
              <g>
               {/* Right Arm */}
-              <path d="M132,95 C 140,120 130,140 120,140 Z" fill="#319795" />
-              <path d="M120,140 C 130,150 145,135,130,130 L 122,138 Z" fill="#ED8936" />
+              <path d="M132,95 C 140,120 130,140 120,140 Z" fill="#0B78C5" />
+              <path d="M120,140 C 130,150 145,135,130,130 L 122,138 Z" fill="#F97316" />
               {/* Left arm */}
-              <path d="M78,95 C 70,120 80,140 90,140 Z" fill="#319795" />
-              <path d="M90,140 C 80,150 65,135 80,130 L 88,138 Z" fill="#ED8936" />
+              <path d="M78,95 C 70,120 80,140 90,140 Z" fill="#0B78C5" />
+              <path d="M90,140 C 80,150 65,135 80,130 L 88,138 Z" fill="#F97316" />
             </g>
 
             {/* Head and Bill */}
-            <path d="M80,80 C 65,65 145,65 130,80 C 140,40 70,40 80,80 Z" fill="#38B2AC"/>
-            <path d="M70,85 C 50,105 160,105 140,85 L 130,80 L 80,80 Z" fill="#ED8936" />
+            <path d="M80,80 C 65,65 145,65 130,80 C 140,40 70,40 80,80 Z" fill="#0D92F4"/>
+            <path d="M70,85 C 50,105 160,105 140,85 L 130,80 L 80,80 Z" fill="#F97316" />
             {/* Nostrils */}
-            <g fill="#C05621">
+            <g fill="#EA580C">
                 <ellipse cx="98" cy="88" rx="2.5" ry="1.5" transform="rotate(-10 98 88)" />
                 <ellipse cx="112" cy="88" rx="2.5" ry="1.5" transform="rotate(10 112 88)" />
             </g>
@@ -1039,43 +1039,43 @@ export const WalkingPlatypusSVG: React.FC<{ className?: string }> = ({ className
                 `}
             </style>
             <pattern id="walkTailGrid2" patternUnits="userSpaceOnUse" width="10" height="10">
-                <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#C05621" strokeWidth="1.5"/>
+                <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#EA580C" strokeWidth="1.5"/>
             </pattern>
         </defs>
         <g transform="translate(10, 0)">
             {/* Tail */}
             <g className="walk_tail_2">
-                <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="#ED8936"/>
+                <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="#F97316"/>
                 <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="url(#walkTailGrid2)"/>
             </g>
 
             {/* Back Leg */}
             <g className="walk_leg_2" style={{ animationDirection: 'reverse' }}>
-                <path d="M120,178 C 110,193 140,193 130,178 L 130,168 L 115,171 Z" fill="#ED8936" />
+                <path d="M120,178 C 110,193 140,193 130,178 L 130,168 L 115,171 Z" fill="#F97316" />
             </g>
 
             {/* Body */}
-            <path d="M80,70 C 70,120 70,180 85,180 L 125,180 C 140,180 140,120 130,70 Z" fill="#38B2AC"/>
+            <path d="M80,70 C 70,120 70,180 85,180 L 125,180 C 140,180 140,120 130,70 Z" fill="#0D92F4"/>
 
             {/* Arms */}
             <g className="walk_arm_2" style={{ animationDelay: '0.5s' }}>
-                <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#319795" />
-                <path d="M55,105 C 45,115 40,100 50,95 C 55,90 60,100 55,105 Z" fill="#ED8936" />
+                <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#0B78C5" />
+                <path d="M55,105 C 45,115 40,100 50,95 C 55,90 60,100 55,105 Z" fill="#F97316" />
             </g>
             <g className="walk_arm_2">
-                <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#319795" />
-                <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#ED8936"/>
+                <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#0B78C5" />
+                <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#F97316"/>
             </g>
 
             {/* Front Leg */}
              <g className="walk_leg_2">
-                <path d="M80,175 C 70,190 100,190 90,175 L 90,165 L 75,168 Z" fill="#ED8936" />
+                <path d="M80,175 C 70,190 100,190 90,175 L 90,165 L 75,168 Z" fill="#F97316" />
             </g>
 
             {/* Head and Bill */}
-            <path d="M80,80 C 65,65 145,65 130,80 C 140,40 70,40 80,80 Z" fill="#38B2AC"/>
-            <path d="M70,85 C 50,105 160,105 140,85 L 130,80 L 80,80 Z" fill="#ED8936" />
-            <g fill="#C05621">
+            <path d="M80,80 C 65,65 145,65 130,80 C 140,40 70,40 80,80 Z" fill="#0D92F4"/>
+            <path d="M70,85 C 50,105 160,105 140,85 L 130,80 L 80,80 Z" fill="#F97316" />
+            <g fill="#EA580C">
                 <ellipse cx="98" cy="88" rx="2.5" ry="1.5" transform="rotate(-10 98 88)" />
                 <ellipse cx="112" cy="88" rx="2.5" ry="1.5" transform="rotate(10 112 88)" />
             </g>
@@ -1091,4 +1091,69 @@ export const WalkingPlatypusSVG: React.FC<{ className?: string }> = ({ className
             </g>
         </g>
     </svg>
+);
+
+export const PlatypusExplorerSVG: React.FC<{ className?: string }> = ({ className }) => (
+    <PlatypusBaseSVG
+        className={className}
+        titleId="platypus-explorer-title"
+        title="An intrepid platypus explorer with a hat and map."
+        expression="curious"
+        defs={[
+            <linearGradient key="lg1" id="mapGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#F7EEDC"/>
+                <stop offset="100%" stopColor="#F0E6CE"/>
+            </linearGradient>
+        ]}
+        accessories={
+             <g>
+                {/* Explorer Hat */}
+                <path d="M70,60 C 60,30 150,30 140,60" fill="#BF8A6B" />
+                <path d="M60,60 C 40,65 170,65 150,60 L 140, 58 L 70, 58 Z" fill="#D9A384" />
+             </g>
+        }
+    >
+        {/* Right Arm (Static) */}
+        <g>
+            <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#0B78C5" />
+            <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#F97316"/>
+        </g>
+        {/* Left Arm holding Map */}
+        <g>
+            <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#0B78C5" />
+            {/* Map */}
+            <g transform="translate(45, 110) rotate(20)">
+                <rect x="-20" y="-30" width="40" height="55" rx="3" fill="url(#mapGradient)" stroke="#A67B5B" strokeWidth="0.5" />
+                {/* Map Details */}
+                <path d="M -15,-20 C 0,-15 5,-25 15,-18" stroke="#E53E3E" strokeWidth="1.5" fill="none" strokeDasharray="3 2" />
+                <path d="M 0,-5 L 5,0 L 0,5 L -5,0 Z" fill="#0D92F4"/>
+            </g>
+            <path d="M60,115 C 45,120 40,100 45,95 L 60,95 C 70,95 70,115 60,115 Z" fill="#F97316" />
+        </g>
+    </PlatypusBaseSVG>
+);
+
+export const PlatypusThumbsUpSVG: React.FC<{ className?: string }> = ({ className }) => (
+    <PlatypusBaseSVG
+        className={className}
+        titleId="platypus-thumbs-up-title"
+        title="A happy platypus giving a thumbs up."
+    >
+        {/* Right Arm (Static) */}
+        <g>
+            <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#0B78C5" />
+            <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#F97316"/>
+        </g>
+        {/* Thumbs Up Arm (Left) */}
+        <g>
+            <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#0B78C5" />
+            {/* Thumbs Up Hand */}
+            <g transform="translate(55, 105) rotate(-10)">
+                {/* Main fist part */}
+                <path d="M0,0 C -10,5 -15,-5 -5,-10 L 10,-8 C 15,0 5,10 0,0 Z" fill="#F97316" />
+                {/* Thumb */}
+                <path d="M-5,-10 C -5,-18 5,-18 5,-10" fill="#F97316" stroke="#EA580C" strokeWidth="1" />
+            </g>
+        </g>
+    </PlatypusBaseSVG>
 );

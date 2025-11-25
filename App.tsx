@@ -13,6 +13,9 @@ import Footer from './components/Footer';
 import PlaygroundPage from './pages/Playground';
 import ChatWidget from './components/ChatWidget';
 import ForestWalkSection from './components/ForestWalkSection';
+import JourneySection from './components/JourneySection';
+import TestimonialsSection from './components/TestimonialsSection';
+import GettingStartedSection from './components/GettingStartedSection';
 
 type Page = 'home' | 'playground';
 export type Theme = 'light' | 'dark';
@@ -84,12 +87,15 @@ const App: React.FC = (): React.ReactElement => {
       <main>
         <HeroSection onNavigateToPlayground={navigateToPlayground} />
         <FeaturesSection />
+        <JourneySection />
         <LanguagesSection />
         <DemoSection />
         <WhyPlatypusSection />
+        <TestimonialsSection />
         <ComparisonSection />
         <PricingSection />
         <PrivacySection />
+        <GettingStartedSection />
         <CTASection />
       </main>
       <div className="container mx-auto px-6 py-16 md:py-20">

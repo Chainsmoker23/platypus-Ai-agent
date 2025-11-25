@@ -11,15 +11,16 @@
         theme: {
           extend: {
             colors: {
-              'platypus-primary': '#5DA9E9',
-              'platypus-secondary': '#F0F7FF',
+              'platypus-primary': '#0D92F4',
+              'platypus-secondary': '#FBF8EF',
+              'platypus-teal': '#0D92F4', 
+              'platypus-accent': '#0D92F4',
               'platypus-background': '#FFFFFF',
-              'platypus-text': '#0A2540',
-              'platypus-subtle': '#52667A',
-              'platypus-accent': '#FF6B6B',
+              'platypus-text': '#1F2937',
+              'platypus-subtle': '#6B7281',
               // Dark Theme Palette
-              'platypus-dark-background': '#111827',
-              'platypus-dark-secondary': '#1F2937',
+              'platypus-dark-background': '#181D26',
+              'platypus-dark-secondary': '#212936',
               'platypus-dark-text': '#E5E7EB',
               'platypus-dark-subtle': '#9CA3AF',
             },
@@ -37,6 +38,11 @@
               'highlight-fix': 'highlight-fix 1s ease-out forwards 0.5s',
               'suggestion-slide-in': 'suggestion-slide-in 0.5s ease-out forwards 0.5s',
               'walk-forest': 'walkForest 20s linear infinite',
+              'marquee-scroll': 'marquee 50s linear infinite',
+              'marquee-scroll-reverse': 'marquee-reverse 50s linear infinite',
+              'glow': 'glow 2s ease-in-out infinite',
+              'draw-line': 'drawLine 1s ease-out forwards',
+              'code-line-anim': 'codeLineAnim 0.5s ease-out forwards'
             },
             keyframes: {
               fadeInUp: {
@@ -89,7 +95,7 @@
               },
               'highlight-fix': {
                 '0%, 40%': { backgroundColor: 'rgba(255, 107, 107, 0.3)' },
-                '100%': { backgroundColor: 'rgba(72, 187, 120, 0.2)' },
+                '100%': { backgroundColor: 'rgba(115, 236, 139, 0.2)' },
               },
               'suggestion-slide-in': {
                 '0%': { opacity: '0', transform: 'translateX(10px)' },
@@ -99,6 +105,26 @@
                 '0%': { transform: 'translateX(110%)' },
                 '100%': { transform: 'translateX(-10%)' },
               },
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-100%)' },
+              },
+              'marquee-reverse': {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(0%)' },
+              },
+              glow: {
+                '0%, 100%': { boxShadow: '0 0 5px #0D92F4, 0 0 10px #0D92F4' },
+                '50%': { boxShadow: '0 0 20px #0D92F4, 0 0 30px #0D92F4' }
+              },
+              drawLine: {
+                'from': { height: '0' },
+                'to': { height: '100%' }
+              },
+              codeLineAnim: {
+                 '0%': { opacity: '0', transform: 'translateX(-10px)' },
+                 '100%': { opacity: '1', transform: 'translateX(0)' },
+              }
             }
           }
         }
@@ -144,7 +170,7 @@
     "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
     "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
     "react/": "https://esm.sh/react@18.2.0/",
-    "react-dom/": "https://esm.sh/react-dom@18.2.0/"
+    "react-dom/": "https://esm.sh/react@18.2.0/"
   }
 }
 </script>

@@ -12,10 +12,12 @@ import {
   PlatypusWavingSkateboardSVG,
   PlatypusCoinsSVG,
   PlatypusChatHeadSVG,
-  PlatypusSleepingSVG
+  PlatypusSleepingSVG,
+  PlatypusExplorerSVG,
+  PlatypusThumbsUpSVG
 } from './PlatypusPlaceholders';
 
-type MascotType = 'hero' | 'peeking' | 'magnifying' | 'rocket' | 'lollipop' | 'laptop' | 'clipboard' | 'pillow' | 'wavingSimple' | 'wavingSkateboard' | 'coins' | 'chat' | 'sleeping';
+type MascotType = 'hero' | 'peeking' | 'magnifying' | 'rocket' | 'lollipop' | 'laptop' | 'clipboard' | 'pillow' | 'wavingSimple' | 'wavingSkateboard' | 'coins' | 'chat' | 'sleeping' | 'explorer' | 'thumbsUp';
 
 interface AnimatedPlatypusProps {
   mascotType: MascotType;
@@ -36,6 +38,8 @@ const mascotMap: Record<MascotType, React.FC<{className: string}>> = {
   coins: PlatypusCoinsSVG,
   chat: PlatypusChatHeadSVG,
   sleeping: PlatypusSleepingSVG,
+  explorer: PlatypusExplorerSVG,
+  thumbsUp: PlatypusThumbsUpSVG,
 };
 
 const AnimatedPlatypus: React.FC<AnimatedPlatypusProps> = ({ mascotType, className }): React.ReactElement | null => {
