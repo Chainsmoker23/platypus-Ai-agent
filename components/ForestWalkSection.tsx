@@ -1,12 +1,15 @@
 import React from 'react';
-import { ForestFloorSVG, WalkingPlatypusSVG } from './PlatypusPlaceholders';
+import { WalkingPlatypusSVG } from './PlatypusPlaceholders';
 
 const ForestWalkSection: React.FC = () => {
     return (
-        <section className="relative w-full h-48 md:h-64 overflow-hidden">
-            <ForestFloorSVG />
+        <section 
+            className="relative w-full h-80 md:h-[500px] overflow-hidden forest-background rounded-2xl shadow-xl"
+            role="img"
+            aria-label="A vibrant green cartoon hill dotted with colorful wildflowers under a bright blue sky."
+        >
             <div className="absolute top-0 left-0 w-full h-full animate-walk-forest">
-                <WalkingPlatypusSVG className="absolute bottom-0 w-40 md:w-48 h-auto" />
+                <WalkingPlatypusSVG className="absolute bottom-0 w-48 md:w-56 h-auto" />
             </div>
         </section>
     );

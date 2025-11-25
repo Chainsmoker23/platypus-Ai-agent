@@ -92,7 +92,9 @@ const App: React.FC = (): React.ReactElement => {
         <PrivacySection />
         <CTASection />
       </main>
-      <ForestWalkSection />
+      <div className="container mx-auto px-6 py-16 md:py-20">
+        <ForestWalkSection />
+      </div>
       <Footer />
       <ChatWidget />
     </div>
