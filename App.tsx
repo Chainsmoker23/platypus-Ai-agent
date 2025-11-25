@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import FeaturesSection from './components/FeaturesSection';
@@ -11,12 +11,29 @@ import PrivacySection from './components/PrivacySection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import PlaygroundPage from './pages/Playground';
+import ChatWidget from './components/ChatWidget';
+import ForestWalkSection from './components/ForestWalkSection';
 
-const App: React.FC = () => {
-  console.log('Rendering: App');
-  const [page, setPage] = useState('home');
-  const [headerScrolled, setHeaderScrolled] = useState(false);
+type Page = 'home' | 'playground';
+export type Theme = 'light' | 'dark';
+
+const App: React.FC = (): React.ReactElement => {
+  const [page, setPage] = useState<Page>('home');
+  const [headerScrolled, setHeaderScrolled] = useState<boolean>(false);
+  const [theme, setTheme] = useState<Theme>('light');
   const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,23 +59,28 @@ const App: React.FC = () => {
     };
   }, []);
 
-  const navigateToPlayground = () => {
+  const navigateToPlayground = useCallback(() => {
     setPage('playground');
     window.scrollTo(0, 0);
-  };
+  }, []);
 
-  const navigateToHome = () => {
+  const navigateToHome = useCallback(() => {
     setPage('home');
-  };
+  }, []);
 
   if (page === 'playground') {
     return <PlaygroundPage onNavigateHome={navigateToHome} />;
   }
 
   return (
-    <div className="min-h-screen text-platypus-text font-sans transition-colors duration-300">
+    <div className="min-h-screen text-platypus-text dark:bg-platypus-dark-background dark:text-platypus-dark-text font-sans transition-colors duration-300">
       <div ref={sentinelRef} style={{ position: 'absolute', top: '10px', height: '1px' }} />
-      <Header scrolled={headerScrolled} onNavigateToPlayground={navigateToPlayground} />
+      <Header 
+        scrolled={headerScrolled} 
+        onNavigateToPlayground={navigateToPlayground}
+        theme={theme}
+        onToggleTheme={toggleTheme}
+      />
       <main>
         <HeroSection onNavigateToPlayground={navigateToPlayground} />
         <FeaturesSection />
@@ -70,7 +92,9 @@ const App: React.FC = () => {
         <PrivacySection />
         <CTASection />
       </main>
+      <ForestWalkSection />
       <Footer />
+      <ChatWidget />
     </div>
   );
 };

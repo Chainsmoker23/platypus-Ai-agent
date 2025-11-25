@@ -1,39 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AnimatedPlatypus from './AnimatedPlatypus';
+import InteractiveCodeWindow from './InteractiveCodeWindow';
 
-const StrengthCard: React.FC<{ mascotType: 'rocket' | 'lollipop' | 'laptop'; title: string; children: React.ReactNode }> = ({ mascotType, title, children }) => {
-  console.log(`Rendering: StrengthCard - ${title}`);
+type Pillar = 'speed' | 'reliability' | 'design';
+
+interface StrengthCardProps {
+  mascotType: 'rocket' | 'lollipop' | 'laptop';
+  title: string;
+  isActive: boolean;
+  children: React.ReactNode;
+}
+
+const StrengthCard: React.FC<StrengthCardProps> = ({ mascotType, title, children, isActive }): React.ReactElement => {
   return (
-    <div className="bg-platypus-secondary p-8 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
-      <AnimatedPlatypus 
-        mascotType={mascotType}
-        className="w-40 h-40 md:w-48 md:h-48 mb-6"
-      />
-      <h3 className="text-2xl font-bold text-platypus-text mb-3">{title}</h3>
-      <p className="text-platypus-subtle">{children}</p>
+    <div className={`bg-white dark:bg-platypus-dark-secondary p-6 md:p-8 rounded-2xl transition-all duration-300 ${isActive ? 'shadow-2xl -translate-y-2 ring-2 ring-platypus-primary' : 'shadow-lg border border-transparent hover:border-platypus-primary/50 dark:hover:border-platypus-primary/70'}`}>
+        <div className="flex items-center gap-4">
+            <AnimatedPlatypus 
+                mascotType={mascotType}
+                className="w-20 h-20 flex-shrink-0"
+            />
+            <div>
+                 <h3 className="text-xl md:text-2xl font-bold text-platypus-text dark:text-platypus-dark-text mb-2">{title}</h3>
+                 <p className="text-platypus-subtle dark:text-platypus-dark-subtle text-sm md:text-base">{children}</p>
+            </div>
+        </div>
     </div>
   );
 };
 
-const WhyPlatypusSection: React.FC = () => {
-  console.log('Rendering: WhyPlatypusSection');
+const WhyPlatypusSection: React.FC = (): React.ReactElement => {
+  const [activePillar, setActivePillar] = useState<Pillar | null>(null);
+
   return (
-    <section className="py-16 md:py-20 bg-white">
+    <section className="py-16 md:py-24 bg-platypus-secondary/70 dark:bg-platypus-dark-background/70">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-platypus-text">Engineered for Excellence</h2>
-          <p className="text-lg text-platypus-subtle mt-4 max-w-3xl mx-auto">Platypus isn't just another tool. It's a finely tuned coding partner, built on three core pillars to elevate your development experience.</p>
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-platypus-text dark:text-platypus-dark-text">Engineered for Excellence</h2>
+          <p className="text-lg text-platypus-subtle dark:text-platypus-dark-subtle mt-4 max-w-3xl mx-auto">Platypus isn't just another tool. It's a finely tuned coding partner, built on three core pillars to elevate your development experience.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <StrengthCard mascotType="rocket" title="Unmatched Speed">
-            Optimized for performance, Platypus delivers suggestions and analysis in milliseconds. Our lightweight models and efficient indexing mean you get instant feedback without ever breaking your creative flow.
-          </StrengthCard>
-          <StrengthCard mascotType="lollipop" title="High Reliability">
-            Tired of nonsensical AI suggestions? Our models are trained on curated, high-quality code and fine-tuned to understand context deeply. This results in accurate, dependable code that reduces errors and saves you debugging time.
-          </StrengthCard>
-          <StrengthCard mascotType="laptop" title="Developer-Centric Design">
-            Built by developers, for developers. We focus on a seamless, intuitive UX that integrates perfectly into your workflow. From the diff-based review to customizable commands, every feature is designed to empower you.
-          </StrengthCard>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-8">
+                <div onMouseEnter={() => setActivePillar('speed')} onMouseLeave={() => setActivePillar(null)}>
+                    <StrengthCard mascotType="rocket" title="Unmatched Speed" isActive={activePillar === 'speed'}>
+                        Optimized for performance, Platypus delivers suggestions and analysis in milliseconds, keeping you in the creative flow.
+                    </StrengthCard>
+                </div>
+                <div onMouseEnter={() => setActivePillar('reliability')} onMouseLeave={() => setActivePillar(null)}>
+                    <StrengthCard mascotType="lollipop" title="High Reliability" isActive={activePillar === 'reliability'}>
+                        Trained on curated, high-quality code, our models provide accurate suggestions that reduce errors and debugging time.
+                    </StrengthCard>
+                </div>
+                <div onMouseEnter={() => setActivePillar('design')} onMouseLeave={() => setActivePillar(null)}>
+                    <StrengthCard mascotType="laptop" title="Developer-Centric Design" isActive={activePillar === 'design'}>
+                        Built by developers, for developers, with a seamless UX that integrates perfectly into your existing workflow.
+                    </StrengthCard>
+                </div>
+            </div>
+            <div className="lg:h-[450px]">
+                <InteractiveCodeWindow activePillar={activePillar} />
+            </div>
         </div>
       </div>
     </section>

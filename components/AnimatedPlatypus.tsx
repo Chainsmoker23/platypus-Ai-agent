@@ -15,13 +15,14 @@ import {
   PlatypusSleepingSVG
 } from './PlatypusPlaceholders';
 
+type MascotType = 'hero' | 'peeking' | 'magnifying' | 'rocket' | 'lollipop' | 'laptop' | 'clipboard' | 'pillow' | 'wavingSimple' | 'wavingSkateboard' | 'coins' | 'chat' | 'sleeping';
 
 interface AnimatedPlatypusProps {
-  mascotType: 'hero' | 'peeking' | 'magnifying' | 'rocket' | 'lollipop' | 'laptop' | 'clipboard' | 'pillow' | 'wavingSimple' | 'wavingSkateboard' | 'coins' | 'chat' | 'sleeping';
+  mascotType: MascotType;
   className?: string;
 }
 
-const mascotMap = {
+const mascotMap: Record<MascotType, React.FC<{className: string}>> = {
   hero: PlatypusHeroSVG,
   peeking: PlatypusPeekingSVG,
   magnifying: PlatypusMagnifyingGlassSVG,
@@ -37,10 +38,13 @@ const mascotMap = {
   sleeping: PlatypusSleepingSVG,
 };
 
-const AnimatedPlatypus: React.FC<AnimatedPlatypusProps> = ({ mascotType, className }) => {
-  console.log(`Rendering: AnimatedPlatypus (type: ${mascotType})`);
+const AnimatedPlatypus: React.FC<AnimatedPlatypusProps> = ({ mascotType, className }): React.ReactElement | null => {
   const MascotComponent = mascotMap[mascotType];
-  if (!MascotComponent) return null; // Safety check
+  
+  if (!MascotComponent) {
+    console.warn(`Invalid mascotType provided: ${mascotType}`);
+    return null;
+  }
 
   const animationClass = (mascotType === 'peeking' || mascotType === 'sleeping') ? '' : 'animate-subtle-bob';
 

@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             colors: {
@@ -16,6 +17,11 @@
               'platypus-text': '#0A2540',
               'platypus-subtle': '#52667A',
               'platypus-accent': '#FF6B6B',
+              // Dark Theme Palette
+              'platypus-dark-background': '#111827',
+              'platypus-dark-secondary': '#1F2937',
+              'platypus-dark-text': '#E5E7EB',
+              'platypus-dark-subtle': '#9CA3AF',
             },
             animation: {
               'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
@@ -26,6 +32,11 @@
               'subtle-float': 'subtleFloat 6s ease-in-out infinite',
               'slide-in-up': 'slideInUp 0.5s ease-out forwards',
               'fade-in-subtle': 'fadeIn 0.5s ease-out forwards',
+              'bounce': 'bounce 1s infinite',
+              'code-flicker': 'code-flicker-in 0.5s ease-out forwards',
+              'highlight-fix': 'highlight-fix 1s ease-out forwards 0.5s',
+              'suggestion-slide-in': 'suggestion-slide-in 0.5s ease-out forwards 0.5s',
+              'walk-forest': 'walkForest 20s linear infinite',
             },
             keyframes: {
               fadeInUp: {
@@ -59,6 +70,34 @@
               fadeIn: {
                 '0%': { opacity: '0' },
                 '100%': { opacity: '1' },
+              },
+              bounce: {
+                '0%, 100%': { 
+                  transform: 'translateY(-25%)',
+                  animationTimingFunction: 'cubic-bezier(0.8,0,1,1)',
+                },
+                '50%': {
+                  transform: 'translateY(0)',
+                  animationTimingFunction: 'cubic-bezier(0,0,0.2,1)',
+                },
+              },
+              'code-flicker-in': {
+                '0%': { opacity: '0' },
+                '25%': { opacity: '1' },
+                '50%': { opacity: '0.3' },
+                '100%': { opacity: '1' },
+              },
+              'highlight-fix': {
+                '0%, 40%': { backgroundColor: 'rgba(255, 107, 107, 0.3)' },
+                '100%': { backgroundColor: 'rgba(72, 187, 120, 0.2)' },
+              },
+              'suggestion-slide-in': {
+                '0%': { opacity: '0', transform: 'translateX(10px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' },
+              },
+              walkForest: {
+                '0%': { transform: 'translateX(110%)' },
+                '100%': { transform: 'translateX(-10%)' },
               },
             }
           }
@@ -103,7 +142,7 @@
 }
 </script>
 </head>
-<body class="bg-platypus-background">
+<body class="bg-platypus-background dark:bg-platypus-dark-background">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
 </body>

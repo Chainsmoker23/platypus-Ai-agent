@@ -8,22 +8,20 @@ interface FeatureCardProps {
   description: string;
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => {
-  console.log(`Rendering: FeatureCard - ${title}`);
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }): React.ReactElement => {
   return (
-    <div className="group bg-platypus-secondary p-6 rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+    <div className="group bg-platypus-secondary dark:bg-platypus-dark-secondary p-6 rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
       <div className="text-platypus-primary group-hover:text-platypus-accent mb-4 transition-colors duration-300">
         {icon}
       </div>
-      <h3 className="text-xl font-bold mb-2 text-platypus-text">{title}</h3>
-      <p className="text-platypus-subtle">{description}</p>
+      <h3 className="text-xl font-bold mb-2 text-platypus-text dark:text-platypus-dark-text">{title}</h3>
+      <p className="text-platypus-subtle dark:text-platypus-dark-subtle">{description}</p>
     </div>
   );
 };
 
-const FeaturesSection: React.FC = () => {
-  console.log('Rendering: FeaturesSection');
-  const features = [
+const FeaturesSection: React.FC = (): React.ReactElement => {
+  const features: FeatureCardProps[] = [
     {
       icon: ICONS.folder,
       title: 'Full-Project Understanding',
@@ -57,15 +55,15 @@ const FeaturesSection: React.FC = () => {
   ];
 
   return (
-    <section id="features" className="py-16 md:py-20 bg-platypus-background relative overflow-hidden">
+    <section id="features" className="py-16 md:py-20 bg-platypus-background dark:bg-platypus-dark-background relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 relative">
            <AnimatedPlatypus 
               mascotType="peeking" 
               className="hidden md:block w-32 h-32 absolute -top-16 -left-8 lg:left-24 animate-slide-in-from-left opacity-0"
             />
-          <h2 className="text-3xl md:text-4xl font-extrabold text-platypus-text">Everything You Need to Code Faster</h2>
-          <p className="text-lg text-platypus-subtle mt-4 max-w-3xl mx-auto">Platypus is more than an autocomplete. It's a comprehensive AI assistant designed for professional developers.</p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-platypus-text dark:text-platypus-dark-text">Everything You Need to Code Faster</h2>
+          <p className="text-lg text-platypus-subtle dark:text-platypus-dark-subtle mt-4 max-w-3xl mx-auto">Platypus is more than an autocomplete. It's a comprehensive AI assistant designed for professional developers.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (

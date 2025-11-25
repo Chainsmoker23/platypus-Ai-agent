@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export const PlatypusLogoSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusLogoSVG');
-    return (
+export const PlatypusLogoSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
     <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-labelledby="platypus-logo-title">
         <title id="platypus-logo-title">Creative logo of a platypus bill forming an idea lightbulb</title>
         <g>
@@ -14,17 +12,13 @@ export const PlatypusLogoSVG: React.FC<{ className?: string }> = ({ className })
              {/* Filament Eyes */}
             <circle cx="43" cy="25" r="3" fill="#0A2540" />
             <circle cx="57" cy="25" r="3" fill="#0A2540" />
-            {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
             <path d="M44 28 Q 50 32 56 28" stroke="#0A2540" strokeWidth="2" strokeLinecap="round" fill="none"/>
         </g>
     </svg>
-    );
-};
+);
 
 
-export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusHeroSVG');
-    return (
+export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
     <svg viewBox="0 0 200 200" className={className} xmlns="http://www.w3.org/2000/svg" aria-labelledby="platypus-hero-title">
         <title id="platypus-hero-title">A secret agent platypus standing confidently in a cowboy hat, waving a pair of realistic, high-quality headphones.</title>
         <defs>
@@ -95,9 +89,7 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
                     {/* The coordinate system is shifted so (0,0) is the top-center of the headband arc */}
 
                     {/* Headband */}
-                    {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
                     <path d="M -27.5 40 C -27.5 0, 27.5 0, 27.5 40" strokeWidth="12" stroke="#2D3748" fill="none" strokeLinecap="round" />
-                    {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
                     <path d="M -27.5 40 C -27.5 0, 27.5 0, 27.5 40" strokeWidth="8" stroke="#4A5568" fill="none" strokeLinecap="round" />
 
                     {/* Right Earcup (closer to viewer) */}
@@ -168,19 +160,16 @@ export const PlatypusHeroSVG: React.FC<{ className?: string }> = ({ className })
 
             {/* Creative Element: Glowing Code Symbol */}
             <g filter="url(#codeGlow)">
-                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
                 <path d="M98 52 L 95 54.5 L 98 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
                 <path d="M112 52 L 115 54.5 L 112 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
             </g>
         </g>
     </svg>
-    );
-};
+);
 
 type EyeExpression = 'default' | 'focused' | 'curious';
 
-const EyeStyles = () => (
+const EyeStyles: React.FC = (): React.ReactElement => (
     <style>{`
         @keyframes blink_anim {
             0%, 95%, 100% { transform: scaleY(1); }
@@ -205,8 +194,7 @@ const EyeStyles = () => (
     `}</style>
 );
 
-const Eyes: React.FC<{ expression?: EyeExpression }> = ({ expression = 'default' }) => {
-    console.log(`Rendering: Eyes (expression: ${expression})`);
+const Eyes: React.FC<{ expression?: EyeExpression }> = ({ expression = 'default' }): React.ReactElement => {
     const pupilStyle = expression === 'focused' ? { r: 3.5 } : { r: 3 };
     const animationDuration = expression === 'focused' ? '6s' : '4s';
     const [delays, setDelays] = useState({ left: '0s', right: '0s' });
@@ -238,8 +226,18 @@ const Eyes: React.FC<{ expression?: EyeExpression }> = ({ expression = 'default'
 };
 
 
-const PlatypusBaseSVG: React.FC<{ children?: React.ReactNode, accessories?: React.ReactNode, title: string, titleId: string, sitting?: boolean, defs?: React.ReactNode, expression?: EyeExpression, className?: string }> = ({ children, accessories, title, titleId, sitting = false, defs, expression, className }) => {
-    console.log(`Rendering: PlatypusBaseSVG (title: ${title})`);
+interface PlatypusBaseSVGProps {
+  children?: React.ReactNode;
+  accessories?: React.ReactNode;
+  title: string;
+  titleId: string;
+  sitting?: boolean;
+  defs?: React.ReactNode;
+  expression?: EyeExpression;
+  className?: string;
+}
+
+const PlatypusBaseSVG: React.FC<PlatypusBaseSVGProps> = ({ children, accessories, title, titleId, sitting = false, defs, expression, className }): React.ReactElement => {
     return (
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-labelledby={titleId} className={className}>
         <title id={titleId}>{title}</title>
@@ -294,9 +292,7 @@ const PlatypusBaseSVG: React.FC<{ children?: React.ReactNode, accessories?: Reac
 };
 
 
-export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusRocketSVG');
-    return (
+export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
     <PlatypusBaseSVG 
       className={className}
       titleId="platypus-rocket-title" 
@@ -360,12 +356,9 @@ export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className 
             <path d="M72,130 C 65,140 50,135 55,125 C 53,115 63,113 67,119 L 75,123 C 77,125 74,130 72,130 Z" fill="#ED8936" />
         </g>
     </PlatypusBaseSVG>
-    );
-};
+);
 
-export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusLaptopSVG');
-    return (
+export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
     <PlatypusBaseSVG 
         className={className}
         titleId="platypus-laptop-title" 
@@ -384,9 +377,7 @@ export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className 
             <rect x="74" y="50" width="62" height="6" fill="#0A2540" />
             {/* Creative Element: Glowing Code Symbol */}
             <g filter="url(#platypusCodeGlow)">
-                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
                 <path d="M98 52 L 95 54.5 L 98 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
                 <path d="M112 52 L 115 54.5 L 112 57" stroke="#5DA9E9" strokeWidth="1.5" fill="none" strokeLinecap="round" />
             </g>
           </g>
@@ -473,13 +464,10 @@ export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className 
             <text x="-40" y="-30" fontFamily="monospace" fontSize="8" fill="#38B2AC">/&gt;</text>
         </g>
     </PlatypusBaseSVG>
-    );
-};
+);
 
 
-export const PlatypusPillowSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusPillowSVG');
-    return (
+export const PlatypusPillowSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
     <PlatypusBaseSVG 
       className={className}
       titleId="platypus-pillow-title" 
@@ -495,9 +483,7 @@ export const PlatypusPillowSVG: React.FC<{ className?: string }> = ({ className 
       <g>
         <path d="M80 100 C 50 100, 55 160, 80 160 L 130 160 C 155 160, 160 100, 130 100 Z" fill="url(#pillowGradient)" stroke="#CBD5E0" strokeWidth="0.5" />
         {/* Pillow Shading/Indentations */}
-        {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
         <path d="M90,105 C 80,125, 85,145, 90,155" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
-        {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
         <path d="M120,105 C 130,125, 125,145, 120,155" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
       </g>
 
@@ -511,12 +497,9 @@ export const PlatypusPillowSVG: React.FC<{ className?: string }> = ({ className 
           <path d="M90,140 C 80,150 65,135 80,130 L 88,138 Z" fill="#ED8936" />
       </g>
     </PlatypusBaseSVG>
-    );
-};
+);
 
-export const PlatypusLollipopSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusLollipopSVG');
-    return (
+export const PlatypusLollipopSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
     <PlatypusBaseSVG 
         className={className}
         titleId="platypus-lollipop-title" 
@@ -572,12 +555,9 @@ export const PlatypusLollipopSVG: React.FC<{ className?: string }> = ({ classNam
             <path d="M78,95 C 75,105 75,115 78,125 Z" fill="#319795" />
         </g>
     </PlatypusBaseSVG>
-    );
-};
+);
 
-export const PlatypusMagnifyingGlassSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusMagnifyingGlassSVG');
-    return (
+export const PlatypusMagnifyingGlassSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
     <PlatypusBaseSVG 
       className={className}
       titleId="platypus-magnifying-title" 
@@ -600,7 +580,6 @@ export const PlatypusMagnifyingGlassSVG: React.FC<{ className?: string }> = ({ c
                 <g transform="translate(84, 95)">
                     <circle cx="0" cy="0" r="25" fill="#718096" />
                     <circle cx="0" cy="0" r="21" fill="#EBF8FF" opacity="0.7" />
-                    {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
                     <path d="M-10 -10 A 15 15 0 0 1 10 -5" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
                 </g>
                 
@@ -624,12 +603,9 @@ export const PlatypusMagnifyingGlassSVG: React.FC<{ className?: string }> = ({ c
             <path d="M78,95 C 75,105 75,115 78,125 Z" fill="#319795" />
        </g>
     </PlatypusBaseSVG>
-    );
-};
+);
 
-export const PlatypusClipboardSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusClipboardSVG');
-    return (
+export const PlatypusClipboardSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
     <PlatypusBaseSVG className={className} titleId="platypus-clipboard-title" title="An analytical platypus holding a clipboard.">
         {/* Right Arm (Static) */}
         <g>
@@ -645,11 +621,9 @@ export const PlatypusClipboardSVG: React.FC<{ className?: string }> = ({ classNa
                 <rect x="-18" y="-28" width="36" height="51" rx="2" fill="white" />
                 {/* Lined Paper & Checkmarks */}
                 <line x1="-15" y1="-15" x2="15" y2="-15" stroke="#E2E8F0" strokeWidth="1"/>
-                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
                 <path d="M-13 -8 l2 2 l4 -4" stroke="#38A169" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
                 <line x1="-15" y1="-5" x2="15" y2="-5" stroke="#E2E8F0" strokeWidth="1"/>
                 <line x1="-15" y1="5" x2="15" y2="5" stroke="#E2E8F0" strokeWidth="1"/>
-                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
                 <path d="M-13 12 l2 2 l4 -4" stroke="#38A169" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
                 <line x1="-15" y1="15" x2="15" y2="15" stroke="#E2E8F0" strokeWidth="1"/>
                 {/* Clip */}
@@ -660,12 +634,9 @@ export const PlatypusClipboardSVG: React.FC<{ className?: string }> = ({ classNa
             <path d="M60,115 C 45,120 40,100 45,95 L 60,95 C 70,95 70,115 60,115 Z" fill="#ED8936" />
         </g>
     </PlatypusBaseSVG>
-    );
-};
+);
 
-export const PlatypusWavingSimpleSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusWavingSimpleSVG');
-    return (
+export const PlatypusWavingSimpleSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
     <PlatypusBaseSVG className={className} titleId="platypus-waving-title" title="A friendly platypus waving its hand.">
         {/* Right Arm (Static) */}
         <g>
@@ -679,11 +650,9 @@ export const PlatypusWavingSimpleSVG: React.FC<{ className?: string }> = ({ clas
             <path d="M55,105 C 45,115 40,100 50,95 C 55,90 60,100 55,105 Z" fill="#ED8936" />
         </g>
     </PlatypusBaseSVG>
-    );
-};
+);
 
-export const PlatypusWavingSkateboardSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusWavingSkateboardSVG');
+export const PlatypusWavingSkateboardSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => {
     const [delays, setDelays] = useState({ left: '0s', right: '0s' });
 
     useEffect(() => {
@@ -787,8 +756,7 @@ export const PlatypusWavingSkateboardSVG: React.FC<{ className?: string }> = ({ 
 };
 
 
-export const PlatypusPeekingSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusPeekingSVG');
+export const PlatypusPeekingSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => {
     const [delays, setDelays] = useState({ left: '0s', right: '0s' });
 
     useEffect(() => {
@@ -846,9 +814,7 @@ export const PlatypusPeekingSVG: React.FC<{ className?: string }> = ({ className
     );
 };
 
-export const PlatypusCoinsSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusCoinsSVG');
-    return (
+export const PlatypusCoinsSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
     <PlatypusBaseSVG 
       className={className}
       titleId="platypus-coins-title" 
@@ -879,11 +845,9 @@ export const PlatypusCoinsSVG: React.FC<{ className?: string }> = ({ className }
             <path d="M95,120 C 85,130 70,115 85,110 L 93,118 Z" fill="#ED8936" />
         </g>
     </PlatypusBaseSVG>
-    );
-};
+);
 
-export const PlatypusChatHeadSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusChatHeadSVG');
+export const PlatypusChatHeadSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => {
     const [delays, setDelays] = useState({ left: '0s', right: '0s' });
 
     useEffect(() => {
@@ -935,9 +899,7 @@ export const PlatypusChatHeadSVG: React.FC<{ className?: string }> = ({ classNam
             {/* Headphones */}
             <g>
                 {/* Headband */}
-                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
                 <path d="M 20 38 C 20 10, 80 10, 80 38" strokeWidth="10" stroke="#2D3748" fill="none" strokeLinecap="round" />
-                {/* FIX: Corrected SVG attribute 'strokeLineCap' to 'strokeLinecap'. */}
                 <path d="M 20 38 C 20 10, 80 10, 80 38" strokeWidth="6" stroke="#4A5568" fill="none" strokeLinecap="round" />
                 {/* Left Earcup */}
                 <rect x="10" y="35" width="20" height="20" rx="6" fill="#2D3748"/>
@@ -951,8 +913,7 @@ export const PlatypusChatHeadSVG: React.FC<{ className?: string }> = ({ classNam
     );
 };
 
-export const PlatypusSleepingSVG: React.FC<{ className?: string }> = ({ className }) => {
-    console.log('Rendering: PlatypusSleepingSVG');
+export const PlatypusSleepingSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => {
     const [delays, setDelays] = useState({ left: '0s', right: '0s' });
 
     useEffect(() => {
@@ -1057,3 +1018,180 @@ export const PlatypusSleepingSVG: React.FC<{ className?: string }> = ({ classNam
     </svg>
     );
 };
+
+export const ForestFloorSVG: React.FC = () => (
+    <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        preserveAspectRatio="xMidYMid slice" 
+        viewBox="0 0 1920 250" 
+        className="absolute inset-0 w-full h-full object-cover -z-10"
+    >
+        <defs>
+            <linearGradient id="skyGradientLight" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="0%" stopColor="#87CEEB" />
+                <stop offset="60%" stopColor="#FDBA74" />
+                <stop offset="100%" stopColor="#F97316" />
+            </linearGradient>
+            <linearGradient id="skyGradientDark" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="0%" stopColor="#1e293b" />
+                <stop offset="50%" stopColor="#4338ca" />
+                <stop offset="100%" stopColor="#7e22ce" />
+            </linearGradient>
+            <linearGradient id="fogGradient" y1="0" y2="1" x1="0.5" x2="0.5">
+                <stop offset="0%" stopColor="white" stopOpacity="0" />
+                <stop offset="50%" stopColor="white" stopOpacity="0.1" />
+                <stop offset="100%" stopColor="white" stopOpacity="0.2" />
+            </linearGradient>
+        </defs>
+        <style>
+            {`
+                .sky-fill { fill: url(#skyGradientLight); }
+                .dark .sky-fill { fill: url(#skyGradientDark); }
+
+                .distant-trees { fill: #3f3f46; }
+                .dark .distant-trees { fill: #1e293b; opacity: 0.7; }
+
+                .mid-trees { fill: #27272a; }
+                .dark .mid-trees { fill: #18181b; }
+
+                .foreground { fill: #18181b; }
+                .dark .foreground { fill: #000; }
+            `}
+        </style>
+        
+        {/* Sky */}
+        <rect className="sky-fill" width="1920" height="250" />
+        
+        {/* Layer 3: Distant, blurry trees */}
+        <g className="distant-trees">
+            <path d="M0 200 L0 180 C 50 150, 150 150, 200 180 T 400 180 T 600 180 T 800 180 T 1000 180 T 1200 180 T 1400 180 T 1600 180 T 1800 180 T 1920 180 L 1920 200 Z" />
+            <path d="M-50 200 L-50 190 C 0 170, 100 170, 150 190 T 350 190 T 550 190 T 750 190 T 950 190 T 1150 190 T 1350 190 T 1550 190 T 1750 190 T 1950 190 L 1950 200 Z" />
+        </g>
+        
+        {/* Layer 2: Mid-ground trees silhouette */}
+        <g className="mid-trees">
+            <path d="M-100 250 v-60 c10-30 30-20 40 0 v60z 
+                     M50 250 v-80 c10-40 40-30 50 0 v80z
+                     M200 250 v-50 c5-20 25-15 30 0 v50z
+                     M300 250 v-100 c10-40 50-30 60 0 v100z
+                     M450 250 v-70 c10-30 30-20 40 0 v70z
+                     M580 250 v-90 c10-35 40-25 50 0 v90z
+                     M700 250 v-50 c5-20 25-15 30 0 v50z
+                     M800 250 v-110 c10-40 50-30 60 0 v110z
+                     M950 250 v-60 c10-30 30-20 40 0 v60z
+                     M1100 250 v-80 c10-40 40-30 50 0 v80z
+                     M1250 250 v-50 c5-20 25-15 30 0 v50z
+                     M1350 250 v-100 c10-40 50-30 60 0 v100z
+                     M1500 250 v-70 c10-30 30-20 40 0 v70z
+                     M1630 250 v-90 c10-35 40-25 50 0 v90z
+                     M1750 250 v-50 c5-20 25-15 30 0 v50z
+                     M1850 250 v-110 c10-40 50-30 60 0 v110z
+            "/>
+        </g>
+
+        {/* Mist Layer */}
+        <rect y="180" width="1920" height="70" fill="url(#fogGradient)" className="dark:opacity-50"/>
+
+        {/* Layer 1: Foreground ground silhouette */}
+        <g className="foreground">
+            <path d="M0 250 L0 230 
+                c5-10 10-10 15-8 
+                s5 0 10 2 s5 5 10 5 s5-5 10-8 s10-3 15 0 
+                l30 15
+                c5-8 10-8 15-6 s5 0 10 3 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                c5-10 10-10 15-8 s5 0 10 2 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                c5-12 10-12 15-10 s5 0 10 2 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                l20 10
+                c5-10 10-10 15-8 s5 0 10 2 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                s5-5 10-8 s10-3 15 0 s5 0 10 2 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                l-10 15
+                c5-10 10-10 15-8 s5 0 10 2 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                c5-8 10-8 15-6 s5 0 10 3 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                l35 20
+                c5-10 10-10 15-8 s5 0 10 2 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                c5-12 10-12 15-10 s5 0 10 2 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                c5-10 10-10 15-8 s5 0 10 2 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                c5-8 10-8 15-6 s5 0 10 3 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                l50 25
+                c5-10 10-10 15-8 s5 0 10 2 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                c5-12 10-12 15-10 s5 0 10 2 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                c5-10 10-10 15-8 s5 0 10 2 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                c5-8 10-8 15-6 s5 0 10 3 s5 5 10 5 s5-5 10-8 s10-3 15 0
+                L 1920 230 L 1920 250 Z" />
+        </g>
+    </svg>
+);
+
+export const WalkingPlatypusSVG: React.FC<{ className?: string }> = ({ className }) => (
+    <svg viewBox="0 0 200 200" className={className} xmlns="http://www.w3.org/2000/svg" aria-labelledby="walking-platypus-title">
+        <title id="walking-platypus-title">An animated platypus walking peacefully.</title>
+        <defs>
+            <style>
+                {`
+                @keyframes walk_blink_anim_2 { 0%, 95%, 100% { transform: scaleY(1); } 97.5% { transform: scaleY(0.1); } }
+                .walk_eye_2 { transform-origin: center; animation: walk_blink_anim_2 4s infinite; }
+                
+                @keyframes walk_arm_anim_2 { 0%, 100% { transform: rotate(10deg); } 50% { transform: rotate(-10deg); } }
+                .walk_arm_2 { transform-origin: 80px 95px; animation: walk_arm_anim_2 1s infinite ease-in-out; }
+
+                @keyframes walk_leg_anim_2 { 0%, 100% { transform: rotate(-15deg); } 50% { transform: rotate(15deg); } }
+                .walk_leg_2 { transform-origin: 90px 170px; animation: walk_leg_anim_2 1s infinite ease-in-out; }
+                
+                @keyframes tail_wag_anim_2 { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+                .walk_tail_2 { transform-origin: 125px 140px; animation: tail_wag_anim_2 2s infinite ease-in-out; }
+                `}
+            </style>
+            <pattern id="walkTailGrid2" patternUnits="userSpaceOnUse" width="10" height="10">
+                <path d="M 0,0 L 10,10 M 10,0 L 0,10" stroke="#C05621" strokeWidth="1.5"/>
+            </pattern>
+        </defs>
+        <g transform="translate(10, 0)">
+            {/* Tail */}
+            <g className="walk_tail_2">
+                <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="#ED8936"/>
+                <path d="M125,130 C 180,120 200,180 150,185 C 120,190 110,150 125,130 Z" fill="url(#walkTailGrid2)"/>
+            </g>
+
+            {/* Back Leg */}
+            <g className="walk_leg_2" style={{ animationDirection: 'reverse' }}>
+                <path d="M120,178 C 110,193 140,193 130,178 L 130,168 L 115,171 Z" fill="#ED8936" />
+            </g>
+
+            {/* Body */}
+            <path d="M80,70 C 70,120 70,180 85,180 L 125,180 C 140,180 140,120 130,70 Z" fill="#38B2AC"/>
+
+            {/* Arms */}
+            <g className="walk_arm_2" style={{ animationDelay: '0.5s' }}>
+                <path d="M78,95 C 70,80 50,90 55,105 Z" fill="#319795" />
+                <path d="M55,105 C 45,115 40,100 50,95 C 55,90 60,100 55,105 Z" fill="#ED8936" />
+            </g>
+            <g className="walk_arm_2">
+                <path d="M132,95 C 145,100 148,125 138,130 Z" fill="#319795" />
+                <path d="M138,130 C 145,140 160,135 155,125 C 157,115 147,113 143,119 L 135,123 C 133,125 136,130 138,130 Z" fill="#ED8936"/>
+            </g>
+
+            {/* Front Leg */}
+             <g className="walk_leg_2">
+                <path d="M80,175 C 70,190 100,190 90,175 L 90,165 L 75,168 Z" fill="#ED8936" />
+            </g>
+
+            {/* Head and Bill */}
+            <path d="M80,80 C 65,65 145,65 130,80 C 140,40 70,40 80,80 Z" fill="#38B2AC"/>
+            <path d="M70,85 C 50,105 160,105 140,85 L 130,80 L 80,80 Z" fill="#ED8936" />
+            <g fill="#C05621">
+                <ellipse cx="98" cy="88" rx="2.5" ry="1.5" transform="rotate(-10 98 88)" />
+                <ellipse cx="112" cy="88" rx="2.5" ry="1.5" transform="rotate(10 112 88)" />
+            </g>
+
+            {/* Eyes */}
+            <g className="walk_eye_2" style={{ animationDelay: '0.3s' }}>
+                <ellipse cx="95" cy="68" rx="7" ry="11" fill="white" transform="rotate(-10 95 68)" />
+                <circle cx="97" cy="70" r="3" fill="black" />
+            </g>
+            <g className="walk_eye_2" style={{ animationDelay: '0.5s' }}>
+                <ellipse cx="120" cy="68" rx="7" ry="11" fill="white" transform="rotate(10 120 68)" />
+                <circle cx="118" cy="70" r="3" fill="black" />
+            </g>
+        </g>
+    </svg>
+);
