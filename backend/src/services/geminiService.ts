@@ -44,8 +44,12 @@ export class GeminiService {
         },
       });
       
-      const responseText = response.text.trim();
-      return JSON.parse(responseText);
+      const responseText = response.text;
+      if (!responseText) {
+        logger.error('Received an empty response from Gemini API for project generation.');
+        throw new Error('Received an empty response from the AI.');
+      }
+      return JSON.parse(responseText.trim());
 
     } catch (error) {
       logger.error('Error calling Gemini API for project generation:', error);
@@ -68,7 +72,12 @@ export class GeminiService {
         });
         
         const response = await chat.sendMessage({ message });
-        return response.text;
+        const responseText = response.text;
+        if (!responseText) {
+            logger.warn('Received an empty chat response from Gemini API.');
+            return 'Sorry, I seem to be at a loss for words. Could you try rephrasing?';
+        }
+        return responseText;
 
     } catch (error) {
         logger.error('Error calling Gemini API for chat:', error);
