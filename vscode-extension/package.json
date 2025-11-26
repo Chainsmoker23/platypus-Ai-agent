@@ -44,8 +44,10 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
+    "compile": "npm run build --prefix webview-ui && tsc -p ./",
+    "watch": "npm-run-all --parallel watch:*",
+    "watch:extension": "tsc -watch -p ./",
+    "watch:webview": "npm run dev --prefix webview-ui",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts"
   },
@@ -55,6 +57,7 @@
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
     "eslint": "^8.57.0",
+    "npm-run-all": "^4.1.5",
     "typescript": "^5.4.5"
   },
   "dependencies": {

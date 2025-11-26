@@ -9,7 +9,7 @@ export function activate(context: vscode.ExtensionContext) {
     console.log('Congratulations, your extension "platypus" is now active!');
 
     // --- Register the Sidebar Webview Provider ---
-    const sidebarProvider = new SidebarProvider(context.extensionUri);
+    const sidebarProvider = new SidebarProvider(context);
     context.subscriptions.push(
         vscode.window.registerWebviewViewProvider(
             SidebarProvider.viewType,
