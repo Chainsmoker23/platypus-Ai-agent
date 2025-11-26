@@ -2,10 +2,20 @@ import * as vscode from 'vscode';
 import { generateProject as callGenerateProjectApi } from './apiClient';
 import { ensureDirectoryExists } from './utils';
 import * as path from 'path';
+import { SidebarProvider } from './SidebarProvider';
 
 // This method is called when your extension is activated
 export function activate(context: vscode.ExtensionContext) {
     console.log('Congratulations, your extension "platypus" is now active!');
+
+    // --- Register the Sidebar Webview Provider ---
+    const sidebarProvider = new SidebarProvider(context.extensionUri);
+    context.subscriptions.push(
+        vscode.window.registerWebviewViewProvider(
+            SidebarProvider.viewType,
+            sidebarProvider
+        )
+    );
 
     // --- Register the main project generation command ---
     let disposable = vscode.commands.registerCommand('platypus.generateProject', async () => {

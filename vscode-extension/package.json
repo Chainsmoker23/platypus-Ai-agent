@@ -4,6 +4,7 @@
   "description": "Your Intelligent Coding Companion",
   "version": "0.0.1",
   "publisher": "platypus-ai",
+  "icon": "assets/platypus-icon.png",
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -11,7 +12,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:platypus.generateProject"
+    "onCommand:platypus.generateProject",
+    "onView:platypus.sidebarView"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -20,7 +22,25 @@
         "command": "platypus.generateProject",
         "title": "Platypus: Generate Project"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "platypus",
+          "title": "Platypus",
+          "icon": "assets/platypus-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "platypus": [
+        {
+          "id": "platypus.sidebarView",
+          "name": "Platypus Chat",
+          "type": "webview"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
