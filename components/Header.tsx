@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({ scrolled, onNavigateToPlayground, theme
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-lg bg-platypus-background/95 dark:bg-platypus-dark-background/95 backdrop-blur-xl' : 'bg-platypus-background/80 dark:bg-transparent backdrop-blur-md'}`}>
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <PlatypusLogoSVG className="w-10 h-10" />
+          <PlatypusLogoSVG className={`w-10 h-10 transition-all duration-300 ${!scrolled ? 'animate-logo-pulse' : 'animate-fade-in-subtle'}`} />
           <span className="text-2xl font-bold text-platypus-text dark:text-platypus-dark-text">Platypus</span>
         </div>
         <nav className="hidden md:flex items-center space-x-8">

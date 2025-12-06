@@ -35,13 +35,13 @@ const GettingStartedSection: React.FC = () => {
       step: 2,
       title: 'Open Your Project',
       description: 'Open any codebase and Platypus will automatically begin indexing your files for context.',
-      icon: React.cloneElement(ICONS.folder, { className: "h-12 w-12" }),
+      icon: React.cloneElement(ICONS.folder as React.ReactElement<{ className?: string }>, { className: "h-12 w-12" }),
     },
     {
       step: 3,
       title: 'Start Coding',
       description: 'Use the integrated chat, run an agent, or enjoy smart suggestions as you type. It’s that easy!',
-      icon: React.cloneElement(ICONS.magicWand, { className: "h-12 w-12" }),
+      icon: React.cloneElement(ICONS.magicWand as React.ReactElement<{ className?: string }>, { className: "h-12 w-12" }),
     },
   ];
 

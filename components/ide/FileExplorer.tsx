@@ -53,7 +53,6 @@ interface FolderEntryProps {
 const FolderEntry: React.FC<FolderEntryProps> = ({ name, entry, path, onFileSelect, onFileDelete, level }) => {
   const [isOpen, setIsOpen] = useState(true);
 
-  // FIX: Explicitly typed sort function arguments to resolve TypeScript error 'Property 'type' does not exist on type 'unknown''.
   const sortedChildren = Object.entries(entry.children).sort(([aName, a]: [string, File | Folder], [bName, b]: [string, File | Folder]) => {
     if (a.type !== b.type) return a.type === 'folder' ? -1 : 1;
     return aName.localeCompare(bName);
@@ -116,7 +115,6 @@ const FileExplorer: React.FC<FileExplorerProps> = ({ files, onFileSelect, onFile
     return <div className="p-2 text-gray-400 text-xs">Generating file structure...</div>;
   }
 
-  // FIX: Explicitly typed sort function arguments to resolve TypeScript error 'Property 'type' does not exist on type 'unknown''.
   const sortedFiles = Object.entries(files).sort(([aName, a]: [string, File | Folder], [bName, b]: [string, File | Folder]) => {
     if (a.type !== b.type) return a.type === 'folder' ? -1 : 1;
     return aName.localeCompare(bName);

@@ -119,7 +119,7 @@ const JourneySection: React.FC = () => {
                     {journeySteps.map((step, index) => (
                         <div 
                             key={index}
-                            ref={el => stepsRefs.current[index] = el} 
+                            ref={el => { stepsRefs.current[index] = el; }} 
                             data-step-index={index}
                             className="relative"
                         >

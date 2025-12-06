@@ -6,62 +6,76 @@ interface InteractiveCodeWindowProps {
   activePillar: Pillar | null;
 }
 
-const CodeLine: React.FC<{ children: React.ReactNode; indent?: number; className?: string }> = ({ children, indent = 0, className = '' }) => {
-    return <div className={className} style={{ marginLeft: `${indent * 1.5}rem` }}>{children}</div>;
+// Animated Line Component to simulate typing
+const TypewriterLine: React.FC<{ children: React.ReactNode; indent?: number; delay?: number }> = ({ children, indent = 0, delay = 0 }) => {
+    return (
+        <div 
+            className="flex items-center opacity-0 animate-code-line-anim" 
+            style={{ 
+                marginLeft: `${indent * 1.5}rem`,
+                animationDelay: `${delay}ms`,
+                animationFillMode: 'forwards'
+            }}
+        >
+            {children}
+        </div>
+    );
 };
 
 const DefaultCode: React.FC = () => (
     <>
-        <CodeLine><span className="text-purple-400">async</span> <span className="text-blue-400">function</span> <span className="text-yellow-400">fetchData</span>(<span className="text-orange-400">url</span>) {'{'}</CodeLine>
-        <CodeLine indent={1}><span className="text-purple-400">try</span> {'{'}</CodeLine>
-        <CodeLine indent={2}><span className="text-blue-400">const</span> response = <span className="text-purple-400">await</span> <span className="text-yellow-400">fetch</span>(url);</CodeLine>
-        <CodeLine indent={2}><span className="text-blue-400">const</span> data = <span className="text-purple-400">await</span> response.<span className="text-yellow-400">json</span>();</CodeLine>
-        <CodeLine indent={2}><span className="text-purple-400">return</span> data;</CodeLine>
-        <CodeLine indent={1}>{'}'} <span className="text-purple-400">catch</span> (error) {'{'}</CodeLine>
-        <CodeLine indent={2}>console.<span className="text-yellow-400">error</span>(<span className="text-green-400">'Failed to fetch:'</span>, error);</CodeLine>
-        <CodeLine indent={1}>{'}'}</CodeLine>
-        <CodeLine>{'}'}</CodeLine>
+        <TypewriterLine delay={0}><span className="text-purple-400">async</span> <span className="text-blue-400">function</span> <span className="text-yellow-400">fetchData</span>(<span className="text-orange-400">url</span>) {'{'}</TypewriterLine>
+        <TypewriterLine indent={1} delay={100}><span className="text-purple-400">try</span> {'{'}</TypewriterLine>
+        <TypewriterLine indent={2} delay={200}><span className="text-blue-400">const</span> response = <span className="text-purple-400">await</span> <span className="text-yellow-400">fetch</span>(url);</TypewriterLine>
+        <TypewriterLine indent={2} delay={300}><span className="text-blue-400">const</span> data = <span className="text-purple-400">await</span> response.<span className="text-yellow-400">json</span>();</TypewriterLine>
+        <TypewriterLine indent={2} delay={400}><span className="text-purple-400">return</span> data;</TypewriterLine>
+        <TypewriterLine indent={1} delay={500}>{'}'} <span className="text-purple-400">catch</span> (error) {'{'}</TypewriterLine>
+        <TypewriterLine indent={2} delay={600}>console.<span className="text-yellow-400">error</span>(<span className="text-green-400">'Failed to fetch:'</span>, error);</TypewriterLine>
+        <TypewriterLine indent={1} delay={700}>{'}'}</TypewriterLine>
+        <TypewriterLine delay={800}>{'}'}</TypewriterLine>
     </>
 );
 
 const SpeedCode: React.FC = () => (
      <div className="transition-all duration-300">
-        <CodeLine><span className="text-gray-500"># Before Platypus:</span></CodeLine>
-        <CodeLine className="opacity-50"><span className="text-blue-400">const</span> <span className="text-cyan-400">squares</span> = [];</CodeLine>
-        <CodeLine className="opacity-50"><span className="text-purple-400">for</span> (<span className="text-blue-400">let</span> i = <span className="text-red-400">0</span>; i &lt; <span className="text-red-400">10</span>; i++) {'{'}</CodeLine>
-        <CodeLine indent={1} className="opacity-50">squares.<span className="text-yellow-400">push</span>(i * i);</CodeLine>
-        <CodeLine className="opacity-50">{'}'}</CodeLine>
+        <TypewriterLine delay={0}><span className="text-gray-500"># Before Platypus:</span></TypewriterLine>
+        <TypewriterLine delay={100} className="opacity-50"><span className="text-blue-400">const</span> <span className="text-cyan-400">squares</span> = [];</TypewriterLine>
+        <TypewriterLine delay={200} className="opacity-50"><span className="text-purple-400">for</span> (<span className="text-blue-400">let</span> i = <span className="text-red-400">0</span>; i &lt; <span className="text-red-400">10</span>; i++) {'{'}</TypewriterLine>
+        <TypewriterLine indent={1} delay={300} className="opacity-50">squares.<span className="text-yellow-400">push</span>(i * i);</TypewriterLine>
+        <TypewriterLine delay={400} className="opacity-50">{'}'}</TypewriterLine>
         <br/>
-        <CodeLine><span className="text-gray-500"># After Platypus (instant):</span></CodeLine>
-        <CodeLine className="animate-code-flicker"><span className="text-blue-400">const</span> <span className="text-cyan-400">squares</span> = Array.<span className="text-yellow-400">from</span>({'{'}length: <span className="text-red-400">10</span>{'}'}, <span className="text-orange-400">(_, i)</span> => i * i);</CodeLine>
+        <TypewriterLine delay={600}><span className="text-gray-500"># After Platypus (instant):</span></TypewriterLine>
+        <TypewriterLine delay={800}><span className="text-blue-400">const</span> <span className="text-cyan-400">squares</span> = Array.<span className="text-yellow-400">from</span>({'{'}length: <span className="text-red-400">10</span>{'}'}, <span className="text-orange-400">(_, i)</span> => i * i); <span className="w-2 h-4 bg-white inline-block animate-code-blink ml-1"></span></TypewriterLine>
      </div>
 );
 
 const ReliabilityCode: React.FC = () => (
     <>
-        <CodeLine><span className="text-purple-400">for</span> (<span className="text-blue-400">let</span> i = <span className="text-red-400">0</span>; i &lt;= items.<span className="text-cyan-400">length</span>; i++) {'{'}</CodeLine>
-        <CodeLine indent={1} className="rounded animate-highlight-fix">
-            <span className="text-gray-500">// Off-by-one error causes a crash!</span>
-        </CodeLine>
-        <CodeLine indent={1}><span className="text-yellow-400">processItem</span>(items[i]);</CodeLine>
-        <CodeLine>{'}'}</CodeLine>
+        <TypewriterLine delay={0}><span className="text-purple-400">for</span> (<span className="text-blue-400">let</span> i = <span className="text-red-400">0</span>; i &lt;= items.<span className="text-cyan-400">length</span>; i++) {'{'}</TypewriterLine>
+        <div className="animate-highlight-fix [animation-delay:1s] rounded">
+            <TypewriterLine indent={1} delay={200}>
+                <span className="text-gray-500">// Off-by-one error detected</span>
+            </TypewriterLine>
+        </div>
+        <TypewriterLine indent={1} delay={300}><span className="text-yellow-400">processItem</span>(items[i]);</TypewriterLine>
+        <TypewriterLine delay={400}>{'}'}</TypewriterLine>
         <br/>
-        <CodeLine className="opacity-0 animate-fade-in-up [animation-delay:1.5s]"><span className="text-green-400 font-bold">✓ Platypus fix:</span> Changed <span className="text-red-400 font-mono">{'<='}</span> to <span className="text-green-400 font-mono">{'<'}</span></CodeLine>
+        <TypewriterLine delay={1000}><span className="text-green-400 font-bold">✓ Platypus fix:</span> Changed <span className="text-red-400 font-mono">{'<='}</span> to <span className="text-green-400 font-mono">{'<'}</span></TypewriterLine>
     </>
 );
 
 const DesignCode: React.FC = () => (
     <>
-        <CodeLine><span className="text-blue-400">const</span> settings = {'{'}</CodeLine>
-        <CodeLine indent={1}><span className="text-cyan-400">timeout</span>: <span className="text-red-400">5000</span>,</CodeLine>
-        <CodeLine indent={1}><span className="text-cyan-400">retries</span>: <span className="text-red-400">3</span>,</CodeLine>
-        <CodeLine>{'}'};</CodeLine>
+        <TypewriterLine delay={0}><span className="text-blue-400">const</span> settings = {'{'}</TypewriterLine>
+        <TypewriterLine indent={1} delay={100}><span className="text-cyan-400">timeout</span>: <span className="text-red-400">5000</span>,</TypewriterLine>
+        <TypewriterLine indent={1} delay={200}><span className="text-cyan-400">retries</span>: <span className="text-red-400">3</span>,</TypewriterLine>
+        <TypewriterLine delay={300}>{'}'};</TypewriterLine>
         <br/>
         <div className="flex items-center">
-            <CodeLine>
+            <TypewriterLine delay={500}>
                 <span className="text-yellow-400">createClient</span>(settings);
-            </CodeLine>
-            <div className="opacity-0 animate-suggestion-slide-in ml-2 p-2 bg-gray-600 rounded-md text-xs text-gray-300 border border-gray-500">
+            </TypewriterLine>
+            <div className="opacity-0 animate-suggestion-slide-in ml-2 p-2 bg-gray-600 rounded-md text-xs text-gray-300 border border-gray-500 [animation-delay:0.8s]">
                 <p><span className="font-mono font-bold text-cyan-400">settings</span>: {'{ timeout: number, retries: number }'}</p>
             </div>
         </div>
@@ -80,20 +94,25 @@ const InteractiveCodeWindow: React.FC<InteractiveCodeWindowProps> = ({ activePil
     }
 
     return (
-        <div className="bg-[#282c34] rounded-xl shadow-2xl overflow-hidden h-full flex flex-col transition-all duration-300">
-            <div className="h-8 bg-gray-700 flex items-center px-4 flex-shrink-0">
+        <div className="bg-[#282c34] rounded-xl shadow-2xl overflow-hidden h-full flex flex-col transition-all duration-300 transform hover:scale-[1.01]">
+            <div className="h-8 bg-gray-700 flex items-center px-4 flex-shrink-0 justify-between">
                 <div className="flex space-x-2">
                     <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                     <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                 </div>
+                <div className="text-xs text-gray-400 font-mono">
+                    {activePillar ? `${activePillar}.ts` : 'platypus.ts'}
+                </div>
             </div>
-            <div className="p-6 text-sm md:text-base text-left font-mono text-white flex-grow">
-                <pre className="whitespace-pre-wrap">
-                    <code>
-                        {renderContent()}
-                    </code>
-                </pre>
+            <div className="p-6 text-sm md:text-base text-left font-mono text-white flex-grow relative">
+                <div key={activePillar || 'default'}>
+                    <pre className="whitespace-pre-wrap">
+                        <code>
+                            {renderContent()}
+                        </code>
+                    </pre>
+                </div>
             </div>
         </div>
     );

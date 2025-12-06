@@ -1,7 +1,0 @@
-<svg viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-labelledby="platypus-icon-title">
-  <title id="platypus-icon-title">Platypus AI Icon</title>
-  <!-- Platypus Bill / Lightbulb Base -->
-  <path d="M25 50 C15,65 85,65 75,50 S50,40 50,40 S35,35 25,50 Z" />
-  <!-- Lightbulb Glass -->
-  <path d="M50 5 C 25 5 25 40 50 40 C 75 40 75 5 50 5 Z" />
-</svg>

@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useRef, useState, MouseEvent } from 'react';
 import { ICONS } from '../constants';
 import AnimatedPlatypus from './AnimatedPlatypus';
 
@@ -9,13 +10,77 @@ interface FeatureCardProps {
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }): React.ReactElement => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [glowPosition, setGlowPosition] = useState({ x: 50, y: 50 });
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    // Calculate rotation based on cursor position relative to center
+    const rotateX = ((y - centerY) / centerY) * -10; // Max -10 to 10 deg
+    const rotateY = ((x - centerX) / centerX) * 10;
+
+    setRotation({ x: rotateX, y: rotateY });
+    setGlowPosition({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
+  };
+
+  const handleMouseLeave = () => {
+    setRotation({ x: 0, y: 0 });
+  };
+
   return (
-    <div className="group bg-platypus-secondary dark:bg-platypus-dark-secondary p-6 rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-      <div className="text-platypus-primary group-hover:text-platypus-accent mb-4 transition-colors duration-300">
-        {icon}
+    <div 
+        className="group relative h-full perspective-1000" 
+        onMouseMove={handleMouseMove} 
+        onMouseLeave={handleMouseLeave}
+    >
+        <div 
+            ref={cardRef}
+            className="relative h-full transition-transform duration-100 ease-linear preserve-3d"
+            style={{
+                transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale3d(1.02, 1.02, 1.02)`,
+            }}
+        >
+            {/* Holographic Sheen Layer */}
+            <div 
+                className="absolute inset-0 rounded-2xl z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay"
+                style={{
+                    background: `radial-gradient(circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%)`
+                }}
+            />
+
+            {/* Gradient Border Layer */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 via-platypus-primary to-blue-600 rounded-2xl opacity-0 group-hover:opacity-75 transition duration-500 blur-sm group-hover:blur group-hover:animate-gradient-xy"></div>
+            
+            {/* Main Card Content */}
+            <div className="relative bg-platypus-secondary dark:bg-platypus-dark-secondary p-6 rounded-2xl shadow-md h-full flex flex-col items-start border border-transparent group-hover:border-white/10 dark:group-hover:border-black/10 transform-style-3d">
+                <div 
+                    className="text-platypus-primary group-hover:text-platypus-accent mb-4 transition-colors duration-300 transform group-hover:scale-110"
+                    style={{ transform: `translateZ(30px)` }}
+                >
+                    {icon}
+                </div>
+                <h3 
+                    className="text-xl font-bold mb-2 text-platypus-text dark:text-platypus-dark-text"
+                    style={{ transform: `translateZ(20px)` }}
+                >
+                    {title}
+                </h3>
+                <p 
+                    className="text-platypus-subtle dark:text-platypus-dark-subtle"
+                    style={{ transform: `translateZ(10px)` }}
+                >
+                    {description}
+                </p>
+            </div>
       </div>
-      <h3 className="text-xl font-bold mb-2 text-platypus-text dark:text-platypus-dark-text">{title}</h3>
-      <p className="text-platypus-subtle dark:text-platypus-dark-subtle">{description}</p>
     </div>
   );
 };

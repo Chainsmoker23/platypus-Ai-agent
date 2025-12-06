@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,17 +12,17 @@
         theme: {
           extend: {
             colors: {
-              'platypus-primary': '#3B82F6', // A strong, accessible blue for primary actions
-              'platypus-secondary': '#D9EAFD', // Pale blue for section backgrounds
-              'platypus-accent': '#3B82F6',
-              'platypus-background': '#F8FAFC', // Cool light gray for main background
-              'platypus-text': '#1F2937', // Dark gray for text
-              'platypus-subtle': '#6B7280', // Lighter gray for subtitles
+              'platypus-primary': '#7C3AED', // Vibrant Violet
+              'platypus-secondary': '#F5F3FF', // Very pale violet/white mix
+              'platypus-accent': '#6D28D9', // Deep Violet
+              'platypus-background': '#FFFFFF', // Pure White
+              'platypus-text': '#111827', // Gray 900
+              'platypus-subtle': '#4B5563', // Gray 600
               // Dark Theme Palette
-              'platypus-dark-background': '#111827',
-              'platypus-dark-secondary': '#1F2937',
-              'platypus-dark-text': '#F8FAFC',
-              'platypus-dark-subtle': '#9CA3AF',
+              'platypus-dark-background': '#0F172A', // Slate 900
+              'platypus-dark-secondary': '#1E293B', // Slate 800
+              'platypus-dark-text': '#F8FAFC', // Slate 50
+              'platypus-dark-subtle': '#94A3B8', // Slate 400
             },
             animation: {
               'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
@@ -41,7 +42,14 @@
               'marquee-scroll-reverse': 'marquee-reverse 50s linear infinite',
               'glow': 'glow 2s ease-in-out infinite',
               'draw-line': 'drawLine 1s ease-out forwards',
-              'code-line-anim': 'codeLineAnim 0.5s ease-out forwards'
+              'code-line-anim': 'codeLineAnim 0.5s ease-out forwards',
+              'grid-move': 'gridMove 20s linear infinite',
+              'logo-pulse': 'logoPulse 3s ease-in-out infinite',
+              'float-up': 'floatUp linear infinite',
+              'gradient-x': 'gradientX 3s ease infinite',
+              'gradient-xy': 'gradientXY 3s ease infinite',
+              'orbit-spin': 'orbitSpin 20s linear infinite',
+              'orbit-spin-reverse': 'orbitSpinReverse 25s linear infinite',
             },
             keyframes: {
               fadeInUp: {
@@ -54,7 +62,7 @@
               },
               blink: {
                 'from, to': { borderColor: 'transparent' },
-                '50%': { borderColor: 'orange' },
+                '50%': { borderColor: '#7C3AED' },
               },
               subtleBob: {
                 '0%, 100%': { transform: 'translateY(0)' },
@@ -113,8 +121,8 @@
                 '100%': { transform: 'translateX(0%)' },
               },
               glow: {
-                '0%, 100%': { boxShadow: '0 0 5px #3B82F6, 0 0 10px #3B82F6' },
-                '50%': { boxShadow: '0 0 20px #3B82F6, 0 0 30px #3B82F6' }
+                '0%, 100%': { boxShadow: '0 0 5px #7C3AED, 0 0 10px #7C3AED' },
+                '50%': { boxShadow: '0 0 20px #7C3AED, 0 0 30px #7C3AED' }
               },
               drawLine: {
                 'from': { height: '0' },
@@ -123,6 +131,64 @@
               codeLineAnim: {
                  '0%': { opacity: '0', transform: 'translateX(-10px)' },
                  '100%': { opacity: '1', transform: 'translateX(0)' },
+              },
+              gridMove: {
+                '0%': { transform: 'translateY(0)' },
+                '100%': { transform: 'translateY(40px)' }
+              },
+              logoPulse: {
+                '0%, 100%': { filter: 'drop-shadow(0 0 2px rgba(124, 58, 237, 0.1))', transform: 'scale(1)' },
+                '50%': { filter: 'drop-shadow(0 0 8px rgba(124, 58, 237, 0.6))', transform: 'scale(1.05)' },
+              },
+              floatUp: {
+                  '0%': { transform: 'translateY(0) rotate(0deg)', opacity: '0' },
+                  '10%': { opacity: '0.6' },
+                  '90%': { opacity: '0.6' },
+                  '100%': { transform: 'translateY(-120vh) rotate(360deg)', opacity: '0' },
+              },
+              gradientX: {
+                  '0%, 100%': {
+                      'background-size': '200% 200%',
+                      'background-position': 'left center'
+                  },
+                  '50%': {
+                      'background-size': '200% 200%',
+                      'background-position': 'right center'
+                  },
+              },
+              gradientXY: {
+                  '0%, 100%': {
+                      'background-size':'400% 400%',
+                      'background-position': 'left center'
+                  },
+                  '50%': {
+                      'background-size':'200% 200%',
+                      'background-position': 'right center'
+                  }
+              },
+              orbitSpin: {
+                '0%': { transform: 'rotate(0deg) translateX(150px) rotate(0deg)' },
+                '100%': { transform: 'rotate(360deg) translateX(150px) rotate(-360deg)' },
+              },
+              orbitSpinReverse: {
+                '0%': { transform: 'rotate(360deg) translateX(200px) rotate(-360deg)' },
+                '100%': { transform: 'rotate(0deg) translateX(200px) rotate(0deg)' },
+              },
+              glitch1: {
+                '0%': { clipPath: 'inset(40% 0 61% 0)' },
+                '20%': { clipPath: 'inset(92% 0 1% 0)' },
+                '40%': { clipPath: 'inset(43% 0 1% 0)' },
+                '60%': { clipPath: 'inset(25% 0 58% 0)' },
+                '80%': { clipPath: 'inset(54% 0 7% 0)' },
+                '100%': { clipPath: 'inset(58% 0 43% 0)' },
+              },
+              glitch2: {
+                '0%': { clipPath: 'inset(12% 0 5% 0)' },
+                '20%': { clipPath: 'inset(54% 0 37% 0)' },
+                '40%': { clipPath: 'inset(20% 0 63% 0)' },
+                '60%': { clipPath: 'inset(85% 0 2% 0)' },
+                '80%': { clipPath: 'inset(4% 0 94% 0)' },
+                '100%': { clipPath: 'inset(34% 0 25% 0)' },
               }
             }
           }
@@ -132,7 +198,94 @@
     <style>
       html {
         scroll-behavior: smooth;
+        cursor: none; /* Hide default cursor */
       }
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      /* Custom Cursor Styles */
+      .custom-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 10px;
+        background-color: #7C3AED;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s, height 0.3s, background-color 0.3s;
+        mix-blend-mode: exclusion;
+      }
+      .custom-cursor.active {
+        width: 60px;
+        height: 60px;
+        background-color: white;
+        opacity: 0.2;
+      }
+      .custom-cursor-follower {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 40px;
+        height: 40px;
+        border: 1px solid #7C3AED;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s, height 0.3s, opacity 0.3s, border-color 0.3s;
+      }
+      .custom-cursor-follower.active {
+        width: 60px;
+        height: 60px;
+        border-color: #A78BFA;
+        background: rgba(124, 58, 237, 0.1);
+      }
+
+      /* Glitch Effect */
+      .glitch-text {
+        position: relative;
+        color: inherit;
+      }
+      .glitch-text::before,
+      .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+      }
+      .glitch-text::before {
+        color: #0ff;
+        animation: glitch1 3s infinite linear alternate-reverse;
+        left: 2px;
+      }
+      .glitch-text::after {
+        color: #f0f;
+        animation: glitch2 2.5s infinite linear alternate-reverse;
+        left: -2px;
+      }
+
+      /* 3D Card */
+      .perspective-1000 {
+        perspective: 1000px;
+      }
+      .preserve-3d {
+        transform-style: preserve-3d;
+      }
+      .card-sheen {
+        background: radial-gradient(
+          circle at var(--mouse-x) var(--mouse-y),
+          rgba(255, 255, 255, 0.4) 0%,
+          rgba(255, 255, 255, 0) 50%
+        );
+      }
+      
       .terminal-input {
         background: transparent;
         border: none;
@@ -161,31 +314,37 @@
         background-position: bottom;
         background-repeat: no-repeat;
       }
+
+      .cyber-grid {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        background-size: 40px 40px;
+        background-image: 
+          linear-gradient(to right, rgba(124, 58, 237, 0.05) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(124, 58, 237, 0.05) 1px, transparent 1px);
+        mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+        pointer-events: none;
+      }
     </style>
 <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@18.2.0",
     "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
     "react/": "https://esm.sh/react@18.2.0/",
-    "react-dom/": "https://esm.sh/react@18.2.0/",
-    "express": "https://aistudiocdn.com/express@^5.1.0",
-    "dotenv": "https://aistudiocdn.com/dotenv@^17.2.3",
-    "cors": "https://aistudiocdn.com/cors@^2.8.5",
-    "helmet": "https://aistudiocdn.com/helmet@^8.1.0",
-    "vscode": "https://aistudiocdn.com/vscode@^1.1.37",
-    "path": "https://aistudiocdn.com/path@^0.12.7",
-    "axios": "https://aistudiocdn.com/axios@^1.13.2",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
-    "vite": "https://aistudiocdn.com/vite@^7.2.4",
-    "vscode-webview": "https://aistudiocdn.com/vscode-webview@^1.0.1-beta.1"
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/"
   }
 }
 </script>
 </head>
-<body class="bg-platypus-background dark:bg-platypus-dark-background">
+<body class="bg-platypus-background dark:bg-platypus-dark-background selection:bg-platypus-primary selection:text-white">
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" data-type="module" src="/index.tsx"></script>
 </body>
 </html>

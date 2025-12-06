@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+
+import React, { useState, useEffect, useCallback } from 'react';
 import AnimatedPlatypus from './AnimatedPlatypus';
+import { useTypewriter } from '../hooks/useTypewriter';
 
 const demoCommands = [
   {
@@ -94,9 +96,6 @@ const demoCommands = [
   },
 ];
 
-// FIX: Replaced the original `getCodeAsString` with a more robust and type-safe version
-// that correctly traverses React nodes to extract the string content. This resolves
-// multiple 'Property 'children' does not exist on type 'unknown'' errors.
 const getCodeAsString = (node: React.ReactNode): string => {
     if (node === null || typeof node === 'boolean' || typeof node === 'undefined') {
         return '';
@@ -108,9 +107,10 @@ const getCodeAsString = (node: React.ReactNode): string => {
         return node.map(child => getCodeAsString(child)).join('');
     }
     if (React.isValidElement(node)) {
-        // FIX: The 'children' property is not guaranteed to exist on the props of a generic ReactElement.
-        // Casting `node.props` allows us to safely access `children` and fixes the TypeScript error.
-        return getCodeAsString((node.props as { children?: React.ReactNode }).children);
+        const props = node.props as { children?: React.ReactNode };
+        if (props.children) {
+            return getCodeAsString(props.children);
+        }
     }
     return '';
 };
@@ -123,35 +123,15 @@ const DemoSection: React.FC = (): React.ReactElement => {
   const [displayedCode, setDisplayedCode] = useState<React.ReactNode>(<></>);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
   
-  // FIX: Changed NodeJS.Timeout to number, as setTimeout in a browser environment returns a number.
-  const animationTimeoutRef = useRef<number[]>([]);
-
-  const cleanupAnimation = useCallback(() => {
-    animationTimeoutRef.current.forEach(clearTimeout);
-    animationTimeoutRef.current = [];
-  }, []);
-  
-  const typewriter = useCallback((text: string, updater: (char: string) => void, delay: number = 30) => {
-    return new Promise<void>(resolve => {
-        let i = 0;
-        const type = () => {
-            if (i < text.length) {
-                updater(text[i]);
-                i++;
-                const timeoutId = setTimeout(type, delay);
-                animationTimeoutRef.current.push(timeoutId);
-            } else {
-                resolve();
-            }
-        };
-        type();
-    });
-  }, []);
+  // Use the custom hook
+  const { typeText, wait, cleanup } = useTypewriter();
 
   const runCommand = useCallback(async (commandId: string) => {
     if (isAnimating) return;
     
-    cleanupAnimation();
+    // Clean up any existing animations
+    cleanup();
+    
     setIsAnimating(true);
     setActiveCommandId(commandId);
     setDisplayedCommand('');
@@ -164,31 +144,29 @@ const DemoSection: React.FC = (): React.ReactElement => {
       return;
     };
 
-    await typewriter(commandConfig.command, (char) => setDisplayedCommand(prev => prev + char));
+    // Type the command
+    await typeText(commandConfig.command, (char) => setDisplayedCommand(prev => prev + char));
     
-    await new Promise<void>(res => {
-      const timeoutId = setTimeout(res, 300);
-      animationTimeoutRef.current.push(timeoutId);
-    });
+    // Pause briefly
+    await wait(300);
     
+    // Show terminal output line by line with varying delays
     for (const line of commandConfig.terminalOutput) {
         setTerminalLines(prev => [...prev, line]);
-        await new Promise<void>(res => {
-          const timeoutId = setTimeout(res, 150 + Math.random() * 100);
-          animationTimeoutRef.current.push(timeoutId);
-        });
+        await wait(150 + Math.random() * 100);
     }
 
+    // Type the code block
     const fullCodeString = getCodeAsString(<div>{commandConfig.code}</div>);
-    await typewriter(fullCodeString, () => {}, 10);
+    await typeText(fullCodeString, () => {}, 10); // Typing effect for code (visual only, we set full component after)
     setDisplayedCode(commandConfig.code);
 
     setIsAnimating(false);
-  }, [isAnimating, cleanupAnimation, typewriter]);
+  }, [isAnimating, cleanup, typeText, wait]);
 
   useEffect(() => {
     runCommand(demoCommands[0].id);
-    return cleanupAnimation;
+    return cleanup;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

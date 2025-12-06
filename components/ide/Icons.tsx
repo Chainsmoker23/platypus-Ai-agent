@@ -68,3 +68,9 @@ export const BackIcon: React.FC<IconProps> = ({ className }) => (
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
     </svg>
 );
+
+export const FileCodeIcon: React.FC<IconProps> = ({ className }) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={`w-4 h-4 text-gray-400 ${className}`} aria-hidden="true">
+       <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M10.6,18.5L8.1,16.1L10.6,13.7L12,15.1L10.9,16.1L12,17.1L10.6,18.5M15.9,18.5L14.5,17.1L15.6,16.1L14.5,15.1L15.9,13.7L18.4,16.1L15.9,18.5Z" />
+    </svg>
+);
