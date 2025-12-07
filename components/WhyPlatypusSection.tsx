@@ -41,11 +41,6 @@ const StrengthCard: React.FC<StrengthCardProps> = ({ mascotType, title, descript
                  <p className="text-sm md:text-base text-platypus-subtle dark:text-platypus-dark-subtle leading-relaxed">
                     {description}
                  </p>
-                 {isActive && (
-                    <div className="mt-2 h-1 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                        <div className="h-full bg-platypus-primary animate-[drawLine_3s_linear_infinite]" />
-                    </div>
-                 )}
             </div>
         </div>
     </div>

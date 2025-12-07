@@ -2,6 +2,24 @@
 import React, { useState, useEffect } from 'react';
 import { PlatypusBaseSVG } from './PlatypusBase';
 
+// FIX: Added missing PlatypusCaptainHat component to be used in PlatypusBoat.tsx
+export const PlatypusCaptainHat: React.FC<{ className?: string }> = ({ className }) => (
+    <g className={className}>
+        {/* Hat top */}
+        <path d="M75,55 C 70,40 140,40 135,55 L 75,55 Z" fill="white" stroke="#2D3748" strokeWidth="1" />
+        {/* Hat brim */}
+        <path d="M70,55 C 60,60 150,60 140,55 L 145, 50 L 65, 50 Z" fill="#2D3748" />
+        {/* Anchor icon */}
+        <g transform="translate(105, 47) scale(0.18)">
+            <circle cx="0" cy="-5" r="8" stroke="#FBBF24" strokeWidth="3" fill="none" />
+            <path d="M0,-15 L0,10" stroke="#FBBF24" strokeWidth="3" />
+            <path d="M-10,5 L10,5" stroke="#FBBF24" strokeWidth="3" />
+            <path d="M-10,10 A 10 5 0 0 0 0 15" stroke="#FBBF24" strokeWidth="3" fill="none" />
+            <path d="M10,10 A 10 5 0 0 1 0 15" stroke="#FBBF24" strokeWidth="3" fill="none" />
+        </g>
+    </g>
+);
+
 export const PlatypusLogoSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
     <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-labelledby="platypus-logo-title">
         <title id="platypus-logo-title">Creative logo of a platypus bill forming an idea lightbulb</title>
@@ -14,26 +32,6 @@ export const PlatypusLogoSVG: React.FC<{ className?: string }> = ({ className })
             <path d="M44 28 Q 50 32 56 28" stroke="#0A2540" strokeWidth="2" strokeLinecap="round" fill="none"/>
         </g>
     </svg>
-);
-
-// FIX: Added and exported the missing PlatypusCaptainHat component.
-export const PlatypusCaptainHat: React.FC = () => (
-    <g>
-        {/* Hat body (white) */}
-        <path d="M75,55 C 70,30 140,30 135,55 L 75,55 Z" fill="white" stroke="#E2E8F0" strokeWidth="0.5" />
-        {/* Flat top crease */}
-        <path d="M80,32 C 105,38 115,38 130,32 L 130,35 C 115,41 105,41 80,35 Z" fill="#F8FAFC" />
-        {/* Brim (black) */}
-        <path d="M65,55 C 45,60 165,60 145,55 L 140,53 L 70,53 Z" fill="#2D3748" />
-        {/* Gold Band */}
-        <rect x="74" y="50" width="62" height="3" fill="#FBBF24" />
-        {/* Anchor Symbol */}
-        <g transform="translate(105, 42) scale(0.25)" fill="none" stroke="#FBBF24" strokeWidth="5" strokeLinecap="round">
-            <circle cx="0" cy="-5" r="5" />
-            <path d="M 0,-10 V 10" />
-            <path d="M -8,5 C -5,15 5,15 8,5" />
-        </g>
-    </g>
 );
 
 export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
@@ -90,7 +88,6 @@ export const PlatypusRocketSVG: React.FC<{ className?: string }> = ({ className 
     </PlatypusBaseSVG>
 );
 
-// ... (The rest of the PlatypusCollection.tsx file remains unchanged)
 export const PlatypusLaptopSVG: React.FC<{ className?: string }> = ({ className }): React.ReactElement => (
     <PlatypusBaseSVG 
         className={className}

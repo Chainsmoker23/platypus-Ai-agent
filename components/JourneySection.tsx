@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import AnimatedPlatypus from './AnimatedPlatypus';
 
@@ -71,6 +72,7 @@ const journeySteps = [
 const JourneySection: React.FC = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const stepsRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -83,7 +85,7 @@ const JourneySection: React.FC = () => {
         });
       },
       {
-        rootMargin: '-50% 0px -50% 0px',
+        rootMargin: '-50% 0px -50% 0px', // Center of the screen
         threshold: 0,
       }
     );
@@ -91,11 +93,27 @@ const JourneySection: React.FC = () => {
     stepsRefs.current.forEach((ref) => {
       if (ref) observer.observe(ref);
     });
+    
+    // Animate drawing line based on scroll, not just active step, for smoothness
+    const handleScroll = () => {
+        if (!lineRef.current) return;
+        const lineRect = lineRef.current.parentElement!.getBoundingClientRect();
+        const scrollY = window.scrollY;
+        const startY = lineRect.top + scrollY;
+        const endY = lineRect.bottom + scrollY - window.innerHeight;
+        
+        const progress = Math.max(0, Math.min(1, (scrollY - startY) / (endY - startY + window.innerHeight * 0.5)));
+        lineRef.current.style.height = `${progress * 100}%`;
+    }
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
 
     return () => {
       stepsRefs.current.forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -111,8 +129,8 @@ const JourneySection: React.FC = () => {
             <div className="relative pl-10">
                 <div className="absolute top-0 left-0 h-full w-1 bg-platypus-primary/20 rounded-full">
                     <div 
+                        ref={lineRef}
                         className="absolute top-0 left-0 w-full bg-platypus-primary transition-all duration-500 ease-out rounded-full" 
-                        style={{ height: `${((activeStep) / (journeySteps.length - 1)) * 100}%` }}
                     />
                 </div>
                 <div className="space-y-24">
@@ -123,9 +141,9 @@ const JourneySection: React.FC = () => {
                             data-step-index={index}
                             className="relative"
                         >
-                            <div className={`absolute -left-12 top-0 w-5 h-5 rounded-full border-4 border-platypus-secondary dark:border-platypus-dark-secondary transition-all duration-300 ${activeStep >= index ? 'bg-platypus-primary animate-glow' : 'bg-platypus-primary/30'}`}></div>
-                            <h3 className={`text-2xl font-bold transition-colors duration-300 ${activeStep >= index ? 'text-platypus-text dark:text-platypus-dark-text' : 'text-platypus-subtle dark:text-platypus-dark-subtle'}`}>{step.title}</h3>
-                            <p className={`mt-2 text-platypus-subtle dark:text-platypus-dark-subtle transition-opacity duration-300 ${activeStep >= index ? 'opacity-100' : 'opacity-60'}`}>{step.description}</p>
+                            <div className={`absolute -left-12 top-0 w-5 h-5 rounded-full border-4 border-platypus-secondary dark:border-platypus-dark-secondary transition-all duration-300 ${activeStep === index ? 'bg-platypus-primary animate-glow scale-125' : 'bg-platypus-primary/30'}`}></div>
+                            <h3 className={`text-2xl font-bold transition-colors duration-300 ${activeStep === index ? 'text-platypus-text dark:text-platypus-dark-text' : 'text-platypus-subtle dark:text-platypus-dark-subtle'}`}>{step.title}</h3>
+                            <p className={`mt-2 text-platypus-subtle dark:text-platypus-dark-subtle transition-opacity duration-300 ${activeStep === index ? 'opacity-100' : 'opacity-60'}`}>{step.description}</p>
                         </div>
                     ))}
                 </div>

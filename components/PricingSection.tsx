@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useRef, useState, MouseEvent } from 'react';
 import AnimatedPlatypus from './AnimatedPlatypus';
 
 const CheckIcon: React.FC = (): React.ReactElement => (
@@ -18,6 +19,91 @@ const FeatureListItem: React.FC<FeatureListItemProps> = ({ children }): React.Re
   </li>
 );
 
+
+interface PricingCardProps {
+  title: string;
+  description: string;
+  price: string;
+  period: string;
+  features: string[];
+  buttonText: string;
+  isPopular?: boolean;
+}
+
+const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, period, features, buttonText, isPopular = false }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [glowPosition, setGlowPosition] = useState({ x: 50, y: 50 });
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -8;
+    const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 8;
+    setRotation({ x: rotateX, y: rotateY });
+    setGlowPosition({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
+  };
+
+  const handleMouseLeave = () => {
+    setRotation({ x: 0, y: 0 });
+  };
+
+  const popularClasses = isPopular ? 'border-2 border-platypus-primary relative lg:scale-105' : 'border border-gray-200 dark:border-gray-700';
+
+  return (
+    <div 
+        className={`group relative h-full perspective-1000 ${isPopular ? 'animate-pulse-glow' : ''}`}
+        onMouseMove={handleMouseMove} 
+        onMouseLeave={handleMouseLeave}
+        style={{ animationDuration: '5s' }}
+    >
+        <div
+            ref={cardRef}
+            className={`relative h-full transition-transform duration-100 ease-out preserve-3d bg-white dark:bg-platypus-dark-secondary p-8 rounded-2xl shadow-lg flex flex-col ${popularClasses}`}
+            style={{ transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)` }}
+        >
+            {isPopular && (
+              <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+                  <span className="px-4 py-1 bg-platypus-primary text-white text-sm font-bold rounded-full">Most Popular</span>
+              </div>
+            )}
+            
+            {/* Holographic Sheen */}
+            <div 
+                className="absolute inset-0 rounded-2xl z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                    background: `radial-gradient(circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%)`
+                }}
+            />
+            
+            {/* Gradient Border */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 via-platypus-primary to-blue-600 rounded-2xl opacity-0 group-hover:opacity-75 transition duration-500 blur-sm group-hover:blur group-hover:animate-gradient-xy"></div>
+
+            <div className="relative z-10 flex flex-col h-full">
+              <h3 className="text-2xl font-bold text-platypus-text dark:text-platypus-dark-text">{title}</h3>
+              <p className="mt-2 text-platypus-subtle dark:text-platypus-dark-subtle">{description}</p>
+              <div className="mt-6">
+                <span className="text-4xl font-extrabold text-platypus-text dark:text-platypus-dark-text">{price}</span>
+                <span className="text-platypus-subtle dark:text-platypus-dark-subtle"> {period}</span>
+              </div>
+              <ul className="mt-6 space-y-4 flex-grow">
+                {features.map((feature, i) => <FeatureListItem key={i}>{feature}</FeatureListItem>)}
+              </ul>
+              <button className={`mt-8 w-full px-6 py-3 font-bold rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 ${
+                  isPopular 
+                    ? 'bg-platypus-accent text-white' 
+                    : 'bg-platypus-secondary dark:bg-platypus-dark-background text-platypus-text dark:text-platypus-dark-text'
+              }`}>
+                {buttonText}
+              </button>
+            </div>
+        </div>
+    </div>
+  );
+};
+
 const PricingSection: React.FC = (): React.ReactElement => {
   return (
     <section id="pricing" className="py-16 md:py-20 bg-platypus-secondary dark:bg-platypus-dark-secondary">
@@ -28,65 +114,32 @@ const PricingSection: React.FC = (): React.ReactElement => {
           <p className="text-lg text-platypus-subtle dark:text-platypus-dark-subtle mt-4 max-w-2xl mx-auto">Start for free, then upgrade for unlimited power. All plans come with our core promise of privacy and security.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {/* Hatchling Plan */}
-          <div className="bg-white dark:bg-platypus-dark-secondary p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col">
-            <h3 className="text-2xl font-bold text-platypus-text dark:text-platypus-dark-text">Hatchling</h3>
-            <p className="mt-2 text-platypus-subtle dark:text-platypus-dark-subtle">Perfect for trying out the core features.</p>
-            <div className="mt-6">
-              <span className="text-4xl font-extrabold text-platypus-text dark:text-platypus-dark-text">Free</span>
-              <span className="text-platypus-subtle dark:text-platypus-dark-subtle"> / 1 Week</span>
-            </div>
-            <ul className="mt-6 space-y-4 flex-grow">
-              <FeatureListItem>Core Autocomplete</FeatureListItem>
-              <FeatureListItem>Basic Code Agents</FeatureListItem>
-              <FeatureListItem>Limited Requests</FeatureListItem>
-            </ul>
-            <button className="mt-8 w-full px-6 py-3 bg-platypus-secondary dark:bg-platypus-dark-background text-platypus-text dark:text-platypus-dark-text font-bold rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300">
-              Start Free Trial
-            </button>
-          </div>
-
-          {/* Ultimate Plan (Highlighted) */}
-          <div className="bg-white dark:bg-platypus-dark-secondary p-8 rounded-2xl shadow-2xl border-2 border-platypus-primary relative flex flex-col transform scale-105">
-            <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
-                <span className="px-4 py-1 bg-platypus-primary text-white text-sm font-bold rounded-full">Most Popular</span>
-            </div>
-            <h3 className="text-2xl font-bold text-platypus-text dark:text-platypus-dark-text">Ultimate</h3>
-            <p className="mt-2 text-platypus-subtle dark:text-platypus-dark-subtle">For professionals who need it all.</p>
-            <div className="mt-6">
-              <span className="text-4xl font-extrabold text-platypus-text dark:text-platypus-dark-text">$10</span>
-              <span className="text-platypus-subtle dark:text-platypus-dark-subtle"> / month</span>
-            </div>
-            <ul className="mt-6 space-y-4 flex-grow">
-              <FeatureListItem>Everything in Pro</FeatureListItem>
-              <FeatureListItem>Unlimited Agent Runs</FeatureListItem>
-              <FeatureListItem>Privacy-Preserving Local Mode</FeatureListItem>
-              <FeatureListItem>Beta Feature Access</FeatureListItem>
-            </ul>
-            <button className="mt-8 w-full px-6 py-3 bg-platypus-accent text-white font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-              Unleash Ultimate
-            </button>
-          </div>
-
-          {/* Pro Plan */}
-          <div className="bg-white dark:bg-platypus-dark-secondary p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col">
-            <h3 className="text-2xl font-bold text-platypus-text dark:text-platypus-dark-text">Pro</h3>
-            <p className="mt-2 text-platypus-subtle dark:text-platypus-dark-subtle">A massive boost for your daily workflow.</p>
-            <div className="mt-6">
-              <span className="text-4xl font-extrabold text-platypus-text dark:text-platypus-dark-text">$5</span>
-              <span className="text-platypus-subtle dark:text-platypus-dark-subtle"> / month</span>
-            </div>
-            <ul className="mt-6 space-y-4 flex-grow">
-              <FeatureListItem>Full-Project Context</FeatureListItem>
-              <FeatureListItem>Advanced Code Agents</FeatureListItem>
-              <FeatureListItem>Increased Request Limits</FeatureListItem>
-              <FeatureListItem>Priority Support</FeatureListItem>
-            </ul>
-            <button className="mt-8 w-full px-6 py-3 bg-platypus-secondary dark:bg-platypus-dark-background text-platypus-text dark:text-platypus-dark-text font-bold rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300">
-              Go Pro
-            </button>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto items-start">
+          <PricingCard
+            title="Hatchling"
+            description="Perfect for trying out the core features."
+            price="Free"
+            period="/ 1 Week"
+            features={['Core Autocomplete', 'Basic Code Agents', 'Limited Requests']}
+            buttonText="Start Free Trial"
+          />
+          <PricingCard
+            title="Ultimate"
+            description="For professionals who need it all."
+            price="$10"
+            period="/ month"
+            features={['Everything in Pro', 'Unlimited Agent Runs', 'Privacy-Preserving Local Mode', 'Beta Feature Access']}
+            buttonText="Unleash Ultimate"
+            isPopular={true}
+          />
+          <PricingCard
+            title="Pro"
+            description="A massive boost for your daily workflow."
+            price="$5"
+            period="/ month"
+            features={['Full-Project Context', 'Advanced Code Agents', 'Increased Request Limits', 'Priority Support']}
+            buttonText="Go Pro"
+          />
         </div>
       </div>
     </section>

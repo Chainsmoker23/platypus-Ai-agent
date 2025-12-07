@@ -50,6 +50,7 @@
               'gradient-xy': 'gradientXY 3s ease infinite',
               'orbit-spin': 'orbitSpin 20s linear infinite',
               'orbit-spin-reverse': 'orbitSpinReverse 25s linear infinite',
+              'progress-bar-fill': 'progressBarFill 1.5s ease-out forwards',
             },
             keyframes: {
               fadeInUp: {
@@ -189,7 +190,11 @@
                 '60%': { clipPath: 'inset(85% 0 2% 0)' },
                 '80%': { clipPath: 'inset(4% 0 94% 0)' },
                 '100%': { clipPath: 'inset(34% 0 25% 0)' },
-              }
+              },
+              progressBarFill: {
+                '0%': { width: '0%' },
+                '100%': { width: '100%' },
+              },
             }
           }
         }
@@ -243,6 +248,26 @@
         height: 60px;
         border-color: #A78BFA;
         background: rgba(124, 58, 237, 0.1);
+      }
+
+      /* Animated Underline for Nav */
+      .nav-link {
+        position: relative;
+        padding-bottom: 4px;
+      }
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0%;
+        height: 2px;
+        background-color: #7C3AED;
+        transform: translateX(-50%);
+        transition: width 0.3s ease-out;
+      }
+      .nav-link:hover::after {
+        width: 100%;
       }
 
       /* Glitch Effect */
@@ -348,3 +373,4 @@
     <script type="text/babel" data-type="module" src="/index.tsx"></script>
 </body>
 </html>
+      

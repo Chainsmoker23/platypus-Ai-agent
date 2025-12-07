@@ -15,7 +15,7 @@ import PlaygroundPage from './pages/Playground';
 import ForestWalkSection from './components/ForestWalkSection';
 import JourneySection from './components/JourneySection';
 import TestimonialsSection from './components/TestimonialsSection';
-import GettingStartedSection from './components/GettingStartedSection';
+import CLISection from './components/CLISection';
 import ScrollToTop from './components/ScrollToTop';
 import FloatingParticles from './components/FloatingParticles';
 import CustomCursor from './components/CustomCursor';
@@ -121,7 +121,7 @@ const App: React.FC = (): React.ReactElement => {
         <ComparisonSection />
         <PricingSection />
         <PrivacySection />
-        <GettingStartedSection />
+        <CLISection />
         <CTASection />
       </main>
       <div className="container mx-auto px-6 py-16 md:py-20 relative z-10">

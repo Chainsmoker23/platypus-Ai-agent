@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { PlatypusLogoSVG } from './PlatypusPlaceholders';
 import type { Theme } from '../App';
@@ -20,7 +21,6 @@ const MoonIcon: React.FC<{ className?: string }> = ({ className }) => (
         <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
     </svg>
 );
-
 
 const ThemeToggle: React.FC<{ theme: 'light' | 'dark'; onToggle: () => void }> = ({ theme, onToggle }) => {
   return (
@@ -55,37 +55,60 @@ const CloseIcon: React.FC = (): React.ReactElement => (
   </svg>
 );
 
+const navLinks = [
+  { href: '#features', label: 'Features' },
+  { href: '#demo', label: 'Demo' },
+  { href: 'playground', label: 'Playground' },
+  { href: '#compare', label: 'Compare' },
+  { href: '#pricing', label: 'Pricing' },
+  { href: '#privacy', label: 'Privacy' },
+];
+
 const Header: React.FC<HeaderProps> = ({ scrolled, onNavigateToPlayground, theme, onToggleTheme }): React.ReactElement => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleMobileLinkClick = (action: () => void) => {
-    action();
+  const handleLinkClick = (href: string) => {
     setIsMenuOpen(false);
+    if (href === 'playground') {
+      onNavigateToPlayground();
+    } else {
+      // Smooth scroll for internal links
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-lg bg-platypus-background/95 dark:bg-platypus-dark-background/95 backdrop-blur-xl' : 'bg-platypus-background/80 dark:bg-transparent backdrop-blur-md'}`}>
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center space-x-2">
+        <a href="#" className="flex items-center space-x-2 cursor-pointer" aria-label="Platypus Home">
           <PlatypusLogoSVG className={`w-10 h-10 transition-all duration-300 ${!scrolled ? 'animate-logo-pulse' : 'animate-fade-in-subtle'}`} />
           <span className="text-2xl font-bold text-platypus-text dark:text-platypus-dark-text">Platypus</span>
-        </div>
-        <nav className="hidden md:flex items-center space-x-8">
-          <a href="#features" className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors">Features</a>
-          <a href="#demo" className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors">Demo</a>
-          <button onClick={onNavigateToPlayground} className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors">Playground</button>
-          <a href="#compare" className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors">Compare</a>
-          <a href="#pricing" className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors">Pricing</a>
-          <a href="#privacy" className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors">Privacy</a>
+        </a>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center space-x-8">
+          {navLinks.map(link => (
+            link.href === 'playground' ? (
+              <button key={link.label} onClick={onNavigateToPlayground} className="nav-link text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors">
+                {link.label}
+              </button>
+            ) : (
+              <a key={link.label} href={link.href} className="nav-link text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors">
+                {link.label}
+              </a>
+            )
+          ))}
         </nav>
+
         <div className="flex items-center space-x-4">
-           <div className="hidden md:block">
+           <div className="hidden lg:block">
             <ThemeToggle theme={theme} onToggle={onToggleTheme} />
            </div>
-           <a href="#download" className="px-5 py-2 bg-platypus-accent text-white font-bold rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 hidden md:block">
+           <a href="#download" className="px-5 py-2 bg-platypus-accent text-white font-bold rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 hidden lg:block">
               Download
             </a>
-            <div className="md:hidden">
+            {/* Mobile Menu Button */}
+            <div className="lg:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary focus:outline-none"
@@ -98,19 +121,33 @@ const Header: React.FC<HeaderProps> = ({ scrolled, onNavigateToPlayground, theme
         </div>
       </div>
       
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-platypus-background/95 dark:bg-platypus-dark-background/95 backdrop-blur-xl animate-fade-in-up animation-duration-300">
+        <div className="lg:hidden bg-platypus-background/95 dark:bg-platypus-dark-background/95 backdrop-blur-xl">
           <nav className="flex flex-col items-center space-y-4 px-6 pb-6 pt-2">
-            <a href="#features" onClick={() => setIsMenuOpen(false)} className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors text-lg">Features</a>
-            <a href="#demo" onClick={() => setIsMenuOpen(false)} className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors text-lg">Demo</a>
-            <button onClick={() => handleMobileLinkClick(onNavigateToPlayground)} className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors text-lg">Playground</button>
-            <a href="#compare" onClick={() => setIsMenuOpen(false)} className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors text-lg">Compare</a>
-            <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors text-lg">Pricing</a>
-            <a href="#privacy" onClick={() => setIsMenuOpen(false)} className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors text-lg">Privacy</a>
-            <div className="pt-4">
+            {navLinks.map((link, index) => (
+                <a
+                  key={link.label}
+                  href={link.href === 'playground' ? '#' : link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLinkClick(link.href);
+                  }}
+                  className="text-platypus-subtle hover:text-platypus-primary dark:text-platypus-dark-subtle dark:hover:text-platypus-primary transition-colors text-lg opacity-0 animate-slide-in-up"
+                  style={{ animationDelay: `${index * 75}ms`, animationFillMode: 'forwards' }}
+                >
+                  {link.label}
+                </a>
+            ))}
+            <div className="pt-4 opacity-0 animate-slide-in-up" style={{ animationDelay: `${navLinks.length * 75}ms`, animationFillMode: 'forwards' }}>
               <ThemeToggle theme={theme} onToggle={onToggleTheme} />
             </div>
-            <a href="#download" onClick={() => setIsMenuOpen(false)} className="w-full text-center mt-4 px-5 py-3 bg-platypus-accent text-white font-bold rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+            <a 
+              href="#download" 
+              onClick={() => setIsMenuOpen(false)} 
+              className="w-full text-center mt-4 px-5 py-3 bg-platypus-accent text-white font-bold rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 opacity-0 animate-slide-in-up"
+              style={{ animationDelay: `${(navLinks.length + 1) * 75}ms`, animationFillMode: 'forwards' }}
+            >
               Download
             </a>
           </nav>
