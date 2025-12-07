@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
@@ -139,3 +138,4 @@ const App: React.FC = (): React.ReactElement => {
 };
 
 export default App;
+    

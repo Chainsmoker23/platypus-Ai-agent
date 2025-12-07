@@ -50,7 +50,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, pe
     setRotation({ x: 0, y: 0 });
   };
 
-  const popularClasses = isPopular ? 'border-2 border-platypus-primary relative lg:scale-105' : 'border border-gray-200 dark:border-gray-700';
+  const popularClasses = isPopular ? 'border-2 border-platypus-primary relative lg:scale-105' : 'border border-gray-200 dark:border-platypus-dark-subtle/20';
 
   return (
     <div 
@@ -106,7 +106,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, pe
 
 const PricingSection: React.FC = (): React.ReactElement => {
   return (
-    <section id="pricing" className="py-16 md:py-20 bg-platypus-secondary dark:bg-platypus-dark-secondary">
+    <section id="pricing" className="py-16 md:py-20">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
             <AnimatedPlatypus mascotType="coins" className="w-40 h-40 mx-auto mb-4" />
@@ -147,3 +147,4 @@ const PricingSection: React.FC = (): React.ReactElement => {
 };
 
 export default PricingSection;
+    

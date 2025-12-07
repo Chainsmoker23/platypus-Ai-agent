@@ -171,7 +171,7 @@ const DemoSection: React.FC = (): React.ReactElement => {
   }, []);
 
   return (
-    <section id="demo" className="py-16 md:py-20 bg-platypus-secondary dark:bg-platypus-dark-secondary">
+    <section id="demo" className="py-16 md:py-20">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-platypus-text dark:text-platypus-dark-text">See Platypus <span className="text-platypus-accent">in Action</span></h2>
@@ -192,7 +192,7 @@ const DemoSection: React.FC = (): React.ReactElement => {
                         key={cmd.id}
                         onClick={() => runCommand(cmd.id)}
                         disabled={isAnimating}
-                        className={`px-4 py-2 text-sm font-semibold rounded-full border-2 transition-all duration-300 ${activeCommandId === cmd.id ? 'bg-platypus-primary text-white border-platypus-primary' : 'bg-white dark:bg-platypus-dark-secondary text-platypus-text dark:text-platypus-dark-text border-gray-300 dark:border-gray-600 hover:border-platypus-primary disabled:opacity-50'}`}
+                        className={`px-4 py-2 text-sm font-semibold rounded-full border-2 transition-all duration-300 ${activeCommandId === cmd.id ? 'bg-platypus-primary text-white border-platypus-primary' : 'bg-white dark:bg-platypus-dark-secondary text-platypus-text dark:text-platypus-dark-text border-gray-300 dark:border-platypus-dark-subtle/30 hover:border-platypus-primary disabled:opacity-50'}`}
                     >
                         {cmd.buttonText}
                     </button>
@@ -233,3 +233,4 @@ const DemoSection: React.FC = (): React.ReactElement => {
 };
 
 export default DemoSection;
+    

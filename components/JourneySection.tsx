@@ -118,7 +118,7 @@ const JourneySection: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-16 md:py-24 bg-platypus-secondary dark:bg-platypus-dark-secondary overflow-hidden">
+    <section className="py-16 md:py-24 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-extrabold text-platypus-text dark:text-platypus-dark-text">The Platypus Journey</h2>
@@ -127,7 +127,7 @@ const JourneySection: React.FC = () => {
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div className="relative pl-10">
-                <div className="absolute top-0 left-0 h-full w-1 bg-platypus-primary/20 rounded-full">
+                <div className="absolute top-0 left-0 h-full w-1 bg-platypus-primary/20 dark:bg-platypus-dark-subtle/20 rounded-full">
                     <div 
                         ref={lineRef}
                         className="absolute top-0 left-0 w-full bg-platypus-primary transition-all duration-500 ease-out rounded-full" 
@@ -141,7 +141,7 @@ const JourneySection: React.FC = () => {
                             data-step-index={index}
                             className="relative"
                         >
-                            <div className={`absolute -left-12 top-0 w-5 h-5 rounded-full border-4 border-platypus-secondary dark:border-platypus-dark-secondary transition-all duration-300 ${activeStep === index ? 'bg-platypus-primary animate-glow scale-125' : 'bg-platypus-primary/30'}`}></div>
+                            <div className={`absolute -left-12 top-0 w-5 h-5 rounded-full border-4 border-platypus-background dark:border-platypus-dark-background transition-all duration-300 ${activeStep === index ? 'bg-platypus-primary animate-glow scale-125' : 'bg-platypus-primary/30'}`}></div>
                             <h3 className={`text-2xl font-bold transition-colors duration-300 ${activeStep === index ? 'text-platypus-text dark:text-platypus-dark-text' : 'text-platypus-subtle dark:text-platypus-dark-subtle'}`}>{step.title}</h3>
                             <p className={`mt-2 text-platypus-subtle dark:text-platypus-dark-subtle transition-opacity duration-300 ${activeStep === index ? 'opacity-100' : 'opacity-60'}`}>{step.description}</p>
                         </div>
@@ -150,7 +150,7 @@ const JourneySection: React.FC = () => {
             </div>
 
             <div className="sticky top-28 hidden lg:block">
-                <div className="relative bg-platypus-background dark:bg-platypus-dark-background/50 rounded-2xl shadow-xl border border-platypus-primary/20 h-80">
+                <div className="relative bg-platypus-background dark:bg-platypus-dark-secondary/50 rounded-2xl shadow-xl border border-platypus-primary/20 dark:border-platypus-dark-subtle/20 h-80">
                    {journeySteps.map((step, index) => (
                        <div key={index} className={`absolute inset-0 transition-opacity duration-500 ${activeStep === index ? 'opacity-100' : 'opacity-0'}`}>
                            {step.visual}
@@ -172,3 +172,4 @@ const JourneySection: React.FC = () => {
 };
 
 export default JourneySection;
+    

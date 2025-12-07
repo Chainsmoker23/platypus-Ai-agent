@@ -1,3 +1,4 @@
+
 import React from 'react';
 import AnimatedPlatypus from './AnimatedPlatypus';
 
@@ -17,7 +18,7 @@ const ComparisonSection: React.FC = (): React.ReactElement => {
   ];
 
   return (
-    <section id="compare" className="py-16 md:py-20 bg-platypus-secondary dark:bg-platypus-dark-secondary relative overflow-hidden">
+    <section id="compare" className="py-16 md:py-20 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 relative">
            <AnimatedPlatypus 
@@ -28,9 +29,9 @@ const ComparisonSection: React.FC = (): React.ReactElement => {
           <p className="text-lg text-platypus-subtle dark:text-platypus-dark-subtle mt-4 max-w-3xl mx-auto">A neutral, descriptive look at how Platypus stacks up against other AI coding tools.</p>
         </div>
         <div className="max-w-4xl mx-auto">
-          <div className="overflow-x-auto rounded-xl shadow-lg border border-platypus-subtle/20 dark:border-gray-700">
+          <div className="overflow-x-auto rounded-xl shadow-lg border border-platypus-subtle/20 dark:border-platypus-dark-subtle/20">
             <table className="w-full text-left border-collapse min-w-[600px]">
-              <thead className="bg-platypus-secondary dark:bg-platypus-dark-background/50">
+              <thead className="bg-platypus-secondary dark:bg-platypus-dark-secondary/50">
                 <tr>
                   <th className="p-4 font-bold text-platypus-text dark:text-platypus-dark-text tracking-wide">Feature</th>
                   <th className="p-4 font-bold text-platypus-text dark:text-platypus-dark-text tracking-wide text-center">Platypus</th>
@@ -40,7 +41,7 @@ const ComparisonSection: React.FC = (): React.ReactElement => {
               </thead>
               <tbody className="bg-white dark:bg-platypus-dark-secondary">
                 {features.map((item) => (
-                  <tr key={item.feature} className="border-t border-platypus-subtle/20 dark:border-gray-700">
+                  <tr key={item.feature} className="border-t border-platypus-subtle/20 dark:border-platypus-dark-subtle/20">
                     <td className="p-4 font-semibold text-platypus-text dark:text-platypus-dark-text">{item.feature}</td>
                     <td className="p-4 text-center bg-platypus-secondary/60 dark:bg-platypus-dark-background/60">{item.platypus}</td>
                     <td className="p-4 text-center">{item.cursor}</td>
@@ -57,3 +58,4 @@ const ComparisonSection: React.FC = (): React.ReactElement => {
 };
 
 export default ComparisonSection;
+    

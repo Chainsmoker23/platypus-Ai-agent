@@ -1,10 +1,11 @@
+
 import React from 'react';
 import { ICONS } from '../constants';
 import AnimatedPlatypus from './AnimatedPlatypus';
 
 const Footer: React.FC = (): React.ReactElement => {
   return (
-    <footer className="bg-platypus-secondary dark:bg-platypus-dark-secondary">
+    <footer className="bg-platypus-secondary dark:bg-platypus-dark-background border-t border-transparent dark:border-platypus-dark-subtle/10">
       <div className="container mx-auto px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           <div className="md:col-span-1 flex items-center gap-4">
@@ -20,7 +21,7 @@ const Footer: React.FC = (): React.ReactElement => {
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="w-full px-4 py-2 rounded-l-lg border-0 focus:ring-2 focus:ring-platypus-accent bg-white dark:bg-platypus-dark-background dark:text-platypus-dark-text"
+                className="w-full px-4 py-2 rounded-l-lg border-0 focus:ring-2 focus:ring-platypus-accent bg-white dark:bg-platypus-dark-secondary dark:text-platypus-dark-text"
                 aria-label="Email for newsletter"
               />
               <button 
@@ -40,7 +41,7 @@ const Footer: React.FC = (): React.ReactElement => {
              </div>
           </div>
         </div>
-        <div className="mt-12 border-t border-platypus-subtle/20 dark:border-gray-700 pt-8 text-center text-platypus-subtle dark:text-platypus-dark-subtle">
+        <div className="mt-12 border-t border-platypus-subtle/20 dark:border-platypus-dark-subtle/20 pt-8 text-center text-platypus-subtle dark:text-platypus-dark-subtle">
           <p>&copy; {new Date().getFullYear()} Platypus AI. All rights reserved.</p>
         </div>
       </div>
@@ -49,3 +50,4 @@ const Footer: React.FC = (): React.ReactElement => {
 };
 
 export default Footer;
+    
