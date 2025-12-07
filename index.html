@@ -30,6 +30,7 @@
               'subtle-bob': 'subtleBob 4s ease-in-out infinite',
               'slide-in-from-left': 'slideInFromLeft 1s ease-out forwards',
               'pulse-glow': 'pulseGlow 5s ease-in-out infinite',
+              'subtle-pulse': 'subtlePulse 4s ease-in-out infinite',
               'subtle-float': 'subtleFloat 6s ease-in-out infinite',
               'slide-in-up': 'slideInUp 0.5s ease-out forwards',
               'fade-in-subtle': 'fadeIn 0.5s ease-out forwards',
@@ -75,6 +76,10 @@
               pulseGlow: {
                 '0%, 100%': { transform: 'scale(1)', opacity: '0.5' },
                 '50%': { transform: 'scale(1.2)', opacity: '0.7' },
+              },
+              subtlePulse: {
+                '0%, 100%': { transform: 'scale(1)' },
+                '50%': { transform: 'scale(1.02)' },
               },
               subtleFloat: {
                 '0%, 100%': { transform: 'translateY(0) rotate(-2deg)' },

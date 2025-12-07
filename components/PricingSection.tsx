@@ -40,8 +40,9 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, pe
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -8;
-    const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 8;
+    // Reduced rotation factor from 8 to 4 for gentler tilt
+    const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -4;
+    const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 4;
     setRotation({ x: rotateX, y: rotateY });
     setGlowPosition({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
   };
@@ -50,14 +51,14 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, pe
     setRotation({ x: 0, y: 0 });
   };
 
-  const popularClasses = isPopular ? 'border-2 border-platypus-primary relative lg:scale-105' : 'border border-gray-200 dark:border-gray-800';
+  // Replaced 'animate-pulse-glow' (which scales aggressively) with 'animate-subtle-pulse'
+  const popularClasses = isPopular ? 'border-2 border-platypus-primary relative animate-subtle-pulse' : 'border border-gray-200 dark:border-gray-800';
 
   return (
     <div 
-        className={`group relative h-full perspective-1000 ${isPopular ? 'animate-pulse-glow' : ''}`}
+        className="group relative h-full perspective-1000"
         onMouseMove={handleMouseMove} 
         onMouseLeave={handleMouseLeave}
-        style={{ animationDuration: '5s' }}
     >
         <div
             ref={cardRef}
@@ -79,7 +80,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, pe
             />
             
             {/* Gradient Border */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 via-platypus-primary to-blue-600 rounded-2xl opacity-0 group-hover:opacity-75 transition duration-500 blur-sm group-hover:blur group-hover:animate-gradient-xy"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 dark:from-pink-600 dark:via-platypus-primary dark:to-blue-600 rounded-2xl opacity-0 group-hover:opacity-75 transition duration-500 blur-sm group-hover:blur group-hover:animate-gradient-xy"></div>
 
             <div className="relative z-10 flex flex-col h-full">
               <h3 className="text-2xl font-bold text-platypus-text dark:text-platypus-dark-text">{title}</h3>
