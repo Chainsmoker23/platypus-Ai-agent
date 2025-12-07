@@ -29,7 +29,7 @@ const FloatingParticles: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-5" aria-hidden="true">
       {particles.map((p) => (
         <div
           key={p.id}

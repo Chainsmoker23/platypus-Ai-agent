@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
@@ -90,17 +91,21 @@ const App: React.FC = (): React.ReactElement => {
   }
 
   return (
-    <div className="min-h-screen text-platypus-text dark:bg-platypus-dark-background dark:text-platypus-dark-text font-sans transition-colors duration-300 relative">
-      {/* Custom Magnetic Cursor */}
+    <div className="min-h-screen text-platypus-text dark:text-platypus-dark-text font-sans transition-colors duration-300 relative">
       <CustomCursor />
       
-      {/* Scroll Progress Bar */}
+      {theme === 'dark' && (
+        <>
+          <div className="dark-mode-aurora" />
+          <div className="dark-mode-stars" />
+        </>
+      )}
+
       <div 
         className="fixed top-0 left-0 h-1 bg-gradient-to-r from-platypus-primary via-purple-400 to-platypus-accent z-[60]" 
         style={{ width: `${scrollProgress * 100}%` }} 
       />
       
-      {/* Background Particles */}
       <FloatingParticles />
 
       <div ref={sentinelRef} style={{ position: 'absolute', top: '10px', height: '1px' }} />
