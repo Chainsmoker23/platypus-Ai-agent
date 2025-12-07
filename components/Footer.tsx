@@ -5,7 +5,7 @@ import AnimatedPlatypus from './AnimatedPlatypus';
 
 const Footer: React.FC = (): React.ReactElement => {
   return (
-    <footer className="bg-platypus-secondary dark:bg-platypus-dark-background border-t border-transparent dark:border-platypus-dark-subtle/10">
+    <footer className="bg-platypus-secondary dark:bg-platypus-dark-background border-t border-transparent dark:border-white/10 transition-colors duration-300">
       <div className="container mx-auto px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           <div className="md:col-span-1 flex items-center gap-4">
@@ -21,7 +21,7 @@ const Footer: React.FC = (): React.ReactElement => {
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="w-full px-4 py-2 rounded-l-lg border-0 focus:ring-2 focus:ring-platypus-accent bg-white dark:bg-platypus-dark-secondary dark:text-platypus-dark-text"
+                className="w-full px-4 py-2 rounded-l-lg border-0 focus:ring-2 focus:ring-platypus-accent bg-white dark:bg-[#0c0c0c] dark:border dark:border-gray-800 dark:text-white transition-colors duration-300"
                 aria-label="Email for newsletter"
               />
               <button 
@@ -50,4 +50,3 @@ const Footer: React.FC = (): React.ReactElement => {
 };
 
 export default Footer;
-    

@@ -118,7 +118,7 @@ const JourneySection: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-16 md:py-24 overflow-hidden">
+    <section className="py-16 md:py-24 overflow-hidden dark:bg-platypus-dark-background transition-colors duration-300">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-extrabold text-platypus-text dark:text-platypus-dark-text">The Platypus Journey</h2>
@@ -150,14 +150,14 @@ const JourneySection: React.FC = () => {
             </div>
 
             <div className="sticky top-28 hidden lg:block">
-                <div className="relative bg-platypus-background dark:bg-platypus-dark-secondary/50 rounded-2xl shadow-xl border border-platypus-primary/20 dark:border-platypus-dark-subtle/20 h-80">
+                <div className="relative bg-platypus-background dark:bg-[#0c0c0c] rounded-2xl shadow-xl border border-platypus-primary/20 dark:border-gray-800 h-80 transition-colors duration-300">
                    {journeySteps.map((step, index) => (
                        <div key={index} className={`absolute inset-0 transition-opacity duration-500 ${activeStep === index ? 'opacity-100' : 'opacity-0'}`}>
                            {step.visual}
                        </div>
                    ))}
                 </div>
-                <div className="mt-8 flex items-center gap-4 p-4 bg-white/50 dark:bg-platypus-dark-secondary/50 rounded-2xl backdrop-blur-sm">
+                <div className="mt-8 flex items-center gap-4 p-4 bg-white/50 dark:bg-[#0c0c0c] border border-transparent dark:border-gray-800 rounded-2xl backdrop-blur-sm transition-colors duration-300">
                     <AnimatedPlatypus mascotType="explorer" className="w-24 h-24 flex-shrink-0" />
                     <div>
                         <h4 className="font-bold text-platypus-text dark:text-platypus-dark-text">Your AI Navigator</h4>
@@ -172,4 +172,3 @@ const JourneySection: React.FC = () => {
 };
 
 export default JourneySection;
-    

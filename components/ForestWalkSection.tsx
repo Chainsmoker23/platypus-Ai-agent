@@ -66,7 +66,7 @@ const ForestWalkSection: React.FC = () => {
         <section 
             ref={sectionRef}
             onClick={handleInteraction}
-            className="relative w-full aspect-[16/9] max-h-[500px] min-h-[300px] overflow-hidden rounded-2xl shadow-xl transition-colors duration-1000 bg-gradient-to-b from-sky-300 via-sky-200 to-blue-400 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 cursor-pointer group select-none"
+            className="relative w-full aspect-[16/9] max-h-[500px] min-h-[300px] overflow-hidden rounded-2xl shadow-xl transition-colors duration-1000 bg-gradient-to-b from-sky-300 via-sky-200 to-blue-400 dark:from-[#050214] dark:via-[#050214] dark:to-indigo-900 cursor-pointer group select-none"
             role="img"
             aria-label="An interactive ocean scene with a platypus captain in a magical skiff. Click to interact!"
         >
@@ -90,7 +90,7 @@ const ForestWalkSection: React.FC = () => {
             <svg viewBox="0 0 1000 562.5" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full pointer-events-none">
                 
                 {/* Sky & Sun/Moon */}
-                <rect width="1000" height="350" className="fill-sky-300 dark:fill-slate-900 transition-colors duration-1000" />
+                <rect width="1000" height="350" className="fill-sky-300 dark:fill-[#050214] transition-colors duration-1000" />
                 <circle cx="850" cy="100" r="50" className="fill-yellow-300 blur-2xl opacity-60 dark:opacity-0 transition-opacity duration-1000" />
                 <circle cx="850" cy="100" r="40" className="fill-slate-100 blur-xl opacity-0 dark:opacity-30 transition-opacity duration-1000" />
 

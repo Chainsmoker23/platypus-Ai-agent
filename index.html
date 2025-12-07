@@ -18,11 +18,11 @@
               'platypus-background': '#FFFFFF', // Pure White
               'platypus-text': '#111827', // Gray 900
               'platypus-subtle': '#4B5563', // Gray 600
-              // NEW "Cosmic Nebula" Dark Theme Palette
-              'platypus-dark-background': '#050214', // Deep Indigo/Black
-              'platypus-dark-secondary': '#110D29', // Dark Nebula Purple
-              'platypus-dark-text': '#E0DDF0',     // Lavender White
-              'platypus-dark-subtle': '#857AAB',   // Muted Lavender
+              // NEW "Cosmic Nebula" Dark Theme Palette - Updated for High Contrast & Uniformity
+              'platypus-dark-background': '#050214', // Deep Indigo/Black (Unified Background)
+              'platypus-dark-secondary': '#0c0c0c', // Deep Black (Cards/Terminals)
+              'platypus-dark-text': '#F8FAFC',     // Bright White (Slate 50)
+              'platypus-dark-subtle': '#CBD5E1',   // Crisp Light Gray (Slate 300)
             },
             animation: {
               'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
@@ -225,6 +225,19 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
+      /* Custom Scrollbar for Terminal */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+        background-color: #0c0c0c;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #333;
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+      }
+
       /* Custom Cursor Styles */
       .custom-cursor {
         position: fixed;
@@ -422,4 +435,3 @@
     <script type="text/babel" data-type="module" src="/index.tsx"></script>
 </body>
 </html>
-    

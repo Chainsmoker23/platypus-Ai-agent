@@ -19,29 +19,27 @@ const StrengthCard: React.FC<StrengthCardProps> = ({ mascotType, title, descript
     <div 
         onMouseEnter={onMouseEnter} 
         onMouseLeave={onMouseLeave}
-        className={`group cursor-pointer relative p-4 rounded-xl transition-all duration-500 border ${
+        className={`group cursor-pointer relative p-8 rounded-2xl transition-all duration-500 border h-full flex flex-col items-center text-center ${
             isActive 
-                ? 'bg-white dark:bg-platypus-dark-secondary border-platypus-primary/50 shadow-lg scale-[1.02]' 
-                : 'bg-transparent border-transparent hover:bg-white/50 dark:hover:bg-platypus-dark-secondary/50 opacity-70 hover:opacity-100'
+                ? 'bg-white dark:bg-[#0c0c0c] border-platypus-primary/50 dark:border-platypus-primary/50 shadow-xl scale-105 z-10' 
+                : 'bg-transparent border-transparent hover:bg-white/50 dark:hover:bg-[#0c0c0c]/50 opacity-80 hover:opacity-100 hover:scale-105'
         }`}
     >
-        <div className="flex items-start gap-4">
-            <div className={`flex-shrink-0 transition-transform duration-500 ${isActive ? 'scale-110' : 'scale-100 group-hover:scale-105'}`}>
-                 <div className={isActive ? 'animate-logo-pulse' : ''}>
-                     <AnimatedPlatypus 
-                        mascotType={mascotType}
-                        className="w-14 h-14 md:w-16 md:h-16"
-                    />
-                 </div>
-            </div>
-            <div>
-                 <h3 className={`text-lg md:text-xl font-bold mb-1 transition-colors ${isActive ? 'text-platypus-primary' : 'text-platypus-text dark:text-platypus-dark-text'}`}>
-                    {title}
-                 </h3>
-                 <p className="text-sm md:text-base text-platypus-subtle dark:text-platypus-dark-subtle leading-relaxed">
-                    {description}
-                 </p>
-            </div>
+        <div className={`flex-shrink-0 mb-6 transition-transform duration-500 ${isActive ? 'scale-125' : 'scale-100 group-hover:scale-110'}`}>
+             <div className={isActive ? 'animate-logo-pulse' : ''}>
+                 <AnimatedPlatypus 
+                    mascotType={mascotType}
+                    className="w-24 h-24"
+                />
+             </div>
+        </div>
+        <div>
+             <h3 className={`text-2xl font-bold mb-3 transition-colors ${isActive ? 'text-platypus-primary' : 'text-platypus-text dark:text-platypus-dark-text'}`}>
+                {title}
+             </h3>
+             <p className="text-base text-platypus-subtle dark:text-platypus-dark-subtle leading-relaxed">
+                {description}
+             </p>
         </div>
     </div>
   );
@@ -61,7 +59,7 @@ const WhyPlatypusSection: React.FC = (): React.ReactElement => {
                 return 'speed';
             });
         }
-    }, 3500); // Cycle every 3.5 seconds
+    }, 4000); // Slower cycle for better readability
 
     return () => clearInterval(interval);
   }, [hoveredPillar]);
@@ -70,15 +68,16 @@ const WhyPlatypusSection: React.FC = (): React.ReactElement => {
   const activePillar = hoveredPillar || autoPillar;
 
   return (
-    <section className="py-16 md:py-24 bg-platypus-secondary/70 dark:bg-platypus-dark-background/70">
+    <section className="py-20 md:py-32 bg-platypus-secondary/70 dark:bg-platypus-dark-background transition-colors duration-300">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-platypus-text dark:text-platypus-dark-text">Engineered for Excellence</h2>
-          <p className="text-lg text-platypus-subtle dark:text-platypus-dark-subtle mt-4 max-w-3xl mx-auto">Platypus isn't just another tool. It's a finely tuned coding partner, continuously optimizing your workflow.</p>
+        <div className="text-center mb-16 md:mb-20">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-platypus-text dark:text-platypus-dark-text tracking-tight">Engineered for Excellence</h2>
+          <p className="text-xl text-platypus-subtle dark:text-platypus-dark-subtle mt-6 max-w-3xl mx-auto">Platypus isn't just another tool. It's a finely tuned coding partner, continuously optimizing your workflow.</p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div className="lg:col-span-5 space-y-4">
+        <div className="flex flex-col gap-16">
+            {/* Top Row: Cards Side-by-Side */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                 <StrengthCard 
                     mascotType="rocket" 
                     title="Unmatched Speed" 
@@ -97,14 +96,16 @@ const WhyPlatypusSection: React.FC = (): React.ReactElement => {
                 />
                 <StrengthCard 
                     mascotType="laptop" 
-                    title="Developer-Centric Design" 
+                    title="Developer-Centric" 
                     description="Built by developers, for developers, with a seamless UX that integrates perfectly into your IDE."
                     isActive={activePillar === 'design'}
                     onMouseEnter={() => setHoveredPillar('design')}
                     onMouseLeave={() => setHoveredPillar(null)}
                 />
             </div>
-            <div className="lg:col-span-7 h-[350px] md:h-[400px] w-full">
+
+            {/* Bottom Row: Full Width Code Window */}
+            <div className="w-full h-[450px] md:h-[550px] shadow-2xl rounded-lg overflow-hidden">
                 <InteractiveCodeWindow activePillar={activePillar} />
             </div>
         </div>

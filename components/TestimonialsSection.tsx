@@ -1,3 +1,4 @@
+
 import React from 'react';
 import AnimatedPlatypus from './AnimatedPlatypus';
 
@@ -35,7 +36,7 @@ const testimonials = [
 ];
 
 const TestimonialCard: React.FC<typeof testimonials[0]> = ({ avatar, name, title, quote }) => (
-    <div className="bg-white dark:bg-platypus-dark-secondary rounded-2xl shadow-lg p-6 w-80 md:w-96 mx-4 flex-shrink-0">
+    <div className="bg-white dark:bg-[#0c0c0c] border border-transparent dark:border-gray-800 rounded-2xl shadow-lg p-6 w-80 md:w-96 mx-4 flex-shrink-0">
         <div className="flex items-center mb-4">
             <img src={avatar} alt={name} className="w-12 h-12 rounded-full mr-4 border-2 border-platypus-primary/50" />
             <div>
@@ -52,7 +53,7 @@ const TestimonialsSection: React.FC = () => {
     const duplicatedTestimonials = [...testimonials, ...testimonials];
 
     return (
-        <section className="py-16 md:py-24 bg-platypus-background dark:bg-platypus-dark-background overflow-hidden">
+        <section className="py-16 md:py-24 bg-platypus-background dark:bg-platypus-dark-background overflow-hidden transition-colors duration-300">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12">
                     <AnimatedPlatypus mascotType="thumbsUp" className="w-40 h-40 mx-auto" />

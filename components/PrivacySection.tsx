@@ -1,9 +1,10 @@
+
 import React from 'react';
 import AnimatedPlatypus from './AnimatedPlatypus';
 
 const PrivacySection: React.FC = (): React.ReactElement => {
   return (
-    <section id="privacy" className="py-16 md:py-20">
+    <section id="privacy" className="py-16 md:py-20 dark:bg-platypus-dark-background transition-colors duration-300">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="text-center md:text-left">
@@ -12,7 +13,7 @@ const PrivacySection: React.FC = (): React.ReactElement => {
             <p className="text-lg text-platypus-subtle dark:text-platypus-dark-subtle mt-4">
               We understand that your codebase is your most valuable asset. Platypus is designed with a privacy-first philosophy, ensuring your data is handled with the utmost care.
             </p>
-            <div className="mt-6 p-6 bg-platypus-secondary dark:bg-platypus-dark-secondary rounded-xl">
+            <div className="mt-6 p-6 bg-platypus-secondary dark:bg-[#0c0c0c] border border-transparent dark:border-gray-800 rounded-xl shadow-sm">
                 <h3 className="font-bold text-xl text-platypus-text dark:text-platypus-dark-text">Operate in Local Mode</h3>
                 <p className="text-platypus-subtle dark:text-platypus-dark-subtle mt-2">
                 For enterprise teams and sensitive projects, enable our privacy-preserving local mode. All code processing and AI reasoning happens entirely on your machine, and no data ever leaves your environment. It's the ultimate peace of mind for security-conscious developers.

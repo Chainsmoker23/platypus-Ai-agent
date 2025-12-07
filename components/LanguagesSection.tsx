@@ -31,7 +31,7 @@ const LanguagesSection: React.FC = (): React.ReactElement => {
   ];
 
   return (
-    <section className="py-16 md:py-20">
+    <section className="py-16 md:py-20 dark:bg-platypus-dark-background transition-colors duration-300">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-platypus-text dark:text-platypus-dark-text">Works With Your Favorite Languages & Frameworks</h2>
@@ -44,7 +44,7 @@ const LanguagesSection: React.FC = (): React.ReactElement => {
           {languages.map(lang => <LanguageIcon key={lang.name} {...lang} />)}
         </div>
 
-        <div className="mt-20 max-w-4xl mx-auto text-center bg-white dark:bg-platypus-dark-secondary p-8 md:p-12 rounded-2xl shadow-xl overflow-hidden relative">
+        <div className="mt-20 max-w-4xl mx-auto text-center bg-white dark:bg-[#0c0c0c] border border-transparent dark:border-gray-800 p-8 md:p-12 rounded-2xl shadow-xl overflow-hidden relative">
           <div className="absolute -top-12 -right-12 w-32 h-32 bg-platypus-primary/10 rounded-full -z-0"></div>
           <div className="relative z-10 flex flex-col items-center">
             <div className="text-platypus-primary mb-4">
@@ -65,4 +65,3 @@ const LanguagesSection: React.FC = (): React.ReactElement => {
 };
 
 export default LanguagesSection;
-    

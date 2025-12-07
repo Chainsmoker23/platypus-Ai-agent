@@ -50,7 +50,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, pe
     setRotation({ x: 0, y: 0 });
   };
 
-  const popularClasses = isPopular ? 'border-2 border-platypus-primary relative lg:scale-105' : 'border border-gray-200 dark:border-platypus-dark-subtle/20';
+  const popularClasses = isPopular ? 'border-2 border-platypus-primary relative lg:scale-105' : 'border border-gray-200 dark:border-gray-800';
 
   return (
     <div 
@@ -61,7 +61,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, pe
     >
         <div
             ref={cardRef}
-            className={`relative h-full transition-transform duration-100 ease-out preserve-3d bg-white dark:bg-platypus-dark-secondary p-8 rounded-2xl shadow-lg flex flex-col ${popularClasses}`}
+            className={`relative h-full transition-transform duration-100 ease-out preserve-3d bg-white dark:bg-[#0c0c0c] p-8 rounded-2xl shadow-lg flex flex-col ${popularClasses}`}
             style={{ transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)` }}
         >
             {isPopular && (
@@ -94,7 +94,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, pe
               <button className={`mt-8 w-full px-6 py-3 font-bold rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 ${
                   isPopular 
                     ? 'bg-platypus-accent text-white' 
-                    : 'bg-platypus-secondary dark:bg-platypus-dark-background text-platypus-text dark:text-platypus-dark-text'
+                    : 'bg-platypus-secondary dark:bg-gray-800 text-platypus-text dark:text-platypus-dark-text hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}>
                 {buttonText}
               </button>
@@ -106,7 +106,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, description, price, pe
 
 const PricingSection: React.FC = (): React.ReactElement => {
   return (
-    <section id="pricing" className="py-16 md:py-20">
+    <section id="pricing" className="py-16 md:py-20 dark:bg-platypus-dark-background transition-colors duration-300">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
             <AnimatedPlatypus mascotType="coins" className="w-40 h-40 mx-auto mb-4" />
@@ -147,4 +147,3 @@ const PricingSection: React.FC = (): React.ReactElement => {
 };
 
 export default PricingSection;
-    
